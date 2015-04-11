@@ -1,5 +1,11 @@
 package gameSim;
 
+/**
+ * Class designed to track the overall tokens in the same
+ * 
+ * @author Brennyn Hawbaker
+ *
+ */
 public class Inventory {
 
 	private String title;
@@ -37,33 +43,37 @@ public class Inventory {
 	}
 
 	// Subtract from the inventory
-	public void take(int num) {
+	public int take(int num) {
 		takeCalled++;
 		if (num > size || num < -1)
 			throw new IllegalStateException();
 		if (size != -1)
 			size -= num;
 		numTaken += num;
+		return num;
 	}
 
 	// Subtract from the inventory with printed report
-	public void take_Report(int num) {
+	public int take_Report(int num) {
 		this.take(num);
 		System.out.println(title + " amount changed: -" + num);
+		return num;
 	}
 	
 	//Add to inventory
-	public void give(int num){
+	public int give(int num){
 		giveCalled++;
 		if (size != -1)
 			size += num;
 		numGiven += num;
+		return num;
 	}
 	
 	//Add to inventory with printed report
-	public void give_Report(int num){
+	public int give_Report(int num){
 		this.give(num);
 		System.out.println(title + " amount changed: +" + num);
+		return num;
 	}
 	
 	//Return takeCalled
