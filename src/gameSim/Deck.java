@@ -3,14 +3,14 @@ package gameSim;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck {
+public class Deck <C extends Card> {
 
 	private int timesShuffled;
 	private int numCards;
 	private int numDraws;
 
 	// By default deck refers to standard card deck
-	private ArrayList<Card> deck;
+	private ArrayList<C> deck;
 
 	/**
 	 * Create empty deck. Typically discard deck
@@ -28,7 +28,7 @@ public class Deck {
 	 * @param deck
 	 *            Initial list of cards in the deck
 	 */
-	public Deck(ArrayList<Card> deck) {
+	public Deck(ArrayList<C> deck) {
 		this.deck = deck;
 		timesShuffled = 0;
 		numCards = deck.size();
@@ -40,7 +40,7 @@ public class Deck {
 	 * 
 	 * @return Card that was at top of the deck
 	 */
-	public Card peekTop() {
+	public C peekTop() {
 		return deck.get(0);
 	}
 
@@ -49,8 +49,8 @@ public class Deck {
 	 * 
 	 * @return Card that was at top of the deck
 	 */
-	public Card peekTopReport() {
-		Card result = peekTop();
+	public C peekTopReport() {
+		C result = peekTop();
 		System.out.println("The top of the deck was looked at. " + result
 				+ " was on top.");
 		return result;
@@ -61,7 +61,7 @@ public class Deck {
 	 * 
 	 * @return Card that was at bottom of the deck
 	 */
-	public Card peekBottom() {
+	public C peekBottom() {
 		return deck.get(numCards);
 	}
 
@@ -71,8 +71,8 @@ public class Deck {
 	 * 
 	 * @return Card that was at bottom of the deck
 	 */
-	public Card peekBottomReport() {
-		Card result = peekBottom();
+	public C peekBottomReport() {
+		C result = peekBottom();
 		System.out.println("The bottom of the deck was looked at. " + result
 				+ " was on the bottom.");
 		return result;
@@ -83,19 +83,19 @@ public class Deck {
 	 * 
 	 * @return Card that was on top of the deck
 	 */
-	public Card draw() {
+	public C draw() {
 		numCards--;
 		return deck.remove(0);
 	}
 
 	/**
-
+	 * 
 	 * Draws the top card of the deck. Generates Report
 	 * 
 	 * @return Card that was on top of the deck
 	 */
-	public Card draw_Report() {
-		Card result = draw();
+	public C draw_Report() {
+		C result = draw();
 		System.out.println("A card was drawn. " + result + " was drawn");
 		return result;
 	}
@@ -108,13 +108,13 @@ public class Deck {
 	 * 
 	 * @return The card request or null if not found.
 	 */
-	public Card get(Card card) {
+	public C get(C card) {
 		if (numCards == 0)
 			return null;
 
 		int pos = 0;
 
-		for (Card current : deck) {
+		for (C current : deck) {
 			if (current.equals(card)) {
 				numCards--;
 				return deck.remove(pos);
@@ -133,8 +133,8 @@ public class Deck {
 	 * 
 	 * @return The card request or null if not found.
 	 */
-	public Card get_Report(Card card) {
-		Card result = get(card);
+	public C get_Report(C card) {
+		C result = get(card);
 		System.out.println("Get Card was called. " + result + " was returned");
 		return result;
 	}
@@ -144,7 +144,7 @@ public class Deck {
 	 * 
 	 * @return Current deck
 	 */
-	public ArrayList<Card> getContents() {
+	public ArrayList<C> getContents() {
 		return deck;
 	}
 
@@ -155,7 +155,7 @@ public class Deck {
 	 */
 	public String printDeck() {
 		String result = "";
-		for (Card card : deck) {
+		for (C card : deck) {
 			result += card.toString() + "\n";
 		}
 		return result;
@@ -166,7 +166,7 @@ public class Deck {
 	 */
 	public void shuffle() {
 		Random random = new Random();
-		ArrayList<Card> result = new ArrayList<Card>();
+		ArrayList<C> result = new ArrayList<C>();
 
 		while (numCards != 0) {
 			result.add(deck.remove(random.nextInt(numCards)));
@@ -184,6 +184,49 @@ public class Deck {
 	public void shuffle_Report() {
 		shuffle();
 		System.out.println("shuffled for the " + timesShuffled + " time");
+	}
+
+	/**
+	 * Adds a card to the deck
+	 * 
+	 * @param card
+	 *            Card to be added to deck.
+	 */
+	public void give(C card ) {
+		deck.add(card);
+	}
+
+	/**
+	 * Adds a card to the deck. Generates report of action
+	 * 
+	 * @param card
+	 *            Card to be added to deck.
+	 */
+	public void give_Report(C card) {
+		deck.add(card);
+		System.out.println(card + " was added.");
+	}
+
+	/**
+	 * Adds several cards to the deck.
+	 * 
+	 * @param cards
+	 *            Cards to add to the deck.
+	 */
+	public void give(ArrayList<C> cards) {
+		for (C card : cards)
+			give(card);
+	}
+
+	/**
+	 * Adds several cards to the deck.
+	 * 
+	 * @param cards
+	 *            Cards to add to the deck.
+	 */
+	public void give_Report(ArrayList<C> cards) {
+		for (C card : cards)
+			give_Report(card);
 	}
 
 	/**
