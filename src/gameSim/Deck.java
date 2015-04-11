@@ -137,7 +137,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		System.out.println("A card was drawn from" + name + ".\n" + result + " was drawn");
+		Reporter.printReport("A card was drawn. " + result + " was drawn");
 		return result;
 	}
 	
@@ -165,7 +165,7 @@ public class Deck<C extends Card> {
 	 */
 	public ArrayList<C> drawMulti_Report(int num){
 		ArrayList<C> temp = drawMulti(num);
-		System.out.println(num + " cards were drawn from" + name + ".");
+		Reporter.printReport(num + " cards were drawn.");
 		return temp;
 	}
 	
@@ -216,6 +216,7 @@ public class Deck<C extends Card> {
 	public C get_Report(C card) {
 		C result = get(card);
 		System.out.println("Get Card was called. " + result + " was returned to the deck.");
+
 		return result;
 	}
 
@@ -264,7 +265,7 @@ public class Deck<C extends Card> {
 	 */
 	public void shuffle_Report() {
 		shuffle();
-		System.out.println("shuffled for the " + timesShuffled + " time");
+		Reporter.printReport("shuffled for the " + timesShuffled + " time");
 	}
 
 	/**
