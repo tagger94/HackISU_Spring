@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Hand {
 	
-	private ArrayList<Card> hand;
+	public ArrayList<Card> hand;
 	private int cardsDrawn;
 	private int cardsDiscarded; 
 	private int maxHandSize;
@@ -115,6 +115,7 @@ public class Hand {
 	 * @return
 	 */
 	public String getCardsDrawn_Report(){
+		System.out.println(cardsDrawn + " have been drawn.\n");
 		return cardsDrawn + " have been drawn.\n"; 
 	}
 	
@@ -133,6 +134,7 @@ public class Hand {
 	 * @return
 	 */
 	public String getCardsDiscarded_Report(){
+		System.out.println(cardsDiscarded + " have been discarded\n");
 		return cardsDiscarded + " have been discarded\n"; 
 	}
 	
