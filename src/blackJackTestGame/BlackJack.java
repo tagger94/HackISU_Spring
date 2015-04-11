@@ -13,50 +13,48 @@ public class BlackJack {
 	private StandardPlayingCard deckMaker = new StandardPlayingCard(1,
 			suit.SPADES);
 	private Deck deck = new Deck(deckMaker.makeDeck());
+	
+	private BlackJackDealerAI dealer = new BlackJackDealerAI("Dealer");
+	
+	private ArrayList<BlackJackPlayer> players = new ArrayList<BlackJackPlayer>();
 
 	private void startRound() {
 
 		deck.shuffle_Report();
+		
+		for(BlackJackPlayer h : players) {
+			h.hand.drawCard_Report(deck.draw_Report());
+			h.hand.drawCard_Report(deck.draw_Report());
+		}
+		
+		dealer.hand.drawCard_Report(deck.draw_Report());
+		dealer.hand.drawCard_Report(deck.draw_Report());
+		
 	}
 
-	private void takeTurn(BlackJackPlayer p) {
+	private void takeTurn(BlackJackAI p) {
 		
 		Boolean hit = false;
-		
-		//Used for Splits
-		BlackJackHand second_hand;
 
-		// Check for Splits
-		if(p.hand.canSplit()){
-			second_hand = new BlackJackHand();
-		}
-
-		// Find Hand Value
-	
 		// Determine Bet
-
+		p.determineBet();
 		// Hit or Not
-		do {
-			if(p.hand.findHandValue() >= 17){
-				hit = true;
-				p.hand.drawCard_Report(deck.draw());
-			} else {
-				hit = false;
-			}
-			
-		} while(hit);
+		while(p.doHit()) {}
+		
 	}
 	
 
 	public void runGame() {
 		Inventory chips = new Inventory("Chips", -1);
 		
-		BlackJackPlayer dealer = (BlackJackPlayer) new ExamplePlayer("Dealer");
-		BlackJackPlayer player = (BlackJackPlayer) new ExamplePlayer("Player", chips.take_Report(50));
 		
 		while (true) {
 			startRound();
-			takeTurn(player);
+			
+			for(BlackJackPlayer p : players) {
+				takeTurn((BlackJackAI) p);
+			}
+			
 			takeTurn(dealer);
 		}
 	}
