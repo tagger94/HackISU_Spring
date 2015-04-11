@@ -27,9 +27,7 @@ public class BlackJack {
 		// Check for Splits
 
 		// Check for Aces
-		for(int i = 0; i < p.hand.hand.size(); i++) {
-			
-		}
+		soft_flag = p.hand.
 
 		// Find Hand Value
 
