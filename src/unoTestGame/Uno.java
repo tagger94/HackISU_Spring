@@ -15,6 +15,7 @@ public class Uno {
 		playDeck.shuffle(); 
 		Deck<UnoCard> discardDeck = new Deck<UnoCard>(); 
 		
+		System.out.println("Drawing Cards\n\n");
 		for(int i = 1; i < 8; i++){ 
 			Bob.playerHand.drawCard_Report(playDeck.draw_Report());
 			Alice.playerHand.drawCard_Report(playDeck.draw_Report()); 
@@ -23,7 +24,7 @@ public class Uno {
 		UnoCard currentTop = playDeck.draw_Report();
 		discardDeck.give_Report(currentTop);
 		
-		System.out.println("The game begins\n\n"); 
+		System.out.println("\n\nThe game begins\n\n"); 
 		for(int j = 0; j < 10; j++){
 			discardDeck.give_Report(Bob.playCard(currentTop, playDeck));
 			currentTop = discardDeck.peekTop(); 
