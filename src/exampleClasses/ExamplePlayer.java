@@ -1,4 +1,8 @@
-package gameSim;
+package exampleClasses;
+
+import gameSim.Hand;
+import gameSim.Inventory;
+import gameSim.Player;
 
 /**
  * 

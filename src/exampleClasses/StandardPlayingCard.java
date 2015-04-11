@@ -1,4 +1,6 @@
-package gameSim;
+package exampleClasses;
+
+import gameSim.Card;
 
 import java.util.ArrayList;
 
