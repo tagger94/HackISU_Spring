@@ -16,20 +16,25 @@ public class Uno {
 		Deck<UnoCard> discardDeck = new Deck<UnoCard>(); 
 		
 		for(int i = 1; i < 8; i++){ 
-			Bob.playerHand.drawCard(playDeck.draw_Report());
+			Bob.playerHand.drawCard_Report(playDeck.draw_Report());
 			Alice.playerHand.drawCard_Report(playDeck.draw_Report()); 
 		}
 		
 		UnoCard currentTop = playDeck.draw_Report();
+		discardDeck.give_Report(currentTop);
+		
+		System.out.println("The game begins\n\n"); 
 		for(int j = 0; j < 10; j++){
-			discardDeck.give(Bob.playCard(currentTop, playDeck));
+			discardDeck.give_Report(Bob.playCard(currentTop, playDeck));
 			currentTop = discardDeck.peekTop(); 
 			if(Bob.playerHand.hand.size() == 0){
+				System.out.println("Bob Won!"); 
 				break;
 			}
-			discardDeck.give(Alice.playCard(currentTop, playDeck));
+			discardDeck.give_Report(Alice.playCard(currentTop, playDeck));
 			currentTop = discardDeck.peekTop(); 
 			if(Alice.playerHand.hand.size() == 0){
+				System.out.println("Alice Won!"); 
 				break;
 			}
 		}
