@@ -50,11 +50,13 @@ public class Hand <C extends Card> {
 	 * @param c
 	 *  - card to be add to hand
 	 */
-	public void drawCard(C c){
+	public C drawCard(C c){
 		if(hand.size() < maxHandSize){ 
 			hand.add(c);
-			cardsDrawn++; 
+			cardsDrawn++;
+			return c; 
 		}
+		return null; 
 	}
 	  
 	/**
@@ -64,12 +66,13 @@ public class Hand <C extends Card> {
 	 * @param c
 	 * 	- card to add to hand
 	 */
-	public void drawCard_Report(C c){
+	public C drawCard_Report(C c){
 		if(hand.size() < maxHandSize){
 			drawCard(c); 
 			System.out.println(c.toString() + " was added to the hand.\n"); 
-
+			return c; 
 		}
+		return null; 
 	}
 	
 	/**
@@ -78,15 +81,18 @@ public class Hand <C extends Card> {
 	 * @param c
 	 * 	- card to remove from hand
 	 */
-	public void discardCard(C c){
+	public C discardCard(C c){
 		if(hand.size() > minHandSize){
 			for(int i = 0; i < hand.size(); i++){
 				if(hand.get(i).equals(c)){
+					C temp = hand.get(i);
 					hand.remove(i);
-					cardsDiscarded++; 
+					cardsDiscarded++;
+					return temp; 
 				}
 			}
 		}
+		return null; 
 	}
 	
 	/**
@@ -96,12 +102,22 @@ public class Hand <C extends Card> {
 	 * @param c
 	 *  - card to remove from hand
 	 */
-	public void discardCard_Report(C c){
+	public C discardCard_Report(C c){
 		if(hand.size() > minHandSize){
 			System.out.println(c.toString() + " was removed from the hand.\n");
-
 			discardCard(c);
+			return c; 
 		}
+		return null; 
+	}
+	
+	public ArrayList<C> discardHand(){
+		ArrayList<C> tempList = new ArrayList<C>(); 
+		for(int i = 0; i < hand.size(); i++){
+			tempList.add(hand.get(i)); 
+			hand.remove(i); 
+		}
+		return tempList;
 	}
 	
 	/**
@@ -151,5 +167,16 @@ public class Hand <C extends Card> {
 		String report = cardsDrawn + "were given to the hand and " + cardsDiscarded + "were taken from the hand.\n";
 		report += "The minimum hand size was " + minHandSize + " and the maximum hand size was " + maxHandSize + ".\n"; 
 		return report;
+	}
+	
+	/**
+	 * Returns a String representation of the contents of hand
+	 */
+	public String toString(){
+		String report = "";
+		for(int i = 0; i < hand.size(); i++){
+			report += hand.get(i).toString() + ", ";
+		}
+		return report; 
 	}
 }

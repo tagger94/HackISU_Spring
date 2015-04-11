@@ -8,31 +8,66 @@ public class Deck<C extends Card> {
 	private int timesShuffled;
 	private int numCards;
 	private int numDraws;
+	private String name; 
 
 	// By default deck refers to standard card deck
 	private ArrayList<C> deck;
 
 	/**
-	 * Create empty deck. Typically discard deck
+	 * Create empty deck, Typically a discard deck
 	 */
 	public Deck() {
 		numCards = 0;
 		deck = new ArrayList<C>();
 		timesShuffled = 0;
 		numDraws = 0;
+		name = "deck";
+	}
+	
+	/**
+	 * Creates an empty deck, Typically a discard deck,
+	 * with a name; 
+	 * 
+	 * @param name
+	 * 		name of the deck
+	 */
+	public Deck(String name){
+		this.name = name;
+		deck = new ArrayList<C>();
+		numCards = 0;
+		numDraws = 0; 
+		timesShuffled = 0;
 	}
 
 	/**
-	 * Creates fully stocked deck
+	 * Creates a fully stocked deck
 	 * 
 	 * @param deck
 	 *            Initial list of cards in the deck
 	 */
 	public Deck(ArrayList<C> deck) {
 		this.deck = deck;
+		name = "deck";
 		timesShuffled = 0;
 		numCards = deck.size();
 		numDraws = 0;
+	}
+	
+	/**
+	 * 
+	 * Creates a fully stocked deck
+	 * 
+	 * @param deck
+	 * 			Initial list of cards in the deck
+	 * @param name
+	 * 			name of the deck
+	 */
+	public Deck(ArrayList<C> deck, String name){
+		this.deck = deck;
+		this.name = name;
+		numDraws = 0; 
+		numCards = deck.size();
+		timesShuffled = 0;
 	}
 
 	/**
@@ -42,7 +77,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekTop() {
 		if (numCards == 0)
-			throw new IllegalStateException("Deck is empty.");
+			throw new IllegalStateException(name + " is empty.");
 		return deck.get(0);
 	}
 
@@ -53,7 +88,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekTopReport() {
 		C result = peekTop();
-		System.out.println("The top of the deck was looked at. " + result
+		Reporter.printReport("The top of" + name + " was looked at.\n" + result
 				+ " was on top.");
 		return result;
 	}
@@ -65,7 +100,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekBottom() {
 		if (numCards == 0)
-			throw new IllegalStateException("Deck is empty.");
+			throw new IllegalStateException(name + " is empty.");
 		return deck.get(numCards);
 	}
 
@@ -77,7 +112,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekBottomReport() {
 		C result = peekBottom();
-		System.out.println("The bottom of the deck was looked at. " + result
+		Reporter.printReport("The bottom of" + name + " was looked at.\n" + result
 				+ " was on the bottom.");
 		return result;
 	}
@@ -89,7 +124,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw() {
 		if (numCards == 0)
-			throw new IllegalStateException("Deck is empty.");
+			throw new IllegalStateException(name + " is empty.");
 		numCards--;
 		return deck.remove(0);
 	}
@@ -102,7 +137,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		Reporter.printReport("A card was drawn. " + result + " was drawn");
+		Reporter.printReport("A card was drawn from" + name + ".\n" + result + " was drawn");
 		return result;
 	}
 	
@@ -114,7 +149,7 @@ public class Deck<C extends Card> {
 	 */
 	public ArrayList<C> drawMulti(int num){
 		if(num > numCards)
-			throw new IllegalStateException("Not enough cards to draw.");
+			throw new IllegalStateException("Not enough cards to draw from" + name + ".");
 		ArrayList<C> hold = new ArrayList<>();
 		for(int a = 0; a < num; a++){
 			hold.add(draw());
@@ -130,7 +165,7 @@ public class Deck<C extends Card> {
 	 */
 	public ArrayList<C> drawMulti_Report(int num){
 		ArrayList<C> temp = drawMulti(num);
-		Reporter.printReport(num + " cards were drawn.");
+		Reporter.printReport(num + " cards were drawn from" + name + ".\n");
 		return temp;
 	}
 	
@@ -180,7 +215,7 @@ public class Deck<C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		System.out.println("Get Card was called. " + result + " was returned to the deck.");
+		Reporter.printReport("Get Card was called. " + result + " was returned to the deck.");
 
 		return result;
 	}
@@ -252,7 +287,7 @@ public class Deck<C extends Card> {
 	 */
 	public void give_Report(C card) {
 		give(card); 
-		System.out.println(card + " was added to the deck.");
+		Reporter.printReport(card + " was added to " + name + ".\n");
 	}
 
 	/**

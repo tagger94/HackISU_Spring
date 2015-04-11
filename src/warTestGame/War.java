@@ -7,6 +7,8 @@ import gameSim.Deck;
 
 public class War {
 
+
+	private Deck<StandardPlayingCard> deck;
 	private ArrayList<StandardPlayingCard> down;
 	WarPlayer player_1;
 	WarPlayer player_2;
@@ -33,6 +35,8 @@ public class War {
 		down = new ArrayList<>();
 		down.add(player_1.playCard());
 		down.add(player_2.playCard());
+		if(down.get(0).equals(null) || down.get(1).equals(null))
+			return;
 		if(makeAction(down.get(0), down.get(1)) == -1){
 			player_1.winRound(down);
 		} else {
@@ -53,6 +57,8 @@ public class War {
 	
 	
 	public int makeAction(StandardPlayingCard c1, StandardPlayingCard c2){
+		if(c1.equals(null) || c2.equals(null))
+			return -2;
 		int comp = c1.compareToIgnoreSuit(c2);
 		if(comp < 0) //c1 bigger
 			return -1;
@@ -63,8 +69,12 @@ public class War {
 	
 	public int splitTie(StandardPlayingCard c1, StandardPlayingCard c2){
 		for(int a = 0; a < 4; a++){
-			down.add(player_1.playCard());
-			down.add(player_2.playCard());
+			try{
+				down.add(player_1.playCard());
+				down.add(player_2.playCard());
+			} catch(IllegalStateException b){
+				return -2;
+			}
 		}
 		return makeAction(down.get(6), down.get(7));
 	}
@@ -78,5 +88,6 @@ public class War {
 		if(player_2.hasWon() == true)
 			System.out.println("Player two wins!");
 	}
+
 
 }

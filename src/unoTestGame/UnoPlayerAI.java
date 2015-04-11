@@ -74,6 +74,8 @@ public class UnoPlayerAI extends UnoPlayer {
 					return numberList.get(j); 
 				}
 			}
+			if(playerHand.hand.size() == 1) System.out.println("UNO!\n");
+			return numberList.get(0);
 		}
 		
 		

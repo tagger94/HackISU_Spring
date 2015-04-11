@@ -45,12 +45,10 @@ public class WarPlayer {
 	public StandardPlayingCard playCard(){
 		try{
 			return hand.draw();
-		} catch(IllegalStateException e){
-			if(!discard.equals(null)){
-				takeDiscard();
-				return hand.draw();
-			}	
-			return null;
+
+		} catch(IllegalStateException b){
+			takeDiscard();
+			return hand.draw();
 		}
 	}
 	
