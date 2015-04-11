@@ -28,7 +28,9 @@ public class UnoPlayerAI extends UnoPlayer {
 		}
 		
 		if(colorList.size() == 0 && numberList.size() == 0){
-			playerHand.drawCard_Report(d.draw());
+			UnoCard temp = d.draw(); 
+			playerHand.drawCard_Report(temp);
+			return temp; 
 		}
 		
 		if(colorList.size() != 0){
@@ -36,13 +38,18 @@ public class UnoPlayerAI extends UnoPlayer {
 			return colorList.get(0);
 		}
 		
+		int[] maxNums = new int[4]; 
+		maxNums[0] = findNumRed();
+		maxNums[1] = findNumBlue();
+		maxNums[2] = findNumGreen();
+		maxNums[3] = findNumYellow(); 
 		
-		int numRed = findNumRed();
-		int numBlue = findNumBlue();
-		int numGreen = findNumGreen();
-		int numYellow = findNumYellow(); 
+		int max = maxNums[0];
+		for(int i = 1; i < 4; i++){
+			if (maxNums[i] > max) max = maxNums[i]; 
+		}
 		
-		if(numRed > numBlue && numRed > && numRed > num)
+		Color maxColor = Color.RED; 
 		
 		return null; 
 	}
