@@ -228,8 +228,8 @@ public class StandardPlayingCard implements Card,
 	 * 
 	 * @return deck
 	 */
-	public ArrayList<Card> makeDeck() {
-		ArrayList<Card> deck = new ArrayList<Card>();
+	public static ArrayList<StandardPlayingCard> makeDeck() {
+		ArrayList<StandardPlayingCard> deck = new ArrayList<StandardPlayingCard>();
 
 		for (Suit s : Suit.values()) {
 			for (int i = 1; i <= 13; i++) {
