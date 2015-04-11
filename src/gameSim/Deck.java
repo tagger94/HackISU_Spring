@@ -215,6 +215,7 @@ public class Deck<C extends Card> {
 
 		while (numCards != 0) {
 			result.add(deck.remove(random.nextInt(numCards)));
+			numCards--; 
 		}
 
 		numCards = result.size();
