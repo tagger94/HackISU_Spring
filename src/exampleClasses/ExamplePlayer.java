@@ -183,7 +183,7 @@ public class ExamplePlayer implements Player {
 	}
 
 	/**
-	 * Returns and prints a string representation of the total number o f tokens
+	 * Returns and prints a string representation of the total number of tokens
 	 * ever lost by the player
 	 * 
 	 * @return
