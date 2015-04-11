@@ -17,7 +17,7 @@ public class Deck<C extends Card> {
 	 */
 	public Deck() {
 		numCards = 0;
-		deck = null;
+		deck = new ArrayList<C>();
 		timesShuffled = 0;
 		numDraws = 0;
 	}
@@ -299,6 +299,10 @@ public class Deck<C extends Card> {
 
 	public String timesShuffled_Report() {
 		return "The deck was shuffled " + timesShuffled + " times";
+	}
+
+	public int get_NumCards() {
+		return numCards;
 	}
 
 }

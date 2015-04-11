@@ -1,5 +1,7 @@
 package warTestGame;
 
+import java.util.ArrayList;
+
 import gameSim.Card;
 import gameSim.Deck;
 import gameSim.Hand;
@@ -13,7 +15,7 @@ import gameSim.Hand;
 public class WarPlayer {
 
 	private String title;
-	private Hand<Card> hand;
+	private Deck<Card> hand;
 	private Deck<Card> discard;
 
 	/**
@@ -21,7 +23,7 @@ public class WarPlayer {
 	 */
 	public WarPlayer() {
 		title = "Player";
-		hand = new Hand<Card>();
+		hand = new Deck<Card>();
 		discard = new Deck<Card>();
 	}
 
@@ -32,15 +34,44 @@ public class WarPlayer {
 	 */
 	public WarPlayer(String title) {
 		this.title = title;
-		hand = new Hand<Card>();
+		hand = new Deck<Card>();
 		discard = new Deck<Card>();
 	}
 	
 	/**
-	 * Adds card to player's hand
+	 * Plays first card from player's hand
+	 * 
+	 * @param Card to be discarded
 	 */
-	public void drawCard(Card card){
+	public Card playCard(){
+		return hand.draw();
+	}
+	
+	/**
+	 * Adds card to bottom of player's hand
+	 * 
+	 * @param Card to be added
+	 */
+	public void takeCard(Card card){
+		ArrayList<Card> tmp = hand.drawAll();
+		hand.give(card);
+		hand.giveMulti(tmp);
+	}
+	
+	/**
+	 * Adds multiple cards to bottom of player's hand
+	 * 
+	 * @param Cards to add to hand
+	 */
+	public void takeMulti(ArrayList<Card> card){
 		
+	}
+	
+	public void takeDiscard(){
+		ArrayList<Card> temp = discard.drawAll();
+		for(int a = 0; a < discard.get_NumCards(); a++){
+			discard.draw();
+		}
 	}
 	
 	
@@ -54,11 +85,11 @@ public class WarPlayer {
 		this.title = title;
 	}
 
-	public Hand<Card> getHand() {
+	public Deck<Card> getHand() {
 		return hand;
 	}
 
-	public void setHand(Hand<Card> hand) {
+	public void setHand(Deck<Card> hand) {
 		this.hand = hand;
 	}
 
