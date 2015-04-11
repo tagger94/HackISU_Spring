@@ -45,7 +45,7 @@ public class WarPlayer {
 	public StandardPlayingCard playCard(){
 		try{
 			return hand.draw();
-		} catch(IllegalStateException e){
+		} catch(IllegalStateException b){
 			takeDiscard();
 			return hand.draw();
 		}
