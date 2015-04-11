@@ -19,18 +19,25 @@ public class BlackJack {
 		deck.shuffle_Report();
 	}
 
-	private void takeTurn(Player p) {
+	private void takeTurn(ExamplePlayer p) {
+		
+		int handValue = 0;
+		Boolean soft_flag = false;
 
 		// Check for Splits
 
 		// Check for Aces
+		for(int i = 0; i < p.hand.hand.size(); i++) {
+			
+		}
 
 		// Find Hand Value
 
 		// Determine Bet
 
-		// 
+		// Hit or Not
 	}
+	
 
 	public void runGame() {
 		Inventory chips = new Inventory("Chips", -1);
