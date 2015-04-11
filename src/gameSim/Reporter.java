@@ -26,5 +26,7 @@ public class Reporter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println(s);
 	}
 }
