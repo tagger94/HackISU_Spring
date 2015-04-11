@@ -2,6 +2,15 @@ package gameSim;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * This class is meant to be extended by a player class
+ * and can use this class to keep a hand of cards. 
+ * 
+ * @author Camden Voigt
+ *
+ */
+
 public class Hand {
 	
 	private ArrayList<Card> hand;
@@ -15,10 +24,6 @@ public class Hand {
 	public Hand(){
 		cardsDrawn = 0;
 		cardsDiscarded = 0; 
-	}
-	
-	public Hand(ArrayList<Card> aList){
-		hand = aList; 
 	}
 	
 	/**
