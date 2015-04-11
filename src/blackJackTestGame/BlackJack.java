@@ -17,44 +17,50 @@ public class BlackJack {
 	private static BlackJackDealerAI dealer = new BlackJackDealerAI("Dealer");
 
 	private static ArrayList<BlackJackPlayerAI> players = new ArrayList<BlackJackPlayerAI>();
-	
+
 	private static int round = 0;
-	
-	//TODO: Bank
+
+	private static final int START_CHIP = 50;
+
+	// TODO: Bank
 
 	public static void main() {
 		Inventory chips = new Inventory("Chips", -1);
-		
-		players.add(new BlackJackPlayerAI("Bob", 50, 90));
-		players.add(new BlackJackPlayerAI("Alice", 50, 50));
-		players.add(new BlackJackPlayerAI("Eve", 50, 20));
 
-		while (true) {
-			//Set up deck
+		players.add(new BlackJackPlayerAI("Bob", chips.take(START_CHIP), 90));
+		players.add(new BlackJackPlayerAI("Alice", chips.take(START_CHIP), 50));
+		players.add(new BlackJackPlayerAI("Eve", chips.take(START_CHIP), 20));
+
+		while (round < 100) {
+			// Set up deck
 			startRound();
-			
-			//Increment Counter
+
+			// Increment Counter
 			round++;
-			
-			//Place Bets
+
+			// Place Bets
 			for (BlackJackPlayerAI p : players) {
 				p.determineBet();
 			}
 
-			//Take Player Turns
+			// Take Player Turns
 			for (BlackJackPlayer p : players) {
 				takeTurn((BlackJackAI) p);
 			}
 
-			//Take Dealer Turn
+			// Take Dealer Turn
 			takeTurn(dealer);
-			
-			//Reclaim Bet
+
+			// Reclaim Bet
 			for (BlackJackPlayerAI p : players) {
-				p.doWin(dealer.hand.findHandValue());
+				int temp = p.doWin(dealer.hand.findHandValue());
+				if(temp < 1)
+					chips.give(temp * -1);
+				else
+					chips.take(temp);
 			}
 
-			//Reset Deck
+			// Reset Deck
 			endRound();
 		}
 	}
@@ -63,11 +69,13 @@ public class BlackJack {
 
 		// Shuffle
 		deck.shuffle_Report();
+		System.out.println("Shuffled Deck");
 
 		// Each player gets 2 cards
 		for (BlackJackPlayer h : players) {
 			h.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
 			h.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
+			System.out.println(h.toString() + ": drew " + h.hand);
 		}
 
 		// Dealer gets 2 cards
@@ -77,19 +85,19 @@ public class BlackJack {
 	}
 
 	private static void takeTurn(BlackJackAI p) {
-	
+
 		// Determine Bet
 		p.determineBet();
 		// Hit until Stop
 		while (p.doHit()) {
 		}
-	
+
 	}
 
 	private static void endRound() {
 
 		for (BlackJackPlayer h : players) {
-			deck.giveMulti(h.hand.discardHand());
+			deck.giveMulti( h.hand.discardHand());
 		}
 		deck.giveMulti(dealer.hand.discardHand());
 	}

@@ -14,6 +14,8 @@ public class BlackJackPlayerAI extends BlackJackPlayer implements BlackJackAI {
 	private int riskLevel;
 
 	private int bet;
+	
+	private int chips;
 
 	public BlackJackPlayerAI(String name, int chips, int riskLevel) {
 		super(name);
