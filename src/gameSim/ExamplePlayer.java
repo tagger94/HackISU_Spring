@@ -101,6 +101,7 @@ public class ExamplePlayer implements Player {
 	 * @param num
 	 *  - number of tokens to be taken from the player total
 	 */
+	@Override
 	public void subTokens(Inventory i, int num){
 		numTokens -= num;
 		totalLostTokens += num;
@@ -185,4 +186,5 @@ public class ExamplePlayer implements Player {
 		System.out.println(name + " has lost " + totalLostTokens + "total.\n");
 		return name + " has lost " + totalLostTokens + "total.\n";
 	}
+
 }
