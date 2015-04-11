@@ -27,9 +27,10 @@ public class BlackJack {
 		// Check for Splits
 
 		// Check for Aces
-		soft_flag = p.hand.
+		soft_flag = p.hand.checkForAce();
 
 		// Find Hand Value
+		
 
 		// Determine Bet
 
