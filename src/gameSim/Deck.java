@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Deck {
 
+	private int timesShuffled;
+
 	private int numCards;
 
 	// By default deck refers to standard card deck
@@ -16,6 +18,7 @@ public class Deck {
 	public Deck() {
 		numCards = 0;
 		deck = null;
+		timesShuffled = 0;
 	}
 
 	/**
@@ -26,6 +29,7 @@ public class Deck {
 	 */
 	public Deck(ArrayList<Card> deck) {
 		this.deck = deck;
+		timesShuffled = 0;
 		numCards = deck.size();
 	}
 
@@ -39,12 +43,37 @@ public class Deck {
 	}
 
 	/**
+	 * Peek at the top card of the deck. Does not remove card. Generates report.
+	 * 
+	 * @return Card that was at top of the deck
+	 */
+	public Card peekTopReport() {
+		Card result = peekTop();
+		System.out.println("The top of the deck was looked at. " + result
+				+ " was on top.");
+		return result;
+	}
+
+	/**
 	 * Peek at the card at the bottom of the deck. Does not remove card
 	 * 
 	 * @return Card that was at bottom of the deck
 	 */
 	public Card peekBottom() {
 		return deck.get(numCards);
+	}
+
+	/**
+	 * Peek at the card at the bottom of the deck. Does not remove card.
+	 * Generates report.
+	 * 
+	 * @return Card that was at bottom of the deck
+	 */
+	public Card peekBottomReport() {
+		Card result = peekBottom();
+		System.out.println("The bottom of the deck was looked at. " + result
+				+ " was on the bottom.");
+		return result;
 	}
 
 	/**
@@ -55,6 +84,18 @@ public class Deck {
 	public Card draw() {
 		numCards--;
 		return deck.remove(0);
+	}
+
+	/**
+
+	 * Draws the top card of the deck. Generates Report
+	 * 
+	 * @return Card that was on top of the deck
+	 */
+	public Card draw_Report() {
+		Card result = draw();
+		System.out.println("A card was drawn. " + result + " was drawn");
+		return result;
 	}
 
 	/**
@@ -83,6 +124,20 @@ public class Deck {
 	}
 
 	/**
+	 * Gets specified card from deck. Generated report
+	 * 
+	 * @param card
+	 *            Card requested from the deck.
+	 * 
+	 * @return The card request or null if not found.
+	 */
+	public Card get_Report(Card card) {
+		Card result = get(card);
+		System.out.println("Get Card was called. " + result + " was returned");
+		return result;
+	}
+
+	/**
 	 * Gives the deck in its current state
 	 * 
 	 * @return Current deck
@@ -104,6 +159,9 @@ public class Deck {
 		return result;
 	}
 
+	/**
+	 * Shuffle the cards within the deck
+	 */
 	public void shuffle() {
 		Random random = new Random();
 		ArrayList<Card> result = new ArrayList<Card>();
@@ -114,5 +172,15 @@ public class Deck {
 
 		numCards = result.size();
 		deck = result;
+		timesShuffled++;
+	}
+
+	/**
+	 * Shuffles deck and returns report that deck was shuffled along with how
+	 * many times in total
+	 */
+	public void shuffle_Report() {
+		shuffle();
+		System.out.println("shuffled for the " + timesShuffled + " time");
 	}
 }
