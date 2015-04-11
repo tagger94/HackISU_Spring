@@ -26,7 +26,8 @@ public class Hand <C extends Card> {
 		cardsDrawn = 0;
 		cardsDiscarded = 0;
 		minHandSize = 0;
-		maxHandSize  = Integer.MAX_VALUE; 
+		maxHandSize  = Integer.MAX_VALUE;
+		hand = new ArrayList<C>(); 
 	}
 	
 	/**
@@ -39,7 +40,8 @@ public class Hand <C extends Card> {
 		cardsDrawn = 0;
 		cardsDiscarded = 0;
 		maxHandSize = max;
-		minHandSize = min; 
+		minHandSize = min;
+		hand = new ArrayList<C>(); 
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class Hand <C extends Card> {
 	 *  - card to be add to hand
 	 */
 	public void drawCard(C c){
-		if(hand.size() < maxHandSize){
+		if(hand.size() < maxHandSize){ 
 			hand.add(c);
 			cardsDrawn++; 
 		}
