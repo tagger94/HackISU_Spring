@@ -65,7 +65,7 @@ public class Hand <C extends Card> {
 	public void drawCard_Report(C c){
 		if(hand.size() < maxHandSize){
 			drawCard(c); 
-			System.out.println(c.toString() + " was add to the hand.\n"); 
+			Reporter.printReport(c.toString() + " was add to the hand.\n"); 
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class Hand <C extends Card> {
 	 */
 	public void discardCard_Report(C c){
 		if(hand.size() > maxHandSize){
-			System.out.println(c.toString() + " was remove from the hand.\n");
+			Reporter.printReport(c.toString() + " was remove from the hand.\n");
 			discardCard(c);
 		}
 	}
@@ -115,7 +115,7 @@ public class Hand <C extends Card> {
 	 * @return
 	 */
 	public String getCardsDrawn_Report(){
-		System.out.println(cardsDrawn + " have been drawn.\n");
+		Reporter.printReport(cardsDrawn + " have been drawn.\n");
 		return cardsDrawn + " have been drawn.\n"; 
 	}
 	
@@ -134,7 +134,7 @@ public class Hand <C extends Card> {
 	 * @return
 	 */
 	public String getCardsDiscarded_Report(){
-		System.out.println(cardsDiscarded + " have been discarded\n");
+		Reporter.printReport(cardsDiscarded + " have been discarded\n");
 		return cardsDiscarded + " have been discarded\n"; 
 	}
 	

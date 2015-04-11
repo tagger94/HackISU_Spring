@@ -88,7 +88,7 @@ public class Inventory {
 	 */
 	public int take_Report(int num) {
 		this.take(num);
-		System.out.println(title + " amount changed: -" + num);
+		Reporter.printReport(title + " amount changed: -" + num);
 		return num;
 	}
 
@@ -112,7 +112,7 @@ public class Inventory {
 	 */
 	public int give_Report(int num) {
 		this.give(num);
-		System.out.println(title + " amount changed: +" + num);
+		Reporter.printReport(title + " amount changed: +" + num);
 		return num;
 	}
 
