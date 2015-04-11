@@ -13,7 +13,8 @@ public class UnoPlayer {
 	}
 	
 	public UnoPlayer(String name){
-		this.name = name; 
+		this.name = name;
+		playerHand = new Hand<UnoCard>(); 
 	}
 	
 	public String getName(){

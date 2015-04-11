@@ -15,9 +15,9 @@ public class Uno {
 		playDeck.shuffle(); 
 		Deck<UnoCard> discardDeck = new Deck<UnoCard>(); 
 		
-		for(int i = 1; i < 8; i++){
-			Bob.playerHand.drawCard_Report(playDeck.draw_Report());
-			Alice.playerHand.drawCard_Report(playDeck.draw()); 
+		for(int i = 1; i < 8; i++){ 
+			Bob.playerHand.drawCard(playDeck.draw_Report());
+			Alice.playerHand.drawCard_Report(playDeck.draw_Report()); 
 		}
 		
 		UnoCard currentTop = playDeck.draw_Report();
