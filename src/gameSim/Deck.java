@@ -185,8 +185,30 @@ public class Deck {
 		System.out.println("shuffled for the " + timesShuffled + " time");
 	}
 
-	public void getReport() {
-		System.out.println("The deck was shuffled " + timesShuffled
-				+ ". There were " + numDraws + " draws.");
+	/**
+	 * Returns report of all action that has occurred in this deck
+	 * 
+	 * @return Actions occurred in this deck.
+	 */
+	public String getReport() {
+		return "The deck was shuffled " + timesShuffled + ". There were "
+				+ numDraws + " draws.\n";
 	}
+
+	public int get_NumDraws() {
+		return numDraws;
+	}
+
+	public int get_TimesShuffled() {
+		return timesShuffled;
+	}
+
+	public String numDraws_Report() {
+		return "There were " + numDraws + " draws";
+	}
+
+	public String timesShuffled_Report() {
+		return "The deck was shuffled " + timesShuffled + " times";
+	}
+
 }
