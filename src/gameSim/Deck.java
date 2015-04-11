@@ -88,7 +88,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekTopReport() {
 		C result = peekTop();
-		System.out.println("The top of" + name + " was looked at.\n" + result
+		Reporter.printReport("The top of" + name + " was looked at.\n" + result
 				+ " was on top.");
 		return result;
 	}
@@ -112,7 +112,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekBottomReport() {
 		C result = peekBottom();
-		System.out.println("The bottom of" + name + " was looked at.\n" + result
+		Reporter.printReport("The bottom of" + name + " was looked at.\n" + result
 				+ " was on the bottom.");
 		return result;
 	}
@@ -137,7 +137,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		Reporter.printReport("A card was drawn. " + result + " was drawn");
+		Reporter.printReport("A card was drawn from" + name + ".\n" + result + " was drawn");
 		return result;
 	}
 	
@@ -165,7 +165,7 @@ public class Deck<C extends Card> {
 	 */
 	public ArrayList<C> drawMulti_Report(int num){
 		ArrayList<C> temp = drawMulti(num);
-		Reporter.printReport(num + " cards were drawn.");
+		Reporter.printReport(num + " cards were drawn from" + name + ".\n");
 		return temp;
 	}
 	
@@ -215,7 +215,7 @@ public class Deck<C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		System.out.println("Get Card was called. " + result + " was returned to the deck.");
+		Reporter.printReport("Get Card was called. " + result + " was returned to the deck.");
 
 		return result;
 	}
@@ -287,7 +287,7 @@ public class Deck<C extends Card> {
 	 */
 	public void give_Report(C card) {
 		give(card); 
-		System.out.println(card + " was added to the deck.");
+		Reporter.printReport(card + " was added to " + name + ".\n");
 	}
 
 	/**
