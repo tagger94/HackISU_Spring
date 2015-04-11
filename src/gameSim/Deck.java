@@ -3,7 +3,7 @@ package gameSim;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck <C extends Card> {
+public class Deck<C extends Card> {
 
 	private int timesShuffled;
 	private int numCards;
@@ -41,6 +41,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was at top of the deck
 	 */
 	public C peekTop() {
+		if (numCards == 0)
+			throw new IllegalStateException("Deck is empty.");
 		return deck.get(0);
 	}
 
@@ -62,6 +64,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was at bottom of the deck
 	 */
 	public C peekBottom() {
+		if (numCards == 0)
+			throw new IllegalStateException("Deck is empty.");
 		return deck.get(numCards);
 	}
 
@@ -84,6 +88,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was on top of the deck
 	 */
 	public C draw() {
+		if (numCards == 0)
+			throw new IllegalStateException("Deck is empty.");
 		numCards--;
 		return deck.remove(0);
 	}
@@ -99,6 +105,45 @@ public class Deck <C extends Card> {
 		System.out.println("A card was drawn. " + result + " was drawn");
 		return result;
 	}
+	
+	/**
+	 * Draws top number of cards from deck
+	 * 
+	 * @param Number to draw
+	 * @return First number of cards on the deck
+	 */
+	public ArrayList<C> drawMulti(int num){
+		if(num > numCards)
+			throw new IllegalStateException("Not enough cards to draw.");
+		ArrayList<C> hold = new ArrayList<>();
+		for(int a = 0; a < num; a++){
+			hold.add(draw());
+		}
+		return hold;
+	}
+	
+	/**
+	 * Draws top number of cards from deck. Prints report.
+	 * 
+	 * @param Number to draw
+	 * @return First number of cards from deck
+	 */
+	public ArrayList<C> drawMulti_Report(int num){
+		ArrayList<C> temp = drawMulti(num);
+		System.out.println(num + " cards were drawn.");
+		return temp;
+	}
+	
+	/**
+	 * Empties the deck.
+	 * 
+	 * @return All cards in deck.
+	 */
+	public ArrayList<C> drawAll(){
+		ArrayList<C> temp = drawMulti(numCards);
+		return temp;
+	}
+	
 
 	/**
 	 * Gets a specific card from the deck if available
@@ -192,10 +237,11 @@ public class Deck <C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void give(C card ) {
+	public void give(C card) {
 		deck.add(card);
+		numCards++;
 	}
-
+	
 	/**
 	 * Adds a card to the deck. Generates report of action
 	 * 
@@ -213,7 +259,7 @@ public class Deck <C extends Card> {
 	 * @param cards
 	 *            Cards to add to the deck.
 	 */
-	public void give(ArrayList<C> cards) {
+	public void giveMulti(ArrayList<C> cards) {
 		for (C card : cards)
 			give(card);
 	}
