@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  */
 public class Yahtzee {
-	private Dice[] dice = { new Dice(6), new Dice(6), new Dice(6), new Dice(6), new Dice(6) };
+	private Dice[] dice = { new Dice(6), new Dice(6), new Dice(6), new Dice(6),
+			new Dice(6) };
 	private Player player;
 	private int rollsTaken;
 
@@ -34,38 +35,49 @@ public class Yahtzee {
 	}
 
 	private ArrayList<Dice> choseDice() {
-		
+
 		double[] prob = getProb();
-		
+		ArrayList<Dice> result = new ArrayList<Dice>();
 		int maxIndex = -1;
 		double max = -1;
-		
-		for(int i = 0; i < prob.length; i++){
-			if(prob[i] > max){
+
+		for (int i = 0; i < prob.length; i++) {
+			if (prob[i] > max) {
 				max = prob[i];
 				maxIndex = i;
 			}
 		}
-		
-		if(maxIndex == 0 || maxIndex == 1 || maxIndex == 5){
+
+		if (maxIndex == 0 || maxIndex == 1 || maxIndex == 5) {
 			int[] results = new int[5];
-			
-			for(int i = 0; i<5; i++){
-			if(dice[i].getLastRoll() == 1)
-				results[0]++;
-			if(dice[i].getLastRoll() == 2)
-				results[1]++;
-			if(dice[i].getLastRoll() == 3)
-				results[2]++;
-			if(dice[i].getLastRoll() == 4)
-				results[3]++;
-			if(dice[i].getLastRoll() == 5)
-				results[4]++;
-			if(dice[i].getLastRoll() == 6)
-				results[5]++;
+
+			for (int i = 0; i < 5; i++) {
+				if (dice[i].getLastRoll() == 1)
+					results[0]++;
+				if (dice[i].getLastRoll() == 2)
+					results[1]++;
+				if (dice[i].getLastRoll() == 3)
+					results[2]++;
+				if (dice[i].getLastRoll() == 4)
+					results[3]++;
+				if (dice[i].getLastRoll() == 5)
+					results[4]++;
+				if (dice[i].getLastRoll() == 6)
+					results[5]++;
+			}
+
+			int maxNum = 0;
+			for (int i = 0; i < 6; i++) {
+				if (results[i] >= maxNum)
+					maxNum = i;
+			}
+
+			for (int i = 0; i < 5; i++) {
+				if (dice[i].getLastRoll() != maxNum)
+					result.add(dice[i]);
+			}
 		}
-		}
-		return null;
+		return result;
 	}
 
 	private double[] getProb() {
