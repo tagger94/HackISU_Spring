@@ -1,6 +1,7 @@
 package gameSim;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck {
 
@@ -55,15 +56,63 @@ public class Deck {
 		numCards--;
 		return deck.remove(0);
 	}
-	
-	public Card get(Card card){
-		if(numCards == 0)
+
+	/**
+	 * Gets a specific card from the deck if available
+	 * 
+	 * @param card
+	 *            Card requested from the deck.
+	 * 
+	 * @return The card request or null if not found.
+	 */
+	public Card get(Card card) {
+		if (numCards == 0)
 			return null;
-		
+
 		int pos = 0;
-		
-		for(Card current: deck){
-			
+
+		for (Card current : deck) {
+			if (current.equals(card)) {
+				numCards--;
+				return deck.remove(pos);
+			}
+			pos++;
 		}
+
+		return null;
+	}
+
+	/**
+	 * Gives the deck in its current state
+	 * 
+	 * @return Current deck
+	 */
+	public ArrayList<Card> getContents() {
+		return deck;
+	}
+
+	/**
+	 * Gives every card printed on its own line
+	 * 
+	 * @return Textual representation of deck
+	 */
+	public String printDeck() {
+		String result = "";
+		for (Card card : deck) {
+			result += card.toString() + "\n";
+		}
+		return result;
+	}
+
+	public void shuffle() {
+		Random random = new Random();
+		ArrayList<Card> result = new ArrayList<Card>();
+
+		while (numCards != 0) {
+			result.add(deck.remove(random.nextInt(numCards)));
+		}
+
+		numCards = result.size();
+		deck = result;
 	}
 }
