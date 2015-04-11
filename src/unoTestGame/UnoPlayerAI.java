@@ -44,7 +44,12 @@ public class UnoPlayerAI extends UnoPlayer {
 		maxNums[2] = findNumGreen();
 		maxNums[3] = findNumYellow(); 
 		
+		int max = maxNums[0];
+		for(int i = 1; i < 4; i++){
+			if (maxNums[i] > max) max = maxNums[i]; 
+		}
 		
+		Color maxColor = Color.RED; 
 		
 		return null; 
 	}
