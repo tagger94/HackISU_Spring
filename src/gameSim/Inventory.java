@@ -51,43 +51,43 @@ public class Inventory {
 		this.take(num);
 		System.out.println(title + " amount changed: -" + num);
 	}
-	
-	//Add to inventory
-	public void give(int num){
+
+	// Add to inventory
+	public void give(int num) {
 		giveCalled++;
 		if (size != -1)
 			size += num;
 		numGiven += num;
 	}
-	
-	//Add to inventory with printed report
-	public void give_Report(int num){
+
+	// Add to inventory with printed report
+	public void give_Report(int num) {
 		this.give(num);
 		System.out.println(title + " amount changed: +" + num);
 	}
-	
-	//Return takeCalled
-	public int get_takeCalled(){
+
+	// Return takeCalled
+	public int get_takeCalled() {
 		return takeCalled;
 	}
-	
-	//Return numTaken
-	public int get_numTaken(){
+
+	// Return numTaken
+	public int get_numTaken() {
 		return numTaken;
 	}
-	
-	//Return giveCalled
-	public int get_giveCalled(){
+
+	// Return giveCalled
+	public int get_giveCalled() {
 		return giveCalled;
 	}
-	
-	//Return numGiven
-	public int get_numGiven(){
+
+	// Return numGiven
+	public int get_numGiven() {
 		return numGiven;
 	}
-	
-	//Return all stats
-	public String getReport(){
+
+	// Return all stats
+	public String getReport() {
 		String report = "";
 		report += "Take called: " + takeCalled + "\n";
 		report += "Number taken: " + numTaken + "\n";
@@ -95,5 +95,5 @@ public class Inventory {
 		report += "Number given: " + numGiven + "\n";
 		return report;
 	}
-	
+
 }
