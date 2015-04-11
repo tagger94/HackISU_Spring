@@ -223,6 +223,7 @@ public class StandardPlayingCard implements Card,
 
 	/**
 	 * Creates a 52 card deck and puts it in an array list to pass to deck
+	 * 
 	 * @return deck
 	 */
 	public ArrayList<Card> makeDeck() {

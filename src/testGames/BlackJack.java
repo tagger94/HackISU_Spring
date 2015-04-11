@@ -2,11 +2,7 @@ package testGames;
 
 import java.util.ArrayList;
 
-import gameSim.Card;
-import gameSim.Hand;
-import gameSim.Deck;
-import gameSim.StandardPlayingCard;
-import gameSim.Suit;
+import gameSim.*;
 
 public class BlackJack {
 	private Suit suit;
@@ -21,13 +17,8 @@ public class BlackJack {
 		deck.shuffle_Report();
 	}
 
-	private void takeTurn(Hand hand) {
-		int handValue = 0;
-		hand.drawCard_Report(deck.draw_Report());
-		hand.drawCard_Report(deck.draw_Report());
+	private void takeTurn(Player p) {
 		
-		StandardPlayingCard card_1 = (StandardPlayingCard) hand.hand.get(0);
-		StandardPlayingCard card_2 = (StandardPlayingCard) hand.hand.get(1);
 		
 		//Check for Splits
 		
@@ -35,13 +26,19 @@ public class BlackJack {
 		
 		//Find Hand Value
 		
+		//Determine Bet
+		
 		//
 	}
 
 	public void runGame() {
+		ArrayList<ExamplePlayer> p = new ArrayList<ExamplePlayer>();
+		for(int i = 0; i < 4; i++) {
+			p.add(new ExamplePlayer("Player " + i));
+		}
 		while (true) {
 			startRound();
-			takeTurn(hand1);
+			takeTurn();
 		}
 	}
 
