@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  */
 
-public class Hand {
+public class Hand <C extends Card> {
 	
 	public ArrayList<Card> hand;
 	private int cardsDrawn;
@@ -48,7 +48,7 @@ public class Hand {
 	 * @param c
 	 *  - card to be add to hand
 	 */
-	public void drawCard(Card c){
+	public void drawCard(C c){
 		if(hand.size() < maxHandSize){
 			hand.add(c);
 			cardsDrawn++; 
@@ -62,7 +62,7 @@ public class Hand {
 	 * @param c
 	 * 	- card to add to hand
 	 */
-	public void drawCard_Report(Card c){
+	public void drawCard_Report(C c){
 		if(hand.size() < maxHandSize){
 			drawCard(c); 
 			System.out.println(c.toString() + " was add to the hand.\n"); 
@@ -75,7 +75,7 @@ public class Hand {
 	 * @param c
 	 * 	- card to remove from hand
 	 */
-	public void discardCard(Card c){
+	public void discardCard(C c){
 		if(hand.size() > minHandSize){
 			for(int i = 0; i < hand.size(); i++){
 				if(hand.get(i).equals(c)){
@@ -93,7 +93,7 @@ public class Hand {
 	 * @param c
 	 *  - card to remove from hand
 	 */
-	public void discardCard_Report(Card c){
+	public void discardCard_Report(C c){
 		if(hand.size() > maxHandSize){
 			System.out.println(c.toString() + " was remove from the hand.\n");
 			discardCard(c);
