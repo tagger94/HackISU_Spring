@@ -1,7 +1,7 @@
 package yahtzeeTestGame;
 
 import gameSim.Dice;
-
+import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
@@ -11,12 +11,7 @@ import java.util.ArrayList;
  *
  */
 public class Yahtzee {
-	private Dice dice1 = new Dice(6);
-	private Dice dice2 = new Dice(6);
-	private Dice dice3 = new Dice(6);
-	private Dice dice4 = new Dice(6);
-	private Dice dice5 = new Dice(6);
-	private Dice dice6 = new Dice(6);
+	private Dice[] dice = { new Dice(6), new Dice(6), new Dice(6), new Dice(6), new Dice(6) };
 	private Player player;
 	private int rollsTaken;
 
@@ -26,24 +21,96 @@ public class Yahtzee {
 	}
 
 	public void roll() {
-		dice1.roll_Report();
-		dice2.roll_Report();
-		dice3.roll_Report();
-		dice4.roll_Report();
-		dice5.roll_Report();
-		dice6.roll_Report();
+		dice[0].roll_Report();
+		dice[1].roll_Report();
+		dice[2].roll_Report();
+		dice[3].roll_Report();
+		dice[4].roll_Report();
 	}
 
 	private void roll(ArrayList<Dice> selectedDice) {
-		for(int i = 0; i< selectedDice.size(); i++)
-			selectedDice.get(i).roll_Report();	
+		for (int i = 0; i < selectedDice.size(); i++)
+			selectedDice.get(i).roll_Report();
 	}
-	
+
 	private ArrayList<Dice> choseDice() {
-		// TODO Auto-generated method stub
+		
+		double[] prob = getProb();
+		
+		int maxIndex = -1;
+		double max = -1;
+		
+		for(int i = 0; i < prob.length; i++){
+			if(prob[i] > max){
+				max = prob[i];
+				maxIndex = i;
+			}
+		}
+		
+		if(maxIndex == 0 || maxIndex == 1 || maxIndex == 5){
+			int[] results = new int[5];
+			
+			for(int i = 0; i<5; i++){
+			if(dice[i].getLastRoll() == 1)
+				results[0]++;
+			if(dice[i].getLastRoll() == 2)
+				results[1]++;
+			if(dice[i].getLastRoll() == 3)
+				results[2]++;
+			if(dice[i].getLastRoll() == 4)
+				results[3]++;
+			if(dice[i].getLastRoll() == 5)
+				results[4]++;
+			if(dice[i].getLastRoll() == 6)
+				results[5]++;
+		}
+		}
 		return null;
 	}
-	
+
+	private double[] getProb() {
+		double[] prob = new double[6];
+
+		prob[0] = getProb3OfAKind();
+		prob[1] = getProb4OfAKind();
+		prob[2] = getProbFullHouse();
+		prob[3] = getProbSmStraight();
+		prob[4] = getProbLgStraight();
+		prob[5] = getProbYahtzee();
+
+		return prob;
+	}
+
+	private double getProbYahtzee() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double getProbLgStraight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double getProbSmStraight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double getProbFullHouse() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double getProb4OfAKind() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double getProb3OfAKind() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public void takeTurn() {
 		boolean pointsClaimed = false;
 		while (rollsTaken < 3 && !pointsClaimed) {
@@ -57,7 +124,7 @@ public class Yahtzee {
 
 	private void claimPoints() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private boolean optionalClaimPoints() {
