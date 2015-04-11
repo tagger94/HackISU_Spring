@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Hand <C extends Card> {
 	
-	public ArrayList<Card> hand;
+	public ArrayList<C> hand;
 	private int cardsDrawn;
 	private int cardsDiscarded; 
 	private int maxHandSize;
