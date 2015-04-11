@@ -37,10 +37,42 @@ public class Dice {
 		 * Generates a random number of the die and reports to file
 		 * @return A random number between 1 and die size
 		 */
-		public int roll_report() {
+		public int roll_Report() {
 			int num = this.roll();
 			System.out.println("Die Rolled: " + num);
 			return num;
+		}
+		
+		/**
+		 * Gives the size of the die used
+		 * @return The size of die as int
+		 */
+		public int get_DieSize() {
+			return DIE_SIZE;
+		}
+		
+		/**
+		 * Gives the size of the die used as a String
+		 * @return The size of die as String
+		 */
+		public String dieSize_Report() {
+			return "Die Size: " + DIE_SIZE;
+		}
+		
+		/**
+		 * Gives the number of times the die has been rolled
+		 * @return Number of rolls as Int
+		 */
+		public int get_reportCounter() {
+			return report_counter;
+		}
+		
+		/**
+		 * Gives the number of times the die has been rolled
+		 * @return Number of rolls as String
+		 */
+		public String numOfRolls_Report() {
+			return "Number of Rolls: " + report_counter;
 		}
 		
 		/**
@@ -48,6 +80,6 @@ public class Dice {
 		 * @return Die size and number of times rolled
 		 */
 		public String getReport() {
-			return "Die Size: " + DIE_SIZE + "/nNum of Rolls: " + report_counter;
+			return "Die Size: " + DIE_SIZE + "/nNumber of Rolls: " + report_counter;
 		}
 }
