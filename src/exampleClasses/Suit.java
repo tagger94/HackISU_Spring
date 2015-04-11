@@ -1,4 +1,4 @@
-package gameSim;
+package exampleClasses;
   /**
    * Constants for the four suits.
    */
