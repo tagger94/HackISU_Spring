@@ -11,9 +11,9 @@ public class Uno {
 		
 		ArrayList<UnoCard> tempD = new ArrayList<UnoCard>();
 		createCards(tempD); 
-		Deck<UnoCard> playDeck = new Deck<UnoCard>(tempD);
+		Deck<UnoCard> playDeck = new Deck<UnoCard>(tempD, "Play Deck");
 		playDeck.shuffle(); 
-		Deck<UnoCard> discardDeck = new Deck<UnoCard>(); 
+		Deck<UnoCard> discardDeck = new Deck<UnoCard>("Discard Deck"); 
 		
 		System.out.println("Drawing Cards\n\n");
 		for(int i = 1; i < 8; i++){ 
@@ -26,12 +26,16 @@ public class Uno {
 		
 		System.out.println("\n\nThe game begins\n\n"); 
 		for(int j = 0; j < 10; j++){
+			System.out.println("Its turn " + (j+1));
+			System.out.println("Its Bob's Turn");
 			discardDeck.give_Report(Bob.playCard(currentTop, playDeck));
 			currentTop = discardDeck.peekTop(); 
 			if(Bob.playerHand.hand.size() == 0){
 				System.out.println("Bob Won!"); 
 				break;
 			}
+			
+			System.out.println("It's Alice's Turn");
 			discardDeck.give_Report(Alice.playCard(currentTop, playDeck));
 			currentTop = discardDeck.peekTop(); 
 			if(Alice.playerHand.hand.size() == 0){
