@@ -21,28 +21,38 @@ public class BlackJack {
 
 	private void takeTurn(BlackJackPlayer p) {
 		
-		int handValue = 0;
-		Boolean soft_flag = false;
+		Boolean hit = false;
+		
+		//Used for Splits
+		BlackJackHand second_hand;
 
 		// Check for Splits
-
-		// Check for Aces
-		soft_flag = p.hand.checkForAce();
+		if(p.hand.canSplit()){
+			second_hand = new BlackJackHand();
+		}
 
 		// Find Hand Value
-		
-
+	
 		// Determine Bet
 
 		// Hit or Not
+		do {
+			if(p.hand.findHandValue() >= 17){
+				hit = true;
+				p.hand.drawCard_Report(deck.draw());
+			} else {
+				hit = false;
+			}
+			
+		} while(hit);
 	}
 	
 
 	public void runGame() {
 		Inventory chips = new Inventory("Chips", -1);
 		
-		ExamplePlayer dealer = new ExamplePlayer("Dealer");
-		ExamplePlayer player = new ExamplePlayer("Player", chips.take_Report(50));
+		BlackJackPlayer dealer = (BlackJackPlayer) new ExamplePlayer("Dealer");
+		BlackJackPlayer player = (BlackJackPlayer) new ExamplePlayer("Player", chips.take_Report(50));
 		
 		while (true) {
 			startRound();
