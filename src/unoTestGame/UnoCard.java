@@ -10,6 +10,15 @@ public class UnoCard implements Card{
 	
 	@Override
 	public String toString(){
+		return name;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if (other == null){
+			return false; 
+		}
+		
 		
 	}
 	
