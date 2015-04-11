@@ -7,22 +7,19 @@ import gameSim.Deck;
 
 public class War {
 
-	private Deck<StandardPlayingCard> deck;
-	 private ArrayList<StandardPlayingCard> down;
+	private ArrayList<StandardPlayingCard> down;
 	WarPlayer player_1;
 	WarPlayer player_2;
 
 	/**
 	 * Default new game constructor
 	 */
-
 	public War() {
 		player_1 = new WarPlayer("Player_1");
 		player_2 = new WarPlayer("Player_2");
 		
-		deck = new Deck<StandardPlayingCard>(StandardPlayingCard.makeDeck());
+		Deck<StandardPlayingCard> deck = new Deck<StandardPlayingCard>(StandardPlayingCard.makeDeck());
 		deck.shuffle();
-		
 		for(int a = 0; a < 26; a++){
 			player_1.takeCard(deck.draw());
 			player_2.takeCard(deck.draw());
@@ -49,11 +46,9 @@ public class War {
 	public void playGame(){
 		while(player_1.hasWon() == false && player_2.hasWon() == false){
 			playTurn();
+			checkEndGame();
 		}
-		if(player_1.hasWon() == true)
-			System.out.println("Player 1 wins!");
-		else
-			System.out.println("Player 2 wins!");
+		System.out.println("Game over.");
 	}
 	
 	
@@ -74,5 +69,14 @@ public class War {
 		return makeAction(down.get(6), down.get(7));
 	}
 	
+	/**
+	 * Ends game and declares a winner
+	 */
+	public void checkEndGame(){
+		if(player_1.hasWon() == true)
+			System.out.println("Player one wins!");
+		if(player_2.hasWon() == true)
+			System.out.println("Player two wins!");
+	}
 
 }

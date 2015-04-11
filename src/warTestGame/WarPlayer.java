@@ -46,8 +46,11 @@ public class WarPlayer {
 		try{
 			return hand.draw();
 		} catch(IllegalStateException e){
-			takeDiscard();
-			return hand.draw();
+			if(!discard.equals(null)){
+				takeDiscard();
+				return hand.draw();
+			}	
+			return null;
 		}
 	}
 	
