@@ -10,8 +10,8 @@ package gameSim;
  */
 public interface Card {
 	@Override
-	boolean equals(Object other);
+	public boolean equals(Object other);
 
 	@Override
-	String toString();
+	public String toString();
 }
