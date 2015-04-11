@@ -17,7 +17,7 @@ public class Deck<C extends Card> {
 	 */
 	public Deck() {
 		numCards = 0;
-		deck = null;
+		deck = new ArrayList<C>();
 		timesShuffled = 0;
 		numDraws = 0;
 	}
@@ -180,7 +180,8 @@ public class Deck<C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		Reporter.printReport("Get Card was called. " + result + " was returned");
+		System.out.println("Get Card was called. " + result + " was returned to the deck.");
+
 		return result;
 	}
 
@@ -215,6 +216,7 @@ public class Deck<C extends Card> {
 
 		while (numCards != 0) {
 			result.add(deck.remove(random.nextInt(numCards)));
+			numCards--; 
 		}
 
 		numCards = result.size();
@@ -249,8 +251,8 @@ public class Deck<C extends Card> {
 	 *            Card to be added to deck.
 	 */
 	public void give_Report(C card) {
-		deck.add(card);
-		Reporter.printReport(card + " was added.");
+		give(card); 
+		System.out.println(card + " was added to the deck.");
 	}
 
 	/**
@@ -299,6 +301,10 @@ public class Deck<C extends Card> {
 
 	public String timesShuffled_Report() {
 		return "The deck was shuffled " + timesShuffled + " times";
+	}
+
+	public int get_NumCards() {
+		return numCards;
 	}
 
 }

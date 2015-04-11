@@ -35,21 +35,47 @@ public class UnoPlayerAI extends UnoPlayer {
 		
 		if(colorList.size() != 0){
 			playerHand.discardCard_Report(colorList.get(0));
+			if(playerHand.hand.size() == 1) System.out.println("UNO!\n");
 			return colorList.get(0);
 		}
 		
-		int[] maxNums = new int[4]; 
-		maxNums[0] = findNumRed();
-		maxNums[1] = findNumBlue();
-		maxNums[2] = findNumGreen();
-		maxNums[3] = findNumYellow(); 
-		
-		int max = maxNums[0];
-		for(int i = 1; i < 4; i++){
-			if (maxNums[i] > max) max = maxNums[i]; 
+		if(numberList.size() != 0){
+			int[] maxNums = new int[4]; 
+			maxNums[0] = findNumRed();
+			maxNums[1] = findNumBlue();
+			maxNums[2] = findNumGreen();
+			maxNums[3] = findNumYellow(); 
+			
+			int max = maxNums[0];
+			for(int i = 1; i < 4; i++){
+				if (maxNums[i] > max) max = maxNums[i]; 
+			}
+			
+			Color maxColor = Color.RED; 
+			
+			if(max == maxNums[0]){
+				maxColor = Color.RED;
+			}
+			else if(max == maxNums[1]){
+				maxColor = Color.BLUE;
+			}
+			else if(max == maxNums[2]){
+				maxColor = Color.GREEN;
+			}
+			else if(max == maxNums[3]){
+				maxColor = Color.YELLOW;
+			}
+			
+			UnoCard temp = new UnoCard(maxColor, c.getNumber());
+			for(int j = 0; j < numberList.size(); j++){
+				if(numberList.get(j).equalColor(temp)){
+					playerHand.discardCard_Report(numberList.get(j));
+					if(playerHand.hand.size() == 1) System.out.println("UNO!\n");
+					return numberList.get(j); 
+				}
+			}
 		}
 		
-		Color maxColor = Color.RED; 
 		
 		return null; 
 	}

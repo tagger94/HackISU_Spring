@@ -26,7 +26,8 @@ public class Hand <C extends Card> {
 		cardsDrawn = 0;
 		cardsDiscarded = 0;
 		minHandSize = 0;
-		maxHandSize  = Integer.MAX_VALUE; 
+		maxHandSize  = Integer.MAX_VALUE;
+		hand = new ArrayList<C>(); 
 	}
 	
 	/**
@@ -39,7 +40,8 @@ public class Hand <C extends Card> {
 		cardsDrawn = 0;
 		cardsDiscarded = 0;
 		maxHandSize = max;
-		minHandSize = min; 
+		minHandSize = min;
+		hand = new ArrayList<C>(); 
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class Hand <C extends Card> {
 	 *  - card to be add to hand
 	 */
 	public void drawCard(C c){
-		if(hand.size() < maxHandSize){
+		if(hand.size() < maxHandSize){ 
 			hand.add(c);
 			cardsDrawn++; 
 		}
@@ -65,7 +67,8 @@ public class Hand <C extends Card> {
 	public void drawCard_Report(C c){
 		if(hand.size() < maxHandSize){
 			drawCard(c); 
-			Reporter.printReport(c.toString() + " was add to the hand.\n"); 
+			System.out.println(c.toString() + " was added to the hand.\n"); 
+
 		}
 	}
 	
@@ -94,8 +97,9 @@ public class Hand <C extends Card> {
 	 *  - card to remove from hand
 	 */
 	public void discardCard_Report(C c){
-		if(hand.size() > maxHandSize){
-			Reporter.printReport(c.toString() + " was remove from the hand.\n");
+		if(hand.size() > minHandSize){
+			System.out.println(c.toString() + " was removed from the hand.\n");
+
 			discardCard(c);
 		}
 	}
