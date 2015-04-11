@@ -63,7 +63,7 @@ public class Dice {
 		 * Gives the number of times the die has been rolled
 		 * @return Number of rolls as Int
 		 */
-		public int get_reportCounter() {
+		public int get_NumOfRolls() {
 			return report_counter;
 		}
 		
