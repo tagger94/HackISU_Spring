@@ -2,9 +2,8 @@ package warTestGame;
 
 import java.util.ArrayList;
 
-import gameSim.Card;
+import exampleClasses.StandardPlayingCard;
 import gameSim.Deck;
-import gameSim.Hand;
 
 /**
  * Designs player for War with a name, hand, and discard pile
@@ -15,16 +14,16 @@ import gameSim.Hand;
 public class WarPlayer {
 
 	private String title;
-	private Deck<Card> hand;
-	private Deck<Card> discard;
+	private Deck<StandardPlayingCard> hand;
+	private Deck<StandardPlayingCard> discard;
 
 	/**
 	 * Default constructor
 	 */
 	public WarPlayer() {
 		title = "Player";
-		hand = new Deck<Card>();
-		discard = new Deck<Card>();
+		hand = new Deck<StandardPlayingCard>();
+		discard = new Deck<StandardPlayingCard>();
 	}
 
 	/**
@@ -34,8 +33,8 @@ public class WarPlayer {
 	 */
 	public WarPlayer(String title) {
 		this.title = title;
-		hand = new Deck<Card>();
-		discard = new Deck<Card>();
+		hand = new Deck<StandardPlayingCard>();
+		discard = new Deck<StandardPlayingCard>();
 	}
 	
 	/**
@@ -43,8 +42,13 @@ public class WarPlayer {
 	 * 
 	 * @param Card to be discarded
 	 */
-	public Card playCard(){
-		return hand.draw();
+	public StandardPlayingCard playCard(){
+		try{
+			return hand.draw();
+		} catch(IllegalStateException e){
+			takeDiscard();
+			return hand.draw();
+		}
 	}
 	
 	/**
@@ -52,8 +56,8 @@ public class WarPlayer {
 	 * 
 	 * @param Card to be added
 	 */
-	public void takeCard(Card card){
-		ArrayList<Card> tmp = hand.drawAll();
+	public void takeCard(StandardPlayingCard card){
+		ArrayList<StandardPlayingCard> tmp = hand.drawAll();
 		hand.give(card);
 		hand.giveMulti(tmp);
 	}
@@ -63,15 +67,33 @@ public class WarPlayer {
 	 * 
 	 * @param Cards to add to hand
 	 */
-	public void takeMulti(ArrayList<Card> card){
-		
+	public void takeMulti(ArrayList<StandardPlayingCard> card){
+		ArrayList<StandardPlayingCard> tmp = hand.drawAll();
+		hand.giveMulti(card);
+		hand.giveMulti(tmp);
 	}
 	
+	/**
+	 * Move all cards from discard to hand
+	 */
 	public void takeDiscard(){
-		ArrayList<Card> temp = discard.drawAll();
-		for(int a = 0; a < discard.get_NumCards(); a++){
-			discard.draw();
-		}
+		discard.shuffle();
+		hand.giveMulti(discard.drawAll());
+	}
+	
+	/**
+	 * Put cards in play into discard pile
+	 * 
+	 * @param Cards from last round of play
+	 */
+	public void winRound(ArrayList<StandardPlayingCard> winnings){
+		discard.giveMulti(winnings);
+	}
+	
+	public boolean hasWon(){
+		if(hand.get_NumCards() + discard.get_NumCards() == 52)
+			return true;
+		return false;
 	}
 	
 	
@@ -85,19 +107,19 @@ public class WarPlayer {
 		this.title = title;
 	}
 
-	public Deck<Card> getHand() {
+	public Deck<StandardPlayingCard> getHand() {
 		return hand;
 	}
 
-	public void setHand(Deck<Card> hand) {
+	public void setHand(Deck<StandardPlayingCard> hand) {
 		this.hand = hand;
 	}
 
-	public Deck<Card> getDiscard() {
+	public Deck<StandardPlayingCard> getDiscard() {
 		return discard;
 	}
 
-	public void setDiscard(Deck<Card> discard) {
+	public void setDiscard(Deck<StandardPlayingCard> discard) {
 		this.discard = discard;
 	}
 	
