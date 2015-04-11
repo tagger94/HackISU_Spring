@@ -67,7 +67,7 @@ public class Hand <C extends Card> {
 	public void drawCard_Report(C c){
 		if(hand.size() < maxHandSize){
 			drawCard(c); 
-			System.out.println(c.toString() + " was add to the hand.\n"); 
+			System.out.println(c.toString() + " was added to the hand.\n"); 
 		}
 	}
 	
@@ -96,8 +96,8 @@ public class Hand <C extends Card> {
 	 *  - card to remove from hand
 	 */
 	public void discardCard_Report(C c){
-		if(hand.size() > maxHandSize){
-			System.out.println(c.toString() + " was remove from the hand.\n");
+		if(hand.size() > minHandSize){
+			System.out.println(c.toString() + " was removed from the hand.\n");
 			discardCard(c);
 		}
 	}

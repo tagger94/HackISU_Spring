@@ -180,7 +180,7 @@ public class Deck<C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		System.out.println("Get Card was called. " + result + " was returned");
+		System.out.println("Get Card was called. " + result + " was returned to the deck.");
 		return result;
 	}
 
@@ -250,8 +250,8 @@ public class Deck<C extends Card> {
 	 *            Card to be added to deck.
 	 */
 	public void give_Report(C card) {
-		deck.add(card);
-		System.out.println(card + " was added.");
+		give(card); 
+		System.out.println(card + " was added to the deck.");
 	}
 
 	/**
