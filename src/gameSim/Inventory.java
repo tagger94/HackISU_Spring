@@ -96,4 +96,8 @@ public class Inventory {
 		return report;
 	}
 	
+	@Override
+	public String toString(){
+		return title; 
+	}
 }

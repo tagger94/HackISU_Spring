@@ -65,7 +65,9 @@ public class ExamplePlayer implements Player {
 	 * @param num
 	 *            - number of tokens to be added to player total
 	 */
-	public void addTokens(Inventory i, int num) {
+
+	@Override
+	public void addTokens(Inventory i, int num){
 		numTokens += num;
 		totalTokens += num;
 		i.take(num);
@@ -81,12 +83,13 @@ public class ExamplePlayer implements Player {
 	 * @param num
 	 *            - number of tokens to be added to player total
 	 */
-	public void addTokens_Report(Inventory i, int num) {
+
+	@Override
+	public void addTokens_Report(Inventory i, int num){
 		numTokens += num;
 		i.take(num);
 		System.out.println(num + " tokens were given to " + name + "\n");
-		System.out.println(num + " tokens were take from inventory " + i.title
-				+ "\n");
+		System.out.println(num + " tokens were take from inventory " + i + "\n"); 
 	}
 
 	/**
@@ -98,7 +101,9 @@ public class ExamplePlayer implements Player {
 	 * @param num
 	 *            - number of tokens to be taken from the player total
 	 */
-	public void subTokens(Inventory i, int num) {
+
+	@Override
+	public void subTokens(Inventory i, int num){
 		numTokens -= num;
 		totalLostTokens += num;
 		i.give(num);
@@ -114,13 +119,14 @@ public class ExamplePlayer implements Player {
 	 * @param num
 	 *            - number of tokens to be taken from the player total
 	 */
-	public void subTokens_Report(Inventory i, int num) {
+
+	@Override
+	public void subTokens_Report(Inventory i, int num){
 		numTokens -= num;
 		totalLostTokens += num;
 		i.give(num);
 		System.out.println(num + " tokens were taken from " + name + ".\n");
-		System.out.println(num + " tokens were given to inventory " + i.title
-				+ ".\n");
+		System.out.println(num + " tokens were given to inventory " + i + ".\n");
 	}
 
 	/**
