@@ -91,7 +91,7 @@ public class Deck {
 	 * 
 	 * @return Card that was on top of the deck
 	 */
-	public Card drawReport() {
+	public Card draw_Report() {
 		Card result = draw();
 		System.out.println("A card was drawn. " + result + " was drawn");
 		return result;
@@ -130,7 +130,7 @@ public class Deck {
 	 * 
 	 * @return The card request or null if not found.
 	 */
-	public Card getReport(Card card) {
+	public Card get_Report(Card card) {
 		Card result = get(card);
 		System.out.println("Get Card was called. " + result + " was returned");
 		return result;
@@ -178,7 +178,7 @@ public class Deck {
 	 * Shuffles deck and returns report that deck was shuffled along with how
 	 * many times in total
 	 */
-	public void reportShuffle() {
+	public void shuffle_Report() {
 		shuffle();
 		System.out.println("shuffled for the " + timesShuffled + " time");
 	}
