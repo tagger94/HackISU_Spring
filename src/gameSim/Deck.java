@@ -274,7 +274,7 @@ public class Deck<C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void give(C card) {
+	public void giveTop(C card) {
 		deck.add(card);
 		numCards++;
 	}
@@ -285,9 +285,18 @@ public class Deck<C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void give_Report(C card) {
-		give(card); 
-		Reporter.printReport(card + " was added to " + name + ".\n");
+	public void giveTop_Report(C card) {
+		giveTop(card); 
+		Reporter.printReport(card + " was added to the top of " + name + ".\n");
+	}
+	
+	public void giveBottom(C card){
+		giveBottom(card);
+	}
+	
+	public void giveBottom_Report(C card){
+		giveBottom(card);
+		Reporter.printReport(card + " was added to the bottom of " + name + ".\n");
 	}
 
 	/**
@@ -298,7 +307,7 @@ public class Deck<C extends Card> {
 	 */
 	public void giveMulti(ArrayList<C> cards) {
 		for (C card : cards)
-			give(card);
+			giveTop(card);
 	}
 
 	/**
@@ -309,7 +318,7 @@ public class Deck<C extends Card> {
 	 */
 	public void give_Report(ArrayList<C> cards) {
 		for (C card : cards)
-			give_Report(card);
+			giveTop_Report(card);
 	}
 
 	/**
