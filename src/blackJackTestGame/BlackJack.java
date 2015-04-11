@@ -19,7 +19,7 @@ public class BlackJack {
 		deck.shuffle_Report();
 	}
 
-	private void takeTurn(ExamplePlayer p) {
+	private void takeTurn(BlackJackPlayer p) {
 		
 		int handValue = 0;
 		Boolean soft_flag = false;
