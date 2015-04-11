@@ -12,10 +12,10 @@ public class Inventory {
 	private int size;
 
 	// Statistics vars
-	private int takeCalled = 0;
-	private int numTaken = 0;
-	private int giveCalled = 0;
-	private int numGiven = 0;
+	private int takeCalled;
+	private int numTaken;
+	private int giveCalled;
+	private int numGiven;
 
 	/**
 	 * Default constructor
@@ -23,6 +23,10 @@ public class Inventory {
 	public Inventory() {
 		title = "Inventory";
 		size = 0;
+		takeCalled = 0;
+		numTaken = 0;
+		giveCalled = 0;
+		numGiven = 0;
 	}
 
 	/**
@@ -38,6 +42,10 @@ public class Inventory {
 			this.size = Integer.MAX_VALUE;
 		else
 			this.size = size;
+		takeCalled = 0;
+		numTaken = 0;
+		giveCalled = 0;
+		numGiven = 0;
 	}
 
 	/**
@@ -52,6 +60,10 @@ public class Inventory {
 		if (size < -1)
 			throw new IllegalStateException();
 		this.size = size;
+		takeCalled = 0;
+		numTaken = 0;
+		giveCalled = 0;
+		numGiven = 0;
 	}
 
 	/**
