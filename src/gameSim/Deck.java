@@ -3,36 +3,71 @@ package gameSim;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck <C extends Card> {
+public class Deck<C extends Card> {
 
 	private int timesShuffled;
 	private int numCards;
 	private int numDraws;
+	private String name; 
 
 	// By default deck refers to standard card deck
 	private ArrayList<C> deck;
 
 	/**
-	 * Create empty deck. Typically discard deck
+	 * Create empty deck, Typically a discard deck
 	 */
 	public Deck() {
 		numCards = 0;
-		deck = null;
+		deck = new ArrayList<C>();
 		timesShuffled = 0;
 		numDraws = 0;
+		name = "deck";
+	}
+	
+	/**
+	 * Creates an empty deck, Typically a discard deck,
+	 * with a name; 
+	 * 
+	 * @param name
+	 * 		name of the deck
+	 */
+	public Deck(String name){
+		this.name = name;
+		deck = new ArrayList<C>();
+		numCards = 0;
+		numDraws = 0; 
+		timesShuffled = 0;
 	}
 
 	/**
-	 * Creates fully stocked deck
+	 * Creates a fully stocked deck
 	 * 
 	 * @param deck
 	 *            Initial list of cards in the deck
 	 */
 	public Deck(ArrayList<C> deck) {
 		this.deck = deck;
+		name = "deck";
 		timesShuffled = 0;
 		numCards = deck.size();
 		numDraws = 0;
+	}
+	
+	/**
+	 * 
+	 * Creates a fully stocked deck
+	 * 
+	 * @param deck
+	 * 			Initial list of cards in the deck
+	 * @param name
+	 * 			name of the deck
+	 */
+	public Deck(ArrayList<C> deck, String name){
+		this.deck = deck;
+		this.name = name;
+		numDraws = 0; 
+		numCards = deck.size();
+		timesShuffled = 0;
 	}
 
 	/**
@@ -41,6 +76,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was at top of the deck
 	 */
 	public C peekTop() {
+		if (numCards == 0)
+			throw new IllegalStateException(name + " is empty.");
 		return deck.get(0);
 	}
 
@@ -51,7 +88,7 @@ public class Deck <C extends Card> {
 	 */
 	public C peekTopReport() {
 		C result = peekTop();
-		System.out.println("The top of the deck was looked at. " + result
+		Reporter.printReport("The top of" + name + " was looked at.\n" + result
 				+ " was on top.");
 		return result;
 	}
@@ -62,6 +99,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was at bottom of the deck
 	 */
 	public C peekBottom() {
+		if (numCards == 0)
+			throw new IllegalStateException(name + " is empty.");
 		return deck.get(numCards);
 	}
 
@@ -73,7 +112,7 @@ public class Deck <C extends Card> {
 	 */
 	public C peekBottomReport() {
 		C result = peekBottom();
-		System.out.println("The bottom of the deck was looked at. " + result
+		Reporter.printReport("The bottom of" + name + " was looked at.\n" + result
 				+ " was on the bottom.");
 		return result;
 	}
@@ -84,6 +123,8 @@ public class Deck <C extends Card> {
 	 * @return Card that was on top of the deck
 	 */
 	public C draw() {
+		if (numCards == 0)
+			throw new IllegalStateException(name + " is empty.");
 		numCards--;
 		return deck.remove(0);
 	}
@@ -96,9 +137,48 @@ public class Deck <C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		System.out.println("A card was drawn. " + result + " was drawn");
+		Reporter.printReport("A card was drawn from" + name + ".\n" + result + " was drawn");
 		return result;
 	}
+	
+	/**
+	 * Draws top number of cards from deck
+	 * 
+	 * @param Number to draw
+	 * @return First number of cards on the deck
+	 */
+	public ArrayList<C> drawMulti(int num){
+		if(num > numCards)
+			throw new IllegalStateException("Not enough cards to draw from" + name + ".");
+		ArrayList<C> hold = new ArrayList<>();
+		for(int a = 0; a < num; a++){
+			hold.add(draw());
+		}
+		return hold;
+	}
+	
+	/**
+	 * Draws top number of cards from deck. Prints report.
+	 * 
+	 * @param Number to draw
+	 * @return First number of cards from deck
+	 */
+	public ArrayList<C> drawMulti_Report(int num){
+		ArrayList<C> temp = drawMulti(num);
+		Reporter.printReport(num + " cards were drawn from" + name + ".\n");
+		return temp;
+	}
+	
+	/**
+	 * Empties the deck.
+	 * 
+	 * @return All cards in deck.
+	 */
+	public ArrayList<C> drawAll(){
+		ArrayList<C> temp = drawMulti(numCards);
+		return temp;
+	}
+	
 
 	/**
 	 * Gets a specific card from the deck if available
@@ -135,7 +215,8 @@ public class Deck <C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		System.out.println("Get Card was called. " + result + " was returned");
+		Reporter.printReport("Get Card was called. " + result + " was returned to the deck.");
+
 		return result;
 	}
 
@@ -170,6 +251,7 @@ public class Deck <C extends Card> {
 
 		while (numCards != 0) {
 			result.add(deck.remove(random.nextInt(numCards)));
+			numCards--; 
 		}
 
 		numCards = result.size();
@@ -183,7 +265,7 @@ public class Deck <C extends Card> {
 	 */
 	public void shuffle_Report() {
 		shuffle();
-		System.out.println("shuffled for the " + timesShuffled + " time");
+		Reporter.printReport("shuffled for the " + timesShuffled + " time");
 	}
 
 	/**
@@ -192,10 +274,11 @@ public class Deck <C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void give(C card ) {
+	public void give(C card) {
 		deck.add(card);
+		numCards++;
 	}
-
+	
 	/**
 	 * Adds a card to the deck. Generates report of action
 	 * 
@@ -203,8 +286,8 @@ public class Deck <C extends Card> {
 	 *            Card to be added to deck.
 	 */
 	public void give_Report(C card) {
-		deck.add(card);
-		System.out.println(card + " was added.");
+		give(card); 
+		Reporter.printReport(card + " was added to " + name + ".\n");
 	}
 
 	/**
@@ -213,7 +296,7 @@ public class Deck <C extends Card> {
 	 * @param cards
 	 *            Cards to add to the deck.
 	 */
-	public void give(ArrayList<C> cards) {
+	public void giveMulti(ArrayList<C> cards) {
 		for (C card : cards)
 			give(card);
 	}
@@ -253,6 +336,10 @@ public class Deck <C extends Card> {
 
 	public String timesShuffled_Report() {
 		return "The deck was shuffled " + timesShuffled + " times";
+	}
+
+	public int get_NumCards() {
+		return numCards;
 	}
 
 }

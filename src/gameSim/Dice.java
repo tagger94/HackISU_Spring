@@ -49,7 +49,7 @@ public class Dice {
 	 */
 	public int roll_Report() {
 		this.roll();
-		System.out.println("Die Rolled: " + last_Roll);
+		Reporter.printReport("Die Rolled: " + last_Roll);
 		return last_Roll;
 	}
 
@@ -59,7 +59,7 @@ public class Dice {
 	}
 	
 	public int getLastRoll_Report() {
-		System.out.println("Last Roll: " + last_Roll);
+		Reporter.printReport("Last Roll: " + last_Roll);
 		return getLastRoll();
 	}
 

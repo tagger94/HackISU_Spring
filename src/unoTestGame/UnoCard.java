@@ -70,5 +70,11 @@ public class UnoCard implements Card{
 		return false; 
 	}
 	
+	public int getNumber(){
+		return number; 
+	}
 	
+	public Color getColor(){
+		return color;
+	}
 }

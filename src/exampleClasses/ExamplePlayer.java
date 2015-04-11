@@ -16,7 +16,7 @@ import gameSim.Player;
 public class ExamplePlayer implements Player {
 
 	// The players hand
-	public Hand hand;
+	public Hand<StandardPlayingCard> hand;
 
 	// The players name
 	private String name;
@@ -38,7 +38,7 @@ public class ExamplePlayer implements Player {
 	 */
 	public ExamplePlayer(String name) {
 		this.name = name;
-		hand = new Hand();
+		hand = new Hand<StandardPlayingCard>();
 		numTokens = 0;
 		totalTokens = 0;
 		totalLostTokens = 0;
@@ -54,7 +54,7 @@ public class ExamplePlayer implements Player {
 	 */
 	public ExamplePlayer(String name, int numTokens) {
 		this.name = name;
-		hand = new Hand();
+		hand = new Hand<StandardPlayingCard>();
 		this.numTokens = numTokens;
 		totalTokens = numTokens;
 		totalLostTokens = 0;
@@ -183,7 +183,7 @@ public class ExamplePlayer implements Player {
 	}
 
 	/**
-	 * Returns and prints a string representation of the total number o f tokens
+	 * Returns and prints a string representation of the total number of tokens
 	 * ever lost by the player
 	 * 
 	 * @return
