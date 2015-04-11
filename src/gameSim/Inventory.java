@@ -8,7 +8,6 @@ public class Inventory {
 	public Inventory(){
 		title = "Default";
 		size = 0;
-		
 	}
 	
 	
