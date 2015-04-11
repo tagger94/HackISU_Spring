@@ -6,8 +6,8 @@ import java.util.Random;
 public class Deck {
 
 	private int timesShuffled;
-
 	private int numCards;
+	private int numDraws;
 
 	// By default deck refers to standard card deck
 	private ArrayList<Card> deck;
@@ -19,6 +19,7 @@ public class Deck {
 		numCards = 0;
 		deck = null;
 		timesShuffled = 0;
+		numDraws = 0;
 	}
 
 	/**
@@ -31,6 +32,7 @@ public class Deck {
 		this.deck = deck;
 		timesShuffled = 0;
 		numCards = deck.size();
+		numDraws = 0;
 	}
 
 	/**
@@ -181,5 +183,10 @@ public class Deck {
 	public void shuffle_Report() {
 		shuffle();
 		System.out.println("shuffled for the " + timesShuffled + " time");
+	}
+
+	public void getReport() {
+		System.out.println("The deck was shuffled " + timesShuffled
+				+ ". There were " + numDraws + " draws.");
 	}
 }
