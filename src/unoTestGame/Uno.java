@@ -11,9 +11,28 @@ public class Uno {
 		
 		ArrayList<UnoCard> tempD = new ArrayList<UnoCard>();
 		createCards(tempD); 
-		Deck<UnoCard> deck = new Deck(tempD); 
-
+		Deck<UnoCard> playDeck = new Deck<UnoCard>(tempD);
+		playDeck.shuffle(); 
+		Deck<UnoCard> discardDeck = new Deck<UnoCard>(); 
 		
+		for(int i = 1; i < 8; i++){
+			Bob.playerHand.drawCard_Report(playDeck.draw_Report());
+			Alice.playerHand.drawCard_Report(playDeck.draw()); 
+		}
+		
+		UnoCard currentTop = playDeck.draw_Report();
+		for(int j = 0; j < 10; j++){
+			discardDeck.give(Bob.playCard(currentTop, playDeck));
+			currentTop = discardDeck.peekTop(); 
+			if(Bob.playerHand.hand.size() == 0){
+				break;
+			}
+			discardDeck.give(Alice.playCard(currentTop, playDeck));
+			currentTop = discardDeck.peekTop(); 
+			if(Alice.playerHand.hand.size() == 0){
+				break;
+			}
+		}
 	}
 	
 	public static void createCards(ArrayList<UnoCard> d){

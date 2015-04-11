@@ -35,6 +35,7 @@ public class UnoPlayerAI extends UnoPlayer {
 		
 		if(colorList.size() != 0){
 			playerHand.discardCard_Report(colorList.get(0));
+			if(playerHand.hand.size() == 1) System.out.println("UNO!\n");
 			return colorList.get(0);
 		}
 		
@@ -69,10 +70,12 @@ public class UnoPlayerAI extends UnoPlayer {
 			for(int j = 0; j < numberList.size(); j++){
 				if(numberList.get(j).equalColor(temp)){
 					playerHand.discardCard_Report(numberList.get(j));
+					if(playerHand.hand.size() == 1) System.out.println("UNO!\n");
 					return numberList.get(j); 
 				}
 			}
 		}
+		
 		
 		return null; 
 	}
