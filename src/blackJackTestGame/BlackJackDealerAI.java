@@ -3,6 +3,11 @@ package blackJackTestGame;
 import exampleClasses.StandardPlayingCard;
 import gameSim.Hand;
 
+/**
+ * Extends the Blackjack Player class. Addes AI to choice of the dealer
+ * @author Alex Berns
+ *
+ */
 public class BlackJackDealerAI extends BlackJackPlayer {
 	
 	private int numOfBlackJack = 0;
@@ -11,11 +16,17 @@ public class BlackJackDealerAI extends BlackJackPlayer {
 		super(name, 0);
 	}
 	
+	/**
+	 * Does nothing for Dealer since does not affect descions
+	 */
 	@Override
 	public void setDealerTopCard(StandardPlayingCard c) {
 		//Empty
 	}
 
+	/**
+	 * Using Casino Rules: Dealer must hit until over 17
+	 */
 	@Override
 	public Boolean doHit() {
 		
@@ -29,11 +40,17 @@ public class BlackJackDealerAI extends BlackJackPlayer {
 		return false;
 	}
 
+	/**
+	 * NOT USED: Casino Rules does not allow deal to split
+	 */
 	@Override
 	public Boolean doSplit() {
 		return false;
 	}
 
+	/**
+	 * NOT USED: Dealer does not bet
+	 */
 	@Override
 	public int determineBet() {
 		return 0;

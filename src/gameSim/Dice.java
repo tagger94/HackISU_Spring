@@ -53,11 +53,19 @@ public class Dice {
 		return last_Roll;
 	}
 
+	/**
+	 * returns the value of the last roll
+	 * @return Last Roll Value
+	 */
 	public int getLastRoll() {
 		report_LastRoll++;
 		return last_Roll;
 	}
 	
+	/**
+	 * returns the vlaue of last roll and generates report
+	 * @return Last Roll Value
+	 */
 	public int getLastRoll_Report() {
 		Reporter.printReport("Last Roll: " + last_Roll);
 		return getLastRoll();

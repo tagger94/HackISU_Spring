@@ -3,6 +3,11 @@ package blackJackTestGame;
 import exampleClasses.StandardPlayingCard;
 import gameSim.Hand;
 
+/**
+ * The custom hand class for Blackjack. Adds methods to make checking hand values easier
+ * @author Alex Berns
+ *
+ */
 public class BlackJackHand extends Hand<StandardPlayingCard> {
 
 	public Boolean checkForAce() {
@@ -15,6 +20,10 @@ public class BlackJackHand extends Hand<StandardPlayingCard> {
 		return false;
 	}
 
+	/**
+	 * returns the value of the hand. Handles Aces by adding 10 until you go over.
+	 * @return
+	 */
 	public int findHandValue() {
 		int val = 0;
 
@@ -29,6 +38,10 @@ public class BlackJackHand extends Hand<StandardPlayingCard> {
 		return val;
 	}
 
+	/**
+	 * Determines with the first 2 cards can be split (same rank)
+	 * @return
+	 */
 	public Boolean canSplit() {
 
 		if (hand.size() > 2)

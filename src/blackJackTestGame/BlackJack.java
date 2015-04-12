@@ -5,6 +5,32 @@ import java.util.ArrayList;
 import exampleClasses.StandardPlayingCard;
 import gameSim.*;
 
+/**
+ * Blackjack, also known as twenty-one, is the most widely played casino banking
+ * game in the world.[1] Blackjack is a comparing card game between a player and
+ * dealer, meaning that players compete against the dealer but not against any
+ * other players. It is played with one or more decks of 52 cards. The object of
+ * the game is to beat the dealer, which can be done in a number of ways:
+ * 
+ * Get 21 points on the player's first two cards (called a blackjack), without a
+ * dealer blackjack; Reach a final score higher than the dealer without
+ * exceeding 21; or Let the dealer draw additional cards until his or her hand
+ * exceeds 21. The player or players are dealt an initial two-card hand and add
+ * together the value of their cards. Face cards (kings, queens, and jacks) are
+ * counted as ten points. A player and the dealer can count their own ace as 1
+ * point or 11 points. All other cards are counted as the numeric value shown on
+ * the card. After receiving their initial two cards, players have the option of
+ * getting a "hit", or taking an additional card. In a given round, the player
+ * or the dealer wins by having a score of 21 or by having the highest score
+ * that is less than 21. Scoring higher than 21 (called "busting" or
+ * "going bust") results in a loss. A player may win by having any final score
+ * equal to or less than 21 if the dealer busts.
+ * 
+ * This recreates Blackjack in our game sim API
+ * 
+ * @author Alex Berns
+ * 
+ */
 public class BlackJack {
 	private static Deck<StandardPlayingCard> deck = new Deck<StandardPlayingCard>(
 			StandardPlayingCard.makeDeck());
@@ -19,6 +45,10 @@ public class BlackJack {
 
 	private static Inventory chips = new Inventory("Chips", -1);
 
+	/**
+	 * Runs the main game. Needs no arguments
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		players.add(new BlackJackPlayerAI("Bob", START_CHIP, 90));
@@ -53,16 +83,19 @@ public class BlackJack {
 
 			// Reset Deck
 			endRound();
-			
+
 			Reporter.printReport("-----------------------------------------");
 		}
-		
+
 		for (BlackJackPlayerAI p : players) {
 			p.generateReport();
 		}
-		
+
 	}
 
+	/**
+	 * Actions to take during start of round
+	 */
 	private static void startRound() {
 
 		// Shuffle
@@ -80,13 +113,17 @@ public class BlackJack {
 
 		// Dealer gets 2 cards
 		startDraw(dealer);
-		
-		//Players See Dealers Face-Up Card
+
+		// Players See Dealers Face-Up Card
 		for (BlackJackPlayer p : players) {
 			p.setDealerTopCard(dealer.hand.hand.get(0));
 		}
 	}
-	
+
+	/**
+	 * Draws 2 cards for player at start of turn
+	 * @param p
+	 */
 	private static void startDraw(BlackJackPlayer p) {
 		Reporter.printReport("*****************************************");
 		Reporter.printReport(p.toString() + "'s Draw");
@@ -94,6 +131,10 @@ public class BlackJack {
 		p.hand.drawCard_Report(deck.draw());
 	}
 
+	/**
+	 * Actions taken by player in middle of turn
+	 * @param p
+	 */
 	private static void takeTurn(BlackJackPlayer p) {
 
 		Reporter.printReport("*****************************************");
@@ -107,6 +148,9 @@ public class BlackJack {
 
 	}
 
+	/**
+	 * Actions done during end of round
+	 */
 	private static void endRound() {
 
 		for (BlackJackPlayer h : players) {
