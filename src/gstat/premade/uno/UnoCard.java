@@ -18,7 +18,7 @@ public class UnoCard implements Card {
 	private int number;
 
 	/**
-	 * Creates a default card of color red and number 1
+	 * Creates a default card of color red and number one.
 	 */
 	public UnoCard() {
 		name = "Red 1";
@@ -27,7 +27,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * Creates a card of the specified color and number
+	 * Creates a card of the specified color and number.
 	 * 
 	 * @param color
 	 *            Color of the card
@@ -55,7 +55,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * This method gives the string representation of the card name
+	 * This method gives the string representation of the card name.
 	 */
 	@Override
 	public String toString() {
@@ -68,7 +68,7 @@ public class UnoCard implements Card {
 	 * 
 	 * @param other
 	 *            the object to be compared to
-	 * @return True when the cards are eqaul
+	 * @return true when the cards are equal
 	 */
 	@Override
 	public boolean equals(Object other) {
@@ -86,7 +86,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * This method compares the color of the card and the card sent to it
+	 * This method compares the color of this card and the specified card.
 	 * 
 	 * @param c
 	 *            Card to be compared to
@@ -101,7 +101,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * This method compares the number of the card and the card sent to it
+	 * This method compares the number of this card and the specified card. 
 	 * 
 	 * @param c
 	 *            Card to be compared to
@@ -116,7 +116,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * Returns the number of the card
+	 * Returns the number of the card.
 	 * 
 	 * @return number of the card
 	 */
@@ -125,9 +125,9 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * Returns the color of the card
+	 * Returns the color of the card.
 	 * 
-	 * @return Color of the card
+	 * @return color of the card
 	 */
 	public Color getColor() {
 		return color;
