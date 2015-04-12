@@ -3,7 +3,7 @@ package gstat.premade.war;
 import gstat.util.Reporter;
 
 /**
- * Runs War games, currently prints statistics.
+ * Runs War games, prints statistics.
  * 
  * @author Brennyn Hawbaker
  *
