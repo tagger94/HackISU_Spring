@@ -25,7 +25,7 @@ public class BlackJack {
 		players.add(new BlackJackPlayerAI("Alice", START_CHIP, 50));
 		players.add(new BlackJackPlayerAI("Eve", START_CHIP, 20));
 
-		while (round < 1) {
+		while (round < 5) {
 			Reporter.printReport("-----------------------------------------");
 			// Set up deck
 			startRound();
@@ -56,6 +56,11 @@ public class BlackJack {
 			
 			Reporter.printReport("-----------------------------------------");
 		}
+		
+		for (BlackJackPlayerAI p : players) {
+			p.generateReport();
+		}
+		
 	}
 
 	private static void startRound() {
