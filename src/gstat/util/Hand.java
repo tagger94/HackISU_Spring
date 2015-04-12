@@ -180,7 +180,6 @@ public class Hand<C extends Card> {
 	/**
 	 * Generates report of number of cards drawn and discarded.
 	 * 
-	 * @return Report of all actions taken by this hand
 	 */
 	public void getFullReport() {
 		String report = cardsDrawn + "were given to the hand and " + cardsDiscarded + "were taken from the hand.\n";

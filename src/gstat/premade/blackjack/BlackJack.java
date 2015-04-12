@@ -48,7 +48,7 @@ public class BlackJack {
 
 	/**
 	 * Runs the main game. Needs no arguments
-	 * @param args
+	 * @param args System arguments
 	 */
 	public static void main(String[] args) {
 

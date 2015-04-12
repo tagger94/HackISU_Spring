@@ -18,6 +18,7 @@ public class Reporter {
 	/**
 	 * Writes to log.txt and prints to console
 	 * @param s
+	 * 		String to be printed
 	 */
 	public static void printReport(String s) {
 		if (!f.exists()){

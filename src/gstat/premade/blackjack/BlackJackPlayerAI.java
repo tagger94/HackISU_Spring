@@ -41,11 +41,14 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	private int totMoneyWon = 0;
 
 	/**
-	 * Initlizer for the Player AI
+	 * Initializer for the Player AI.
 	 * 
 	 * @param name
+	 * 		Name of the player
 	 * @param chips
+	 * 		Number of starting chips
 	 * @param riskLevel
+	 * 		percentage willing to bet
 	 */
 	public BlackJackPlayerAI(String name, int chips, int riskLevel) {
 		super(name, chips);
