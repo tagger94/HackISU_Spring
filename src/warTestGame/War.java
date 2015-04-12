@@ -13,6 +13,9 @@ public class War {
 	WarPlayer player_2;
 	static int p1_wins;
 	static int p2_wins;
+	static int rounds;
+	static int totRounds;
+	static int games;
 
 	/**
 	 * Default new game constructor
@@ -37,31 +40,39 @@ public class War {
 		down = new ArrayList<>();
 		down.add(player_1.playCard());
 		down.add(player_2.playCard());
-		if(down.get(0).equals(null) || down.get(1).equals(null))
-			return;
 		int win = makeAction(down.get(0), down.get(1));
 		if(win == -1){
 			player_1.winRound(down);
+			checkEndGame();
 		} else if(win == -2){
-			player_1.winRound(down);
-		} else
+			checkEndGame();
+		} else {
 			player_2.winRound(down);
+			checkEndGame();
+		}
 	}
 	
 	/**
 	 * Runs one full game of War
 	 */
 	public void playGame(){
-		while(WarPlayer.haveWinner(player_1, player_2, down) == 0){
+		rounds = 0;
+		while(WarPlayer.haveWinner(player_1, player_2) == 0){
 			playTurn();
-			checkEndGame();
+			//System.out.println(count);
+			rounds++;
 		}
 		//System.out.println("Game over.");
+		totRounds += rounds;
+		games++;
 	}
 	
 	
 	public int makeAction(StandardPlayingCard c1, StandardPlayingCard c2){
-
+		if(c1 == null)
+			return 1;
+		if(c2 == null)
+			return -1;
 		int comp = c1.compareToIgnoreSuit(c2);
 		if(comp < 0) //c1 bigger
 			return -1;
@@ -86,11 +97,11 @@ public class War {
 	 * Ends game and declares a winner
 	 */
 	public void checkEndGame(){
-		if(WarPlayer.haveWinner(player_1, player_2, down) == -1){
+		if(WarPlayer.haveWinner(player_1, player_2) == -1){
 			//System.out.print("Player one wins! ");
 			p1_wins++;
 		}
-		if(WarPlayer.haveWinner(player_1, player_2, down) == 1){
+		if(WarPlayer.haveWinner(player_1, player_2) == 1){
 			//System.out.print("Player two wins! ");
 			p2_wins++;
 		}
