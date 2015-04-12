@@ -71,10 +71,10 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public void addTokens(Inventory i, int num){
+	public int addTokens(Inventory i, int num){
 		numTokens += num;
 		totalTokens += num;
-		i.take(num);
+		return i.take(num);
 	}
 
 	/**
@@ -89,11 +89,11 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public void addTokens_Report(Inventory i, int num){
-		numTokens += num;
-		i.take(num);
-		System.out.println(num + " tokens were given to " + name + "\n");
-		System.out.println(num + " tokens were take from inventory " + i + "\n"); 
+	public int addTokens_Report(Inventory i, int num){
+		int temp = addTokens(i, num);
+		System.out.println(temp + " tokens were given to " + name + "\n");
+		System.out.println(temp + " tokens were take from inventory " + i + "\n"); 
+		return temp;
 	}
 
 	/**
@@ -107,10 +107,10 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public void subTokens(Inventory i, int num){
+	public int subTokens(Inventory i, int num){
 		numTokens -= num;
 		totalLostTokens += num;
-		i.give(num);
+		return i.give(num);
 	}
 
 	/**
@@ -125,12 +125,11 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public void subTokens_Report(Inventory i, int num){
-		numTokens -= num;
-		totalLostTokens += num;
-		i.give(num);
-		System.out.println(num + " tokens were taken from " + name + ".\n");
-		System.out.println(num + " tokens were given to inventory " + i + ".\n");
+	public int subTokens_Report(Inventory i, int num){
+		int temp = subTokens(i, num);
+		System.out.println(temp + " tokens were taken from " + name + ".\n");
+		System.out.println(temp + " tokens were given to inventory " + i + ".\n");
+		return temp;
 	}
 
 	/**
@@ -191,5 +190,10 @@ public class ExamplePlayer implements Player {
 	public String totalLostTokens_Report() {
 		System.out.println(name + " has lost " + totalLostTokens + "total.\n");
 		return name + " has lost " + totalLostTokens + "total.\n";
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

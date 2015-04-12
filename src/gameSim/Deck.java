@@ -265,7 +265,7 @@ public class Deck<C extends Card> {
 	 */
 	public void shuffle_Report() {
 		shuffle();
-		Reporter.printReport("shuffled for the " + timesShuffled + " time");
+		Reporter.printReport("shuffled for the " + timesShuffled + " time\n");
 	}
 
 	/**
