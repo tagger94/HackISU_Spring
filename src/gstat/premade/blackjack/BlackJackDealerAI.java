@@ -3,7 +3,7 @@ package gstat.premade.blackjack;
 import gstat.premade.playingcard.StandardPlayingCard;
 
 /**
- * Desicion Maker for Dealer. Dealer is extended from a player class.
+ * Decision Maker for Dealer. Dealer is extended from a player class.
  * 
  * @author Alex Berns
  * 
