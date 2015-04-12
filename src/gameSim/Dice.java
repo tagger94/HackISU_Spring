@@ -57,7 +57,7 @@ public class Dice {
 		report_LastRoll++;
 		return last_Roll;
 	}
-	
+
 	public int getLastRoll_Report() {
 		Reporter.printReport("Last Roll: " + last_Roll);
 		return getLastRoll();

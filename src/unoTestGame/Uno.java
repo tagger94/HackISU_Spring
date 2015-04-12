@@ -5,9 +5,10 @@ import gameSim.*;
 
 /**
  * This project will run a simulation on the game of UNO! This is a card game.
- * The goal is for a player to lose all the cards in their hand. This is accomplished
- * by playing cards of the same color or number as the card in play. There are also special
- * cards that allow the player to play on any card, skip players turn, and reverse turn order.
+ * The goal is for a player to lose all the cards in their hand. This is
+ * accomplished by playing cards of the same color or number as the card in
+ * play. There are also special cards that allow the player to play on any card,
+ * skip players turn, and reverse turn order.
  * 
  * 
  * @author Camden Voigt
@@ -15,39 +16,38 @@ import gameSim.*;
  */
 
 public class Uno {
-	
+
 	/**
-	 * These variables are used to find statistics. 
+	 * These variables are used to find statistics.
 	 */
 	private static int aliceWins, bobWins, totalTurnsTaken, numUnos;
 	private static double aveTurns, aliceWinPercentage, bobWinPercentage, aveUno;
-	
+
 	/**
 	 * This is the number of UNO! games to be simulated.
 	 */
 	private static int games = 10000;
 
 	/**
-	 * This is the main method used to call any number of games. 
+	 * This is the main method used to call any number of games.
 	 * 
 	 * @param args
-	 * 		System Arguments
+	 *            System Arguments
 	 */
 	public static void main(String[] args) {
 
 		for(int i = 0; i < games; i++){
-			//System.out.println("\n\nGame " + i + "\n\n");
+			// System.out.println("\n\nGame " + i + "\n\n");
 			playSilent();
 		}
-		statistics(); 
+		statistics();
 	}
 
 	/**
-	 * Will create an ArrayList to store created cards for the UNO
-	 * deck. 
+	 * Will create an ArrayList to store created cards for the UNO deck.
 	 * 
 	 * @param d
-	 * 		A temporary ArrayList to store cards
+	 *            A temporary ArrayList to store cards
 	 */
 	public static void createCards(ArrayList<UnoCard> d) {
 
@@ -80,9 +80,8 @@ public class Uno {
 	}
 
 	/**
-	 * This method will play one game of UNO and
-	 * print turns and draws to the console and a
-	 * log file. 
+	 * This method will play one game of UNO and print turns and draws to the
+	 * console and a log file.
 	 */
 	public static void play() {
 		UnoPlayerAI Bob = new UnoPlayerAI("Bob");
@@ -153,11 +152,10 @@ public class Uno {
 		totalTurnsTaken += turnsTaken;
 		numUnos += Bob.getNumUno() + Alice.getNumUno();
 	}
-	
+
 	/**
-	 * This method will play one game of UNO and
-	 * will not print turns and draws to the console 
-	 * and a log file.
+	 * This method will play one game of UNO and will not print turns and draws
+	 * to the console and a log file.
 	 */
 	public static void playSilent() {
 		SilentUnoPlayerAI Bob = new SilentUnoPlayerAI("Bob");
@@ -223,28 +221,27 @@ public class Uno {
 	}
 
 	/**
-	 * This method takes two decks one play card deck
-	 * and one discard deck. It will put the values of the discard
-	 * deck into the the play card deck and shuffle them while saving
-	 * one card from discard for the card in play. 
+	 * This method takes two decks one play card deck and one discard deck. It
+	 * will put the values of the discard deck into the the play card deck and
+	 * shuffle them while saving one card from discard for the card in play.
 	 * 
 	 * @param playDeck
-	 * 		Empty deck of cards to be drawn
+	 *            Empty deck of cards to be drawn
 	 * @param discardDeck
-	 * 		Empty deck of cards that have been discarded
+	 *            Empty deck of cards that have been discarded
 	 */
 	public static void reshuffle(Deck<UnoCard> playDeck, Deck<UnoCard> discardDeck) {
-		UnoCard temp1 = discardDeck.draw(); 
+		UnoCard temp1 = discardDeck.draw();
 		playDeck.giveMulti(discardDeck.drawAll());
 		playDeck.shuffle();
 		discardDeck.giveTop(temp1);
 	}
 
 	/**
-	 * This method uses the global variables to calculate statistics 
-	 * of all the games. 
+	 * This method uses the global variables to calculate statistics of all the
+	 * games.
 	 */
-	public static void statistics(){
+	public static void statistics() {
 		aveTurns = (double) totalTurnsTaken / games;
 		bobWinPercentage = (double) bobWins / games;
 		aliceWinPercentage = (double) aliceWins / games;

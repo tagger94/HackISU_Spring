@@ -31,8 +31,9 @@ public class Inventory {
 
 	/**
 	 * Constructor with set size, -1 for "infinite" size
+	 * 
 	 * @param size
-	 *  -number of beginning tokens
+	 *            -number of beginning tokens
 	 */
 	public Inventory(int size) {
 		title = "Inventory";
@@ -50,10 +51,11 @@ public class Inventory {
 
 	/**
 	 * Constructor with set size and title, -1 for "infinite" size
+	 * 
 	 * @param title
-	 *  -Name of inventory
+	 *            -Name of inventory
 	 * @param size
-	 *  -Number of beginning tokens
+	 *            -Number of beginning tokens
 	 */
 	public Inventory(String title, int size) {
 		this.title = title;
@@ -68,8 +70,9 @@ public class Inventory {
 
 	/**
 	 * Subtract from the inventory
+	 * 
 	 * @param num
-	 *  -Number taken from intentory
+	 *            -Number taken from intentory
 	 */
 	public int take(int num) {
 		takeCalled++;
@@ -83,8 +86,9 @@ public class Inventory {
 
 	/**
 	 * Subtract from the inventory with printed report
+	 * 
 	 * @param num
-	 *  -Number taken from inventory
+	 *            -Number taken from inventory
 	 */
 	public int take_Report(int num) {
 		this.take(num);
@@ -94,8 +98,9 @@ public class Inventory {
 
 	/**
 	 * Add to inventory
+	 * 
 	 * @param num
-	 *  -Number given to inventory
+	 *            -Number given to inventory
 	 */
 	public int give(int num) {
 		giveCalled++;
@@ -107,8 +112,9 @@ public class Inventory {
 
 	/**
 	 * Add to inventory with printed report
+	 * 
 	 * @param num
-	 *  -Number given to inventory
+	 *            -Number given to inventory
 	 */
 	public int give_Report(int num) {
 		this.give(num);
@@ -118,8 +124,8 @@ public class Inventory {
 
 	/**
 	 * Return takeCalled
-	 * @return
-	 *  -Number of times take method was called
+	 * 
+	 * @return -Number of times take method was called
 	 */
 	public int get_takeCalled() {
 		return takeCalled;
@@ -127,8 +133,8 @@ public class Inventory {
 
 	/**
 	 * Return numTaken
-	 * @return
-	 *  -Total number taken from inventory
+	 * 
+	 * @return -Total number taken from inventory
 	 */
 	public int get_numTaken() {
 		return numTaken;
@@ -136,8 +142,8 @@ public class Inventory {
 
 	/**
 	 * Return giveCalled
-	 * @return
-	 *  -Number of times give was called
+	 * 
+	 * @return -Number of times give was called
 	 */
 	public int get_giveCalled() {
 		return giveCalled;
@@ -145,8 +151,8 @@ public class Inventory {
 
 	/**
 	 * Return numGiven
-	 * @return
-	 *  -Total number given to the inventory
+	 * 
+	 * @return -Total number given to the inventory
 	 */
 	public int get_numGiven() {
 		return numGiven;
@@ -154,8 +160,8 @@ public class Inventory {
 
 	/**
 	 * Return all stats
-	 * @return
-	 *  -String containing all stat variables
+	 * 
+	 * @return -String containing all stat variables
 	 */
 	public String getReport() {
 		String report = "";
@@ -165,14 +171,14 @@ public class Inventory {
 		report += "Number given: " + numGiven + "\n";
 		return report;
 	}
-	
+
 	/**
 	 * Returns name of inventory
-	 * @return
-	 *  -Title
+	 * 
+	 * @return -Title
 	 */
 	@Override
-	public String toString(){
-		return title; 
+	public String toString() {
+		return title;
 	}
 }

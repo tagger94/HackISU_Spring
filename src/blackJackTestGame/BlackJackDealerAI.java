@@ -4,28 +4,28 @@ import exampleClasses.StandardPlayingCard;
 import gameSim.Hand;
 
 public class BlackJackDealerAI extends BlackJackPlayer {
-	
+
 	private int numOfBlackJack = 0;
 
 	public BlackJackDealerAI(String name) {
 		super(name, 0);
 	}
-	
+
 	@Override
 	public void setDealerTopCard(StandardPlayingCard c) {
-		//Empty
+		// Empty
 	}
 
 	@Override
 	public Boolean doHit() {
-		
-		if(hand.findHandValue() == 21 && hand.hand.size() == 2) {
+
+		if (hand.findHandValue() == 21 && hand.hand.size() == 2){
 			numOfBlackJack++;
 		}
-		
-		if(hand.findHandValue() < 17)
+
+		if (hand.findHandValue() < 17)
 			return true;
-		
+
 		return false;
 	}
 

@@ -6,8 +6,7 @@ import exampleClasses.StandardPlayingCard;
 import gameSim.*;
 
 public class BlackJack {
-	private static Deck<StandardPlayingCard> deck = new Deck<StandardPlayingCard>(
-			StandardPlayingCard.makeDeck());
+	private static Deck<StandardPlayingCard> deck = new Deck<StandardPlayingCard>(StandardPlayingCard.makeDeck());
 
 	private static BlackJackDealerAI dealer = new BlackJackDealerAI("Dealer");
 
@@ -25,7 +24,7 @@ public class BlackJack {
 		players.add(new BlackJackPlayerAI("Alice", START_CHIP, 50));
 		players.add(new BlackJackPlayerAI("Eve", START_CHIP, 20));
 
-		while (round < 5) {
+		while (round < 5){
 			Reporter.printReport("-----------------------------------------");
 			// Set up deck
 			startRound();
@@ -34,7 +33,7 @@ public class BlackJack {
 			round++;
 
 			// Take Player Turns
-			for (BlackJackPlayer p : players) {
+			for(BlackJackPlayer p : players){
 				takeTurn(p);
 			}
 
@@ -42,7 +41,7 @@ public class BlackJack {
 			takeTurn(dealer);
 
 			// Reclaim Bet
-			for (BlackJackPlayerAI p : players) {
+			for(BlackJackPlayerAI p : players){
 				int temp = p.doWin(dealer.hand.findHandValue());
 				// Loss return 0, Win return (bet * 2)
 				// Win
@@ -53,14 +52,14 @@ public class BlackJack {
 
 			// Reset Deck
 			endRound();
-			
+
 			Reporter.printReport("-----------------------------------------");
 		}
-		
-		for (BlackJackPlayerAI p : players) {
+
+		for(BlackJackPlayerAI p : players){
 			p.generateReport();
 		}
-		
+
 	}
 
 	private static void startRound() {
@@ -69,24 +68,24 @@ public class BlackJack {
 		deck.shuffle_Report();
 
 		// Place Bets
-		for (BlackJackPlayerAI p : players) {
+		for(BlackJackPlayerAI p : players){
 			p.subTokens_Report(chips, p.determineBet());
 		}
 
 		// Each player gets 2 cards
-		for (BlackJackPlayer p : players) {
+		for(BlackJackPlayer p : players){
 			startDraw(p);
 		}
 
 		// Dealer gets 2 cards
 		startDraw(dealer);
-		
-		//Players See Dealers Face-Up Card
-		for (BlackJackPlayer p : players) {
+
+		// Players See Dealers Face-Up Card
+		for(BlackJackPlayer p : players){
 			p.setDealerTopCard(dealer.hand.hand.get(0));
 		}
 	}
-	
+
 	private static void startDraw(BlackJackPlayer p) {
 		Reporter.printReport("*****************************************");
 		Reporter.printReport(p.toString() + "'s Draw");
@@ -99,7 +98,7 @@ public class BlackJack {
 		Reporter.printReport("*****************************************");
 		Reporter.printReport(p.toString() + "'s Turn[" + round + "]");
 		// Hit until Stop
-		while (p.doHit()) {
+		while (p.doHit()){
 			Reporter.printReport(p.toString() + " Hits");
 			p.getHand().drawCard_Report(deck.draw());
 		}
@@ -109,7 +108,7 @@ public class BlackJack {
 
 	private static void endRound() {
 
-		for (BlackJackPlayer h : players) {
+		for(BlackJackPlayer h : players){
 			deck.giveMulti(h.hand.discardHand());
 		}
 		deck.giveMulti(dealer.hand.discardHand());

@@ -71,7 +71,7 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public int addTokens(Inventory i, int num){
+	public int addTokens(Inventory i, int num) {
 		numTokens += num;
 		totalTokens += num;
 		return i.take(num);
@@ -89,10 +89,10 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public int addTokens_Report(Inventory i, int num){
+	public int addTokens_Report(Inventory i, int num) {
 		int temp = addTokens(i, num);
 		System.out.println(temp + " tokens were given to " + name + "\n");
-		System.out.println(temp + " tokens were take from inventory " + i + "\n"); 
+		System.out.println(temp + " tokens were take from inventory " + i + "\n");
 		return temp;
 	}
 
@@ -107,7 +107,7 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public int subTokens(Inventory i, int num){
+	public int subTokens(Inventory i, int num) {
 		numTokens -= num;
 		totalLostTokens += num;
 		return i.give(num);
@@ -125,7 +125,7 @@ public class ExamplePlayer implements Player {
 	 */
 
 	@Override
-	public int subTokens_Report(Inventory i, int num){
+	public int subTokens_Report(Inventory i, int num) {
 		int temp = subTokens(i, num);
 		System.out.println(temp + " tokens were taken from " + name + ".\n");
 		System.out.println(temp + " tokens were given to inventory " + i + ".\n");
@@ -191,7 +191,7 @@ public class ExamplePlayer implements Player {
 		System.out.println(name + " has lost " + totalLostTokens + "total.\n");
 		return name + " has lost " + totalLostTokens + "total.\n";
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;

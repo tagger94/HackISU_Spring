@@ -33,15 +33,13 @@ public class shutTheBox {
 		winState = 0;
 		tiles = new boolean[9];
 		turns = 0;
-		while (winState == 0) {
+		while (winState == 0){
 			die1.roll();
 			die2.roll();
 
-			System.out.println(die1.getLastRoll() + " and "
-					+ die2.getLastRoll() + " were rolled");
+			System.out.println(die1.getLastRoll() + " and " + die2.getLastRoll() + " were rolled");
 
-			Reporter.printReport(die1.getLastRoll() + " and "
-					+ die2.getLastRoll() + " were rolled\n");
+			Reporter.printReport(die1.getLastRoll() + " and " + die2.getLastRoll() + " were rolled\n");
 
 			// Change to flop to change playStyle
 			flip();
@@ -51,11 +49,12 @@ public class shutTheBox {
 			hasWon();
 		}
 
-		if (winState == 1) {
+		if (winState == 1){
 			System.out.println("You won in " + turns);
 			Reporter.printReport("You won in " + turns + "\n");
 			return 1;
-		} else {
+		}
+		else{
 			System.out.println("You lost in " + turns);
 			Reporter.printReport("You lost in " + turns + "\n");
 			System.out.println(printTiles());
@@ -73,7 +72,7 @@ public class shutTheBox {
 		winState = 0;
 		tiles = new boolean[9];
 		turns = 0;
-		while (winState == 0) {
+		while (winState == 0){
 			die1.roll();
 			die2.roll();
 
@@ -83,9 +82,10 @@ public class shutTheBox {
 			hasWon();
 		}
 
-		if (winState == 1) {
+		if (winState == 1){
 			return 1;
-		} else {
+		}
+		else{
 			return 0;
 		}
 	}
@@ -98,335 +98,396 @@ public class shutTheBox {
 	public static void flip() {
 		int sum = die1.getLastRoll() + die2.getLastRoll();
 
-		if (sum == 2) {
-			if (!tiles[1]) {
+		if (sum == 2){
+			if (!tiles[1]){
 				tiles[1] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 3) {
-			if (!tiles[2]) {
+		if (sum == 3){
+			if (!tiles[2]){
 				tiles[2] = true;
 				return;
-			} else if (!tiles[0] && !tiles[1]) {
+			}
+			else if (!tiles[0] && !tiles[1]){
 				tiles[0] = true;
 				tiles[1] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 4) {
-			if (!tiles[3]) {
+		if (sum == 4){
+			if (!tiles[3]){
 				tiles[3] = true;
 				return;
-			} else if (!tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[2] && !tiles[0]){
 				tiles[0] = true;
 				tiles[2] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 5) {
-			if (!tiles[4]) {
+		if (sum == 5){
+			if (!tiles[4]){
 				tiles[4] = true;
 				return;
-			} else if (!tiles[3] && !tiles[0]) {
+			}
+			else if (!tiles[3] && !tiles[0]){
 				tiles[3] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[2] && !tiles[1]) {
+			}
+			else if (!tiles[2] && !tiles[1]){
 				tiles[2] = true;
 				tiles[1] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 6) {
-			if (!tiles[5]) {
+		if (sum == 6){
+			if (!tiles[5]){
 				tiles[5] = true;
 				return;
-			} else if (!tiles[4] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[0]){
 				tiles[4] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[3] && !tiles[1]) {
+			}
+			else if (!tiles[3] && !tiles[1]){
 				tiles[3] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[0] && !tiles[1] && !tiles[2]) {
+			}
+			else if (!tiles[0] && !tiles[1] && !tiles[2]){
 				tiles[0] = true;
 				tiles[1] = true;
 				tiles[2] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 7) {
-			if (!tiles[6]) {
+		if (sum == 7){
+			if (!tiles[6]){
 				tiles[6] = true;
 				return;
-			} else if (!tiles[5] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[0]){
 				tiles[5] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[3] && !tiles[2]) {
+			}
+			else if (!tiles[3] && !tiles[2]){
 				tiles[3] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[0] && !tiles[1] && !tiles[3]) {
+			}
+			else if (!tiles[0] && !tiles[1] && !tiles[3]){
 				tiles[0] = true;
 				tiles[1] = true;
 				tiles[3] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 8) {
-			if (!tiles[7]) {
+		if (sum == 8){
+			if (!tiles[7]){
 				tiles[7] = true;
 				return;
-			} else if (!tiles[6] && !tiles[0]) {
+			}
+			else if (!tiles[6] && !tiles[0]){
 				tiles[6] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[5] && !tiles[1]) {
+			}
+			else if (!tiles[5] && !tiles[1]){
 				tiles[5] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[4] && !tiles[2]) {
+			}
+			else if (!tiles[4] && !tiles[2]){
 				tiles[4] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[4] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[1] && !tiles[0]){
 				tiles[4] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[3] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[3] && !tiles[2] && !tiles[0]){
 				tiles[3] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 9) {
-			if (!tiles[8]) {
+		if (sum == 9){
+			if (!tiles[8]){
 				tiles[8] = true;
 				return;
-			} else if (!tiles[7] && !tiles[0]) {
+			}
+			else if (!tiles[7] && !tiles[0]){
 				tiles[7] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[6] && !tiles[1]) {
+			}
+			else if (!tiles[6] && !tiles[1]){
 				tiles[6] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[5] && !tiles[2]) {
+			}
+			else if (!tiles[5] && !tiles[2]){
 				tiles[5] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[5] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[1] && !tiles[0]){
 				tiles[5] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[4] && !tiles[3]) {
+			}
+			else if (!tiles[4] && !tiles[3]){
 				tiles[4] = true;
 				tiles[3] = true;
 				return;
-			} else if (!tiles[4] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[2] && !tiles[0]){
 				tiles[4] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[3] && !tiles[2] && !tiles[1]) {
+			}
+			else if (!tiles[3] && !tiles[2] && !tiles[1]){
 				tiles[3] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 10) {
-			if (!tiles[8] && !tiles[0]) {
+		if (sum == 10){
+			if (!tiles[8] && !tiles[0]){
 				tiles[8] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[7] && !tiles[1]) {
+			}
+			else if (!tiles[7] && !tiles[1]){
 				tiles[7] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[6] && !tiles[2]) {
+			}
+			else if (!tiles[6] && !tiles[2]){
 				tiles[6] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[6] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[6] && !tiles[1] && !tiles[0]){
 				tiles[6] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[5] && !tiles[3]) {
+			}
+			else if (!tiles[5] && !tiles[3]){
 				tiles[5] = true;
 				tiles[3] = true;
 				return;
-			} else if (!tiles[5] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[2] && !tiles[0]){
 				tiles[5] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[4] && !tiles[3] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[3] && !tiles[0]){
 				tiles[4] = true;
 				tiles[3] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[4] && !tiles[2] && !tiles[1]) {
+			}
+			else if (!tiles[4] && !tiles[2] && !tiles[1]){
 				tiles[4] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[3] && !tiles[2] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[3] && !tiles[2] && !tiles[1] && !tiles[0]){
 				tiles[3] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 11) {
-			if (!tiles[8] && !tiles[1]) {
+		if (sum == 11){
+			if (!tiles[8] && !tiles[1]){
 				tiles[8] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[7] && !tiles[2]) {
+			}
+			else if (!tiles[7] && !tiles[2]){
 				tiles[7] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[7] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[7] && !tiles[1] && !tiles[0]){
 				tiles[7] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[6] && !tiles[3]) {
+			}
+			else if (!tiles[6] && !tiles[3]){
 				tiles[6] = true;
 				tiles[3] = true;
 				return;
-			} else if (!tiles[6] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[6] && !tiles[2] && !tiles[0]){
 				tiles[6] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[5] && !tiles[4]) {
+			}
+			else if (!tiles[5] && !tiles[4]){
 				tiles[5] = true;
 				tiles[4] = true;
 				return;
-			} else if (!tiles[5] && !tiles[3] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[3] && !tiles[0]){
 				tiles[5] = true;
 				tiles[3] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[5] && !tiles[2] && !tiles[1]) {
+			}
+			else if (!tiles[5] && !tiles[2] && !tiles[1]){
 				tiles[5] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[4] && !tiles[3] && !tiles[1]) {
+			}
+			else if (!tiles[4] && !tiles[3] && !tiles[1]){
 				tiles[4] = true;
 				tiles[3] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[4] && !tiles[2] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[2] && !tiles[1] && !tiles[0]){
 				tiles[4] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
 		}
-		if (sum == 12) {
-			if (!tiles[8] && !tiles[2]) {
+		if (sum == 12){
+			if (!tiles[8] && !tiles[2]){
 				tiles[8] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[8] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[8] && !tiles[2] && !tiles[0]){
 				tiles[8] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[7] && !tiles[3]) {
+			}
+			else if (!tiles[7] && !tiles[3]){
 				tiles[7] = true;
 				tiles[3] = true;
 				return;
-			} else if (!tiles[7] && !tiles[2] && !tiles[0]) {
+			}
+			else if (!tiles[7] && !tiles[2] && !tiles[0]){
 				tiles[7] = true;
 				tiles[2] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[6] && !tiles[4]) {
+			}
+			else if (!tiles[6] && !tiles[4]){
 				tiles[6] = true;
 				tiles[4] = true;
 				return;
-			} else if (!tiles[6] && !tiles[3] && !tiles[0]) {
+			}
+			else if (!tiles[6] && !tiles[3] && !tiles[0]){
 				tiles[6] = true;
 				tiles[3] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[6] && !tiles[2] && !tiles[1]) {
+			}
+			else if (!tiles[6] && !tiles[2] && !tiles[1]){
 				tiles[6] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[5] && !tiles[4] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[4] && !tiles[0]){
 				tiles[5] = true;
 				tiles[4] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[5] && !tiles[3] && !tiles[1]) {
+			}
+			else if (!tiles[5] && !tiles[3] && !tiles[1]){
 				tiles[5] = true;
 				tiles[3] = true;
 				tiles[1] = true;
 				return;
-			} else if (!tiles[5] && !tiles[2] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[5] && !tiles[2] && !tiles[1] && !tiles[0]){
 				tiles[5] = true;
 				tiles[2] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else if (!tiles[4] && !tiles[3] && !tiles[2]) {
+			}
+			else if (!tiles[4] && !tiles[3] && !tiles[2]){
 				tiles[4] = true;
 				tiles[3] = true;
 				tiles[2] = true;
 				return;
-			} else if (!tiles[4] && !tiles[3] && !tiles[1] && !tiles[0]) {
+			}
+			else if (!tiles[4] && !tiles[3] && !tiles[1] && !tiles[0]){
 				tiles[4] = true;
 				tiles[3] = true;
 				tiles[1] = true;
 				tiles[0] = true;
 				return;
-			} else {
+			}
+			else{
 				winState = -1;
 				return;
 			}
@@ -443,79 +504,83 @@ public class shutTheBox {
 	public static void flop() {
 		int sum = die1.getLastRoll() + die2.getLastRoll();
 
-		if (sum == 7 && !tiles[6]) {
+		if (sum == 7 && !tiles[6]){
 			tiles[6] = true;
 			return;
-		} else if (sum == 8 && !tiles[7]) {
+		}
+		else if (sum == 8 && !tiles[7]){
 			tiles[7] = true;
 			return;
-		} else if (sum == 9 && !tiles[8]) {
+		}
+		else if (sum == 9 && !tiles[8]){
 			tiles[8] = true;
 			return;
-		} else if (die1.getLastRoll() == 1 && !tiles[0]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 1 && !tiles[0] && !tiles[die2.getLastRoll() - 1]){
 			tiles[0] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die1.getLastRoll() == 2 && !tiles[1]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 2 && !tiles[1] && !tiles[die2.getLastRoll() - 1]){
 			tiles[1] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die1.getLastRoll() == 3 && !tiles[2]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 3 && !tiles[2] && !tiles[die2.getLastRoll() - 1]){
 			tiles[2] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die1.getLastRoll() == 4 && !tiles[3]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 4 && !tiles[3] && !tiles[die2.getLastRoll() - 1]){
 			tiles[3] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die1.getLastRoll() == 5 && !tiles[4]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 5 && !tiles[4] && !tiles[die2.getLastRoll() - 1]){
 			tiles[4] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die1.getLastRoll() == 6 && !tiles[5]
-				&& !tiles[die2.getLastRoll() - 1]) {
+		}
+		else if (die1.getLastRoll() == 6 && !tiles[5] && !tiles[die2.getLastRoll() - 1]){
 			tiles[5] = true;
 			tiles[die2.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 1 && !tiles[0]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 1 && !tiles[0] && !tiles[die1.getLastRoll() - 1]){
 			tiles[0] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 2 && !tiles[1]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 2 && !tiles[1] && !tiles[die1.getLastRoll() - 1]){
 			tiles[1] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 3 && !tiles[2]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 3 && !tiles[2] && !tiles[die1.getLastRoll() - 1]){
 			tiles[2] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 4 && !tiles[3]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 4 && !tiles[3] && !tiles[die1.getLastRoll() - 1]){
 			tiles[3] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 5 && !tiles[4]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 5 && !tiles[4] && !tiles[die1.getLastRoll() - 1]){
 			tiles[4] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (die2.getLastRoll() == 6 && !tiles[5]
-				&& !tiles[die1.getLastRoll() - 1]) {
+		}
+		else if (die2.getLastRoll() == 6 && !tiles[5] && !tiles[die1.getLastRoll() - 1]){
 			tiles[5] = true;
 			tiles[die1.getLastRoll() - 1] = true;
 			return;
-		} else if (sum < 10 && !tiles[sum - 1]) {
+		}
+		else if (sum < 10 && !tiles[sum - 1]){
 			tiles[sum - 1] = true;
 			return;
-		} else {
+		}
+		else{
 			winState = -1;
 			return;
 		}
@@ -527,8 +592,8 @@ public class shutTheBox {
 	 * is ongoing.
 	 */
 	public static void hasWon() {
-		for (int i = 0; i < tiles.length; i++) {
-			if (!tiles[i]) {
+		for(int i = 0; i < tiles.length; i++){
+			if (!tiles[i]){
 				return;
 			}
 		}
@@ -543,10 +608,11 @@ public class shutTheBox {
 	 */
 	public static String printTiles() {
 		String result = "";
-		for (int i = 0; i < tiles.length; i++) {
-			if (tiles[i]) {
+		for(int i = 0; i < tiles.length; i++){
+			if (tiles[i]){
 				result += ("X\t");
-			} else
+			}
+			else
 				result += (i + 1 + "\t");
 		}
 		return result;
@@ -564,42 +630,36 @@ public class shutTheBox {
 		int totalWinningTurns = 0;
 		int totalLosingTurns = 0;
 		int totalTurns = 0;
-		for (int i = 0; i < 1000000; i++) {
-			if (playSilent() == 1) {
+		for(int i = 0; i < 1000000; i++){
+			if (playSilent() == 1){
 				win++;
 				totalWinningTurns += turns;
-			} else
+			}
+			else
 				totalLosingTurns += turns;
 			totalTurns += turns;
 		}
 		System.out.println((win * 100.0) / 1000000 + "% Win Rate");
-		System.out.println((totalWinningTurns * 1.0) / win
-				+ " Average turns per winning game");
-		System.out.println((totalLosingTurns * 1.0) / (1000000 - win)
-				+ " Average turns per losing game");
-		System.out.println((totalTurns * 1.0) / 1000000
-				+ " Average turns per game");
+		System.out.println((totalWinningTurns * 1.0) / win + " Average turns per winning game");
+		System.out.println((totalLosingTurns * 1.0) / (1000000 - win) + " Average turns per losing game");
+		System.out.println((totalTurns * 1.0) / 1000000 + " Average turns per game");
 
 		Reporter.printReport((win * 100.0) / 1000000 + "% Win Rate\n");
-		Reporter.printReport((totalWinningTurns * 1.0) / win
-				+ " Average turns per winning game\n");
-		Reporter.printReport((totalLosingTurns * 1.0) / (1000000 - win)
-				+ " Average turns per losing game\n");
-		Reporter.printReport((totalTurns * 1.0) / 1000000
-				+ " Average turns per game\n");
+		Reporter.printReport((totalWinningTurns * 1.0) / win + " Average turns per winning game\n");
+		Reporter.printReport((totalLosingTurns * 1.0) / (1000000 - win) + " Average turns per losing game\n");
+		Reporter.printReport((totalTurns * 1.0) / 1000000 + " Average turns per game\n");
 
 		// Sanity Check
 		win = 0;
-		for (int i = 0; i < 1000000; i++) {
+		for(int i = 0; i < 1000000; i++){
 			int total = 0;
-			while (total < 45) {
+			while (total < 45){
 				total += die1.roll() + die2.roll();
 			}
 			if (total == 45)
 				win++;
 		}
 		System.out.println((win * 100.0) / 1000000 + "% Theoretical Win Rate");
-		Reporter.printReport((win * 100.0) / 1000000
-				+ "% Theoretical Win Rate\n");
+		Reporter.printReport((win * 100.0) / 1000000 + "% Theoretical Win Rate\n");
 	}
 }

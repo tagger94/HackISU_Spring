@@ -53,25 +53,25 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 		int val = hand.findHandValue();
 		int dRank = Math.max(dealerCard.getRank(), 10);
 
-		if (hand.findHandValue() == 21 && hand.hand.size() == 2) {
+		if (hand.findHandValue() == 21 && hand.hand.size() == 2){
 			numOfBlackJack++;
 		}
 
 		// Deals with greater than you 17
-		if (val >= 17) {
+		if (val >= 17){
 			return false;
 		}
 
 		// Deals with Dealer Ace
-		if (dRank == 1) {
+		if (dRank == 1){
 			return true;
 		}
 
-		if (val >= 13 && dRank <= 6) {
+		if (val >= 13 && dRank <= 6){
 			return false;
 		}
 
-		if (val == 12 && dRank >= 4 && dRank <= 6) {
+		if (val == 12 && dRank >= 4 && dRank <= 6){
 			return false;
 		}
 
@@ -110,11 +110,12 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 		bet = 0;
 
 		// Win
-		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))) {
+		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))){
 			numOfWins++;
 			totMoneyWon = temp;
 			return temp * 2;
-		} else {
+		}
+		else{
 			// Lost
 			numOfLoses++;
 			totMoneyLost += temp;
@@ -190,13 +191,13 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	public Double getAvgCardPerRound() {
 		return 1.0 * totNumOfCards / numOfRounds;
 	}
-	
+
 	public void generateReport() {
 		String s = "";
 		s += "=========================\n";
 		s += "Player Name: " + this.toString() + "\n";
 		s += "Final Money: " + this.getNumTokens() + "\n";
-		
+
 		Reporter.printReport(s);
 	}
 }

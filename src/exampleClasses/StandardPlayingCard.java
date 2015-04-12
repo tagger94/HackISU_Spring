@@ -8,8 +8,7 @@ import java.util.ArrayList;
  * Class representing a playing card. Each card has a positive integer rank and
  * a suit defined by the enumeration type <code>Suit</code>.
  */
-public class StandardPlayingCard implements Card,
-		Comparable<StandardPlayingCard> {
+public class StandardPlayingCard implements Card, Comparable<StandardPlayingCard> {
 
 	/**
 	 * Suit for this card.
@@ -65,33 +64,33 @@ public class StandardPlayingCard implements Card,
 	public String toString() {
 		String rankString;
 		switch (rank) {
-		case 1:
-			rankString = "A";
-			break;
-		case 11:
-			rankString = "J";
-			break;
-		case 12:
-			rankString = "Q";
-			break;
-		case 13:
-			rankString = "K";
-			break;
-		default:
-			rankString = "" + rank;
+			case 1:
+				rankString = "A";
+				break;
+			case 11:
+				rankString = "J";
+				break;
+			case 12:
+				rankString = "Q";
+				break;
+			case 13:
+				rankString = "K";
+				break;
+			default:
+				rankString = "" + rank;
 		}
 		switch (suit) {
-		case CLUBS:
-			return rankString + "c";
-		case DIAMONDS:
-			return rankString + "d";
-		case HEARTS:
-			return rankString + "h";
-		case SPADES:
-			return rankString + "s";
-		default:
-			// can't happen
-			return null;
+			case CLUBS:
+				return rankString + "c";
+			case DIAMONDS:
+				return rankString + "d";
+			case HEARTS:
+				return rankString + "h";
+			case SPADES:
+				return rankString + "s";
+			default:
+				// can't happen
+				return null;
 		}
 	}
 
@@ -102,7 +101,7 @@ public class StandardPlayingCard implements Card,
 	@Override
 	public int compareTo(StandardPlayingCard rhs) {
 		int comp = compareToIgnoreSuit(rhs);
-		if (comp == 0) {
+		if (comp == 0){
 			// same rank, compare suits, reversed so "high" suit comes first
 			return -this.suit.compareTo(rhs.suit);
 		}
@@ -116,16 +115,19 @@ public class StandardPlayingCard implements Card,
 	 * @return
 	 */
 	public int compareToIgnoreSuit(StandardPlayingCard rhs) {
-		if (this.rank == rhs.rank) {
+		if (this.rank == rhs.rank){
 			return 0;
-		} else {
+		}
+		else{
 			// ranks are unequal, check for aces
-			if (this.rank == 1) {
+			if (this.rank == 1){
 				// higher rank comes first, return a negative value
 				return -1;
-			} else if (rhs.rank == 1) {
+			}
+			else if (rhs.rank == 1){
 				return 1;
-			} else {
+			}
+			else{
 				// reverse numerical ordering to get A, K, Q, J, 10, 9, ...
 				return -(this.rank - rhs.rank);
 			}
@@ -134,7 +136,7 @@ public class StandardPlayingCard implements Card,
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if (obj == null || obj.getClass() != this.getClass()){
 			return false;
 		}
 		StandardPlayingCard other = (StandardPlayingCard) obj;
@@ -153,7 +155,7 @@ public class StandardPlayingCard implements Card,
 		Suit suit = Suit.CLUBS; // default
 		int size = cards.length;
 		StandardPlayingCard[] result = new StandardPlayingCard[size];
-		for (int i = 0; i < cards.length; ++i) {
+		for(int i = 0; i < cards.length; ++i){
 			result[i] = new StandardPlayingCard(cards[i], suit);
 		}
 		return result;
@@ -175,48 +177,54 @@ public class StandardPlayingCard implements Card,
 		Suit suit = Suit.CLUBS; // default
 		String[] cards = cardString.split(",");
 		StandardPlayingCard[] result = new StandardPlayingCard[cards.length];
-		for (int i = 0; i < cards.length; ++i) {
+		for(int i = 0; i < cards.length; ++i){
 			String rankString = cards[i].trim().toLowerCase();
 			char last = rankString.charAt(rankString.length() - 1);
-			if (!Character.isDigit(last)) {
+			if (!Character.isDigit(last)){
 				// strip off last character and attempt to interpret as a suit
 				rankString = rankString.substring(0, rankString.length() - 1);
 				switch (last) {
-				case 'c':
-					suit = Suit.CLUBS;
-					break;
-				case 'd':
-					suit = Suit.DIAMONDS;
-					break;
-				case 'h':
-					suit = Suit.HEARTS;
-					break;
-				case 's':
-					suit = Suit.SPADES;
-					break;
-				default:
-					return null;
+					case 'c':
+						suit = Suit.CLUBS;
+						break;
+					case 'd':
+						suit = Suit.DIAMONDS;
+						break;
+					case 'h':
+						suit = Suit.HEARTS;
+						break;
+					case 's':
+						suit = Suit.SPADES;
+						break;
+					default:
+						return null;
 				}
 			}
 			int rank = -1;
-			if (rankString.equals("a")) {
+			if (rankString.equals("a")){
 				rank = 1;
-			} else if (rankString.equals("k")) {
+			}
+			else if (rankString.equals("k")){
 				rank = 13;
-			} else if (rankString.equals("q")) {
+			}
+			else if (rankString.equals("q")){
 				rank = 12;
-			} else if (rankString.equals("j")) {
+			}
+			else if (rankString.equals("j")){
 				rank = 11;
-			} else {
-				try {
+			}
+			else{
+				try{
 					rank = Integer.parseInt(rankString);
-				} catch (NumberFormatException e) {
+				}
+				catch (NumberFormatException e){
 					return null;
 				}
 			}
-			if (rank > 0) {
+			if (rank > 0){
 				result[i] = new StandardPlayingCard(rank, suit);
-			} else {
+			}
+			else{
 				return null;
 			}
 		}
@@ -231,8 +239,8 @@ public class StandardPlayingCard implements Card,
 	public static ArrayList<StandardPlayingCard> makeDeck() {
 		ArrayList<StandardPlayingCard> deck = new ArrayList<StandardPlayingCard>();
 
-		for (Suit s : Suit.values()) {
-			for (int i = 1; i <= 13; i++) {
+		for(Suit s : Suit.values()){
+			for(int i = 1; i <= 13; i++){
 				deck.add(new StandardPlayingCard(i, s));
 			}
 		}

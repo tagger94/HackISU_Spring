@@ -45,13 +45,15 @@ public class WarPlayer {
 	 * @return Card to be played, null if no card to play
 	 */
 	public StandardPlayingCard playCard() {
-		try {
+		try{
 			return hand.draw();
-		} catch (IllegalStateException b) {
+		}
+		catch (IllegalStateException b){
 			takeDiscard();
-			try {
+			try{
 				return hand.draw();
-			} catch (IllegalStateException c) {
+			}
+			catch (IllegalStateException c){
 				return null;
 			}
 		}

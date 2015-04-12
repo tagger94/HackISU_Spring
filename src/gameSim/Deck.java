@@ -98,8 +98,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekTopReport() {
 		C result = peekTop();
-		Reporter.printReport("The top of" + name + " was looked at.\n" + result
-				+ " was on top.");
+		Reporter.printReport("The top of" + name + " was looked at.\n" + result + " was on top.");
 		return result;
 	}
 
@@ -122,8 +121,7 @@ public class Deck<C extends Card> {
 	 */
 	public C peekBottomReport() {
 		C result = peekBottom();
-		Reporter.printReport("The bottom of" + name + " was looked at.\n"
-				+ result + " was on the bottom.");
+		Reporter.printReport("The bottom of" + name + " was looked at.\n" + result + " was on the bottom.");
 		return result;
 	}
 
@@ -147,8 +145,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		Reporter.printReport("A card was drawn from " + name + ".\n" + result
-				+ " was drawn");
+		Reporter.printReport("A card was drawn from " + name + ".\n" + result + " was drawn");
 		return result;
 	}
 
@@ -162,10 +159,9 @@ public class Deck<C extends Card> {
 	 */
 	public ArrayList<C> drawMulti(int num) {
 		if (num > numCards)
-			throw new IllegalStateException("Not enough cards to draw from"
-					+ name + ".");
+			throw new IllegalStateException("Not enough cards to draw from" + name + ".");
 		ArrayList<C> hold = new ArrayList<>();
-		for (int a = 0; a < num; a++) {
+		for(int a = 0; a < num; a++){
 			hold.add(draw());
 		}
 		return hold;
@@ -218,8 +214,8 @@ public class Deck<C extends Card> {
 
 		int pos = 0;
 
-		for (C current : deck) {
-			if (current.equals(card)) {
+		for(C current : deck){
+			if (current.equals(card)){
 				numCards--;
 				return deck.remove(pos);
 			}
@@ -239,8 +235,7 @@ public class Deck<C extends Card> {
 	 */
 	public C get_Report(C card) {
 		C result = get(card);
-		Reporter.printReport("Get Card was called. " + result
-				+ " was returned to the deck.");
+		Reporter.printReport("Get Card was called. " + result + " was returned to the deck.");
 
 		return result;
 	}
@@ -262,7 +257,7 @@ public class Deck<C extends Card> {
 	 */
 	public String printDeck() {
 		String result = "";
-		for (C card : deck) {
+		for(C card : deck){
 			result += card.toString() + "\n";
 		}
 		return result;
@@ -276,7 +271,7 @@ public class Deck<C extends Card> {
 		ArrayList<C> result = new ArrayList<C>();
 
 		int count = numCards;
-		while (count != 0) {
+		while (count != 0){
 			result.add(deck.remove(random.nextInt(count)));
 			count--;
 		}
@@ -332,7 +327,7 @@ public class Deck<C extends Card> {
 	public C giveBottom(C card) {
 		deck.add(card);
 		numCards++;
-		return card; 
+		return card;
 
 	}
 
@@ -345,8 +340,7 @@ public class Deck<C extends Card> {
 	 */
 	public C giveBottom_Report(C card) {
 		giveBottom(card);
-		Reporter.printReport(card + " was added to the bottom of " + name
-				+ ".\n");
+		Reporter.printReport(card + " was added to the bottom of " + name + ".\n");
 		return card;
 	}
 
@@ -357,7 +351,7 @@ public class Deck<C extends Card> {
 	 *            Cards to add to the deck
 	 */
 	public void giveMulti(ArrayList<C> cards) {
-		for (C card : cards)
+		for(C card : cards)
 			giveTop(card);
 	}
 
@@ -368,7 +362,7 @@ public class Deck<C extends Card> {
 	 *            Cards to add to the deck
 	 */
 	public void give_Report(ArrayList<C> cards) {
-		for (C card : cards)
+		for(C card : cards)
 			giveTop_Report(card);
 	}
 
@@ -378,8 +372,7 @@ public class Deck<C extends Card> {
 	 * @return Actions occurred in this deck.
 	 */
 	public String getReport() {
-		return "The deck was shuffled " + timesShuffled + ". There were "
-				+ numDraws + " draws.\n";
+		return "The deck was shuffled " + timesShuffled + ". There were " + numDraws + " draws.\n";
 	}
 
 	/**
@@ -416,8 +409,7 @@ public class Deck<C extends Card> {
 	 * @return Number of shuffles that have been performed on this deck
 	 */
 	public String timesShuffled_Report() {
-		Reporter.printReport("The deck was shuffled " + timesShuffled
-				+ " times\n");
+		Reporter.printReport("The deck was shuffled " + timesShuffled + " times\n");
 		return "The deck was shuffled " + timesShuffled + " times";
 	}
 
