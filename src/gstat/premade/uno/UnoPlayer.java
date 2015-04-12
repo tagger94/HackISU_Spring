@@ -36,7 +36,7 @@ public class UnoPlayer {
 	}
 
 	/**
-	 * Returns the name of the UNOPlayer
+	 * Returns the name of the UNOPlayer.
 	 * 
 	 * @return name of the UNOPlayer
 	 */
