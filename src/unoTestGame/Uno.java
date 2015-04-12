@@ -20,26 +20,38 @@ public class Uno {
 			Bob.playerHand.drawCard_Report(playDeck.draw_Report());
 			Alice.playerHand.drawCard_Report(playDeck.draw_Report()); 
 		}
-		
+		System.out.println("\nFlipping First Card\n\n");
 		UnoCard currentTop = playDeck.draw_Report();
-		discardDeck.give_Report(currentTop);
+		discardDeck.giveTop_Report(currentTop);
 		
 		System.out.println("\n\nThe game begins\n\n"); 
-		for(int j = 0; j < 10; j++){
-			System.out.println("Its turn " + (j+1));
+		boolean flag = false;
+		int turnsTaken = 0;
+		int tempSize = 0; 
+		while(!flag){
+			turnsTaken++; 
+			System.out.println("Its turn " + turnsTaken);
 			System.out.println("Its Bob's Turn");
-			discardDeck.give_Report(Bob.playCard(currentTop, playDeck));
-			currentTop = discardDeck.peekTop(); 
+			tempSize = Bob.playerHand.hand.size();
+			discardDeck.giveTop_Report(Bob.playCard(currentTop, playDeck));
+			if(Bob.playerHand.hand.size() < tempSize){
+				currentTop = discardDeck.peekTop(); 
+			}
 			if(Bob.playerHand.hand.size() == 0){
-				System.out.println("Bob Won!"); 
+				System.out.println("Bob Won!");
+				flag = true; 
 				break;
 			}
 			
 			System.out.println("It's Alice's Turn");
-			discardDeck.give_Report(Alice.playCard(currentTop, playDeck));
-			currentTop = discardDeck.peekTop(); 
+			tempSize = Alice.playerHand.hand.size();
+			discardDeck.giveTop_Report(Alice.playCard(currentTop, playDeck));
+			if(Alice.playerHand.hand.size() < tempSize){
+				currentTop = discardDeck.peekTop(); 
+			}
 			if(Alice.playerHand.hand.size() == 0){
-				System.out.println("Alice Won!"); 
+				System.out.println("Alice Won!");
+				flag = true; 
 				break;
 			}
 		}
