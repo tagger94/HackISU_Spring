@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * The die simulator. Self contained random number generator
  * 
- * @author Alex
+ * @author Alex Berns
  * 
  */
 public class Dice {
@@ -19,9 +19,9 @@ public class Dice {
 	private int last_Roll;
 
 	/**
-	 * Give the number of sides for that die to use
+	 * Constructs a die with specific number of sides.
 	 * 
-	 * @param sides
+	 * @param sides Number of sides on die
 	 */
 	public Dice(int sides) {
 		DIE_SIZE = sides;
@@ -32,9 +32,9 @@ public class Dice {
 	}
 
 	/**
-	 * Generates a random number of the die
+	 * Generates a random die roll
 	 * 
-	 * @return A random number between 1 and die size
+	 * @return Random integer between 1 and die size
 	 */
 	public int roll() {
 		report_Roll++;
@@ -43,7 +43,7 @@ public class Dice {
 	}
 
 	/**
-	 * Generates a random number of the die and reports to file
+	 * Generates a random die roll. Generates report.
 	 * 
 	 * @return A random number between 1 and die size
 	 */
@@ -53,18 +53,28 @@ public class Dice {
 		return last_Roll;
 	}
 
+	/**
+	 * Returns previous die value rolled
+	 * 
+	 * @return Previous die value
+	 */
 	public int getLastRoll() {
 		report_LastRoll++;
 		return last_Roll;
 	}
 	
+	/**
+	 * Returns previous die value rolled. Generates report.
+	 * 
+	 * @return Previous die value
+	 */
 	public int getLastRoll_Report() {
 		Reporter.printReport("Last Roll: " + last_Roll);
 		return getLastRoll();
 	}
 
 	/**
-	 * Gives the size of the die used
+	 * Returns the size of the die used
 	 * 
 	 * @return The size of die as int
 	 */
@@ -73,7 +83,7 @@ public class Dice {
 	}
 
 	/**
-	 * Gives the size of the die used as a String
+	 * Returns the size of the die used as a String
 	 * 
 	 * @return The size of die as String
 	 */
@@ -82,7 +92,7 @@ public class Dice {
 	}
 
 	/**
-	 * Gives the number of times the die has been rolled
+	 * Returns the number of times the die has been rolled
 	 * 
 	 * @return Number of rolls as Int
 	 */
@@ -91,7 +101,7 @@ public class Dice {
 	}
 
 	/**
-	 * Gives the number of times the die has been rolled
+	 * Returns the number of times the die has been rolled
 	 * 
 	 * @return Number of rolls as String
 	 */
@@ -100,7 +110,7 @@ public class Dice {
 	}
 
 	/**
-	 * Generates report of another final report to use
+	 * Generates full report
 	 * 
 	 * @return Die size and number of times rolled
 	 */
