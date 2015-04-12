@@ -3,18 +3,45 @@ package unoTestGame;
 import java.util.ArrayList;
 import gameSim.*; 
 
+/**
+ * This class is a subclass of UnoPlayer and is meant to be an automatic
+ * UNO player for use in simulations. 
+ * 
+ * @author Camden Voigt
+ *
+ */
+
 public class UnoPlayerAI extends UnoPlayer {
 
 	private int numUno = 0; 
 	
+	/**
+	 * Creates a UnoPlayerAI using super class UnoPlayer
+	 */
 	public UnoPlayerAI(){
 		super(); 
 	}
 	
+	/**
+	 * Creates a UnoPlayerAI using super class UnoPlayer
+	 * with a specific name;
+	 * 
+	 * @param name
+	 * 		The name for the UnoPlayerAI
+	 */
 	public UnoPlayerAI(String name){
 		super(name);
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * 		UnoCard to be played on
+	 * @param d
+	 * 		Deck to be drawn from
+	 * @return
+	 * 		return the UnoCard that is played or drawn
+	 */
 	public UnoCard playCard(UnoCard c, Deck<UnoCard> d){
 		
 		ArrayList<UnoCard> colorList = new ArrayList<UnoCard>();
@@ -94,6 +121,13 @@ public class UnoPlayerAI extends UnoPlayer {
 		return null; 
 	}
 	
+	
+	/**
+	 * Returns the number of times there has been an UNO
+	 * 
+	 * @return
+	 * 	 The counter for UNO's
+	 */
 	public int getNumUno(){
 		return numUno;
 	}
