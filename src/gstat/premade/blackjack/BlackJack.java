@@ -89,7 +89,7 @@ public class BlackJack {
 		}
 
 		for(BlackJackPlayerAI p : players){
-			p.generateReport();
+			p.getFullReport();
 		}
 
 	}
