@@ -294,6 +294,7 @@ public class Deck<C extends Card> {
 	
 	public C giveBottom(C card){
 		deck.add(card);
+		numCards++;
 		return card; 
 	}
 	
