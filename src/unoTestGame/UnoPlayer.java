@@ -34,7 +34,7 @@ public class UnoPlayer {
 	
 	public int findNumBlue(){
 		int numBlue = 0;
-		UnoCard blue = new UnoCard(Color.RED, 1); 
+		UnoCard blue = new UnoCard(Color.BLUE, 1); 
 		for(int i = 0; i < playerHand.hand.size(); i++){
 			if(playerHand.hand.get(i).equalColor(blue)){
 				numBlue++; 
@@ -45,7 +45,7 @@ public class UnoPlayer {
 	
 	public int findNumGreen(){
 		int numGreen = 0;
-		UnoCard green = new UnoCard(Color.RED, 1); 
+		UnoCard green = new UnoCard(Color.GREEN, 1); 
 		for(int i = 0; i < playerHand.hand.size(); i++){
 			if(playerHand.hand.get(i).equalColor(green)){
 				numGreen++; 
@@ -56,7 +56,7 @@ public class UnoPlayer {
 	
 	public int findNumYellow(){
 		int numYellow = 0;
-		UnoCard yellow = new UnoCard(Color.RED, 1); 
+		UnoCard yellow = new UnoCard(Color.YELLOW, 1); 
 		for(int i = 0; i < playerHand.hand.size(); i++){
 			if(playerHand.hand.get(i).equalColor(yellow)){
 				numYellow++; 

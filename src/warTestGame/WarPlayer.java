@@ -22,8 +22,8 @@ public class WarPlayer {
 	 */
 	public WarPlayer() {
 		title = "Player";
-		hand = new Deck<StandardPlayingCard>();
-		discard = new Deck<StandardPlayingCard>();
+		hand = new Deck<StandardPlayingCard>("hand");
+		discard = new Deck<StandardPlayingCard>("discard");
 	}
 
 	/**
@@ -33,8 +33,8 @@ public class WarPlayer {
 	 */
 	public WarPlayer(String title) {
 		this.title = title;
-		hand = new Deck<StandardPlayingCard>();
-		discard = new Deck<StandardPlayingCard>();
+		hand = new Deck<StandardPlayingCard>("hand");
+		discard = new Deck<StandardPlayingCard>("discard");
 	}
 	
 	/**
@@ -45,32 +45,30 @@ public class WarPlayer {
 	public StandardPlayingCard playCard(){
 		try{
 			return hand.draw();
-		} catch(IllegalStateException e){
+		} catch(IllegalStateException b){
 			takeDiscard();
 			return hand.draw();
 		}
 	}
 	
 	/**
-	 * Adds card to bottom of player's hand
+	 * Adds card to player's hand
 	 * 
 	 * @param Card to be added
 	 */
 	public void takeCard(StandardPlayingCard card){
-		ArrayList<StandardPlayingCard> tmp = hand.drawAll();
 		hand.give(card);
-		hand.giveMulti(tmp);
+		hand.shuffle();
 	}
 	
 	/**
-	 * Adds multiple cards to bottom of player's hand
+	 * Adds multiple cards of player's hand
 	 * 
 	 * @param Cards to add to hand
 	 */
 	public void takeMulti(ArrayList<StandardPlayingCard> card){
-		ArrayList<StandardPlayingCard> tmp = hand.drawAll();
 		hand.giveMulti(card);
-		hand.giveMulti(tmp);
+		hand.shuffle();
 	}
 	
 	/**
@@ -90,8 +88,16 @@ public class WarPlayer {
 		discard.giveMulti(winnings);
 	}
 	
-	public boolean hasWon(){
-		if(hand.get_NumCards() + discard.get_NumCards() == 52)
+	public static int haveWinner(WarPlayer p1, WarPlayer p2, ArrayList<StandardPlayingCard> board){
+		if(p2.noCards())
+			return -1;
+		if(p1.noCards())
+			return 1;
+		return 0;
+	}
+	
+	private boolean noCards(){
+		if(hand.equals(null) && discard.equals(null))
 			return true;
 		return false;
 	}
