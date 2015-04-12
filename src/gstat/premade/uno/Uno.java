@@ -44,7 +44,7 @@ public class Uno {
 	}
 
 	/**
-	 * Will create an ArrayList to store created cards for the UNO deck.
+	 * Creates a List to store cards to populate the UNO deck.
 	 * 
 	 * @param d
 	 *            A temporary ArrayList to store cards
@@ -80,8 +80,8 @@ public class Uno {
 	}
 
 	/**
-	 * This method will play one game of UNO and print turns and draws to the
-	 * console and a log file.
+	 * This method will play one game of UNO and print a log of the actions taken
+	 *  to the console and a file called log.txt
 	 */
 	public static void play() {
 		UnoPlayerAI Bob = new UnoPlayerAI("Bob");
@@ -100,7 +100,7 @@ public class Uno {
 		}
 		System.out.println("\nFlipping First Card\n\n");
 		UnoCard currentTop = playDeck.draw_Report();
-		discardDeck.giveTop_Report(currentTop);
+		discardDeck.giveToTop_Report(currentTop);
 
 		System.out.println("\n\nThe game begins\n\n");
 		int flag = 0;
@@ -112,12 +112,12 @@ public class Uno {
 			System.out.println("Its turn " + turnsTaken);
 			System.out.println("Its Bob's Turn");
 			tempSize = Bob.playerHand.hand.size();
-			if (playDeck.get_NumCards() == 0){
+			if (playDeck.getNumCards() == 0){
 				reshuffle(playDeck, discardDeck);
 			}
 			temp = Bob.playCard(currentTop, playDeck);
 			if (Bob.playerHand.hand.size() < tempSize){
-				discardDeck.giveTop_Report(temp);
+				discardDeck.giveToTop_Report(temp);
 				currentTop = discardDeck.peekTop();
 			}
 			if (Bob.playerHand.hand.size() == 0){
@@ -128,12 +128,12 @@ public class Uno {
 
 			System.out.println("It's Alice's Turn");
 			tempSize = Alice.playerHand.hand.size();
-			if (playDeck.get_NumCards() == 0){
+			if (playDeck.getNumCards() == 0){
 				reshuffle(playDeck, discardDeck);
 			}
 			temp = Alice.playCard(currentTop, playDeck);
 			if (Alice.playerHand.hand.size() < tempSize){
-				discardDeck.giveTop_Report(temp);
+				discardDeck.giveToTop_Report(temp);
 				currentTop = discardDeck.peekTop();
 			}
 			if (Alice.playerHand.hand.size() == 0){
@@ -154,8 +154,8 @@ public class Uno {
 	}
 
 	/**
-	 * This method will play one game of UNO and will not print turns and draws
-	 * to the console and a log file.
+	  * This method will play one game of UNO and will not print a log of the actions taken
+	 *  to the console and a file called log.txt
 	 */
 	public static void playSilent() {
 		SilentUnoPlayerAI Bob = new SilentUnoPlayerAI("Bob");
@@ -173,7 +173,7 @@ public class Uno {
 		}
 
 		UnoCard currentTop = playDeck.draw();
-		discardDeck.giveTop(currentTop);
+		discardDeck.giveToTop(currentTop);
 
 		int flag = 0;
 		int turnsTaken = 0;
@@ -182,12 +182,12 @@ public class Uno {
 		while (flag == 0){
 			turnsTaken++;
 			tempSize = Bob.playerHand.hand.size();
-			if (playDeck.get_NumCards() == 0){
+			if (playDeck.getNumCards() == 0){
 				reshuffle(playDeck, discardDeck);
 			}
 			temp = Bob.playCard(currentTop, playDeck);
 			if (Bob.playerHand.hand.size() < tempSize){
-				discardDeck.giveTop(temp);
+				discardDeck.giveToTop(temp);
 				currentTop = discardDeck.peekTop();
 			}
 			if (Bob.playerHand.hand.size() == 0){
@@ -196,12 +196,12 @@ public class Uno {
 			}
 
 			tempSize = Alice.playerHand.hand.size();
-			if (playDeck.get_NumCards() == 0){
+			if (playDeck.getNumCards() == 0){
 				reshuffle(playDeck, discardDeck);
 			}
 			temp = Alice.playCard(currentTop, playDeck);
 			if (Alice.playerHand.hand.size() < tempSize){
-				discardDeck.giveTop(temp);
+				discardDeck.giveToTop(temp);
 				currentTop = discardDeck.peekTop();
 			}
 			if (Alice.playerHand.hand.size() == 0){
@@ -221,9 +221,7 @@ public class Uno {
 	}
 
 	/**
-	 * This method takes two decks one play card deck and one discard deck. It
-	 * will put the values of the discard deck into the the play card deck and
-	 * shuffle them while saving one card from discard for the card in play.
+	 * Repopulates and reshuffles the play deck using the contents of the discard deck.
 	 * 
 	 * @param playDeck
 	 *            Empty deck of cards to be drawn
@@ -232,13 +230,13 @@ public class Uno {
 	 */
 	public static void reshuffle(Deck<UnoCard> playDeck, Deck<UnoCard> discardDeck) {
 		UnoCard temp1 = discardDeck.draw();
-		playDeck.giveMulti(discardDeck.drawAll());
+		playDeck.giveMultiple(discardDeck.drawAll());
 		playDeck.shuffle();
-		discardDeck.giveTop(temp1);
+		discardDeck.giveToTop(temp1);
 	}
 
 	/**
-	 * This method uses the global variables to calculate statistics of all the
+	 * This method uses the global counters to calculate statistics of all the
 	 * games.
 	 */
 	public static void statistics() {

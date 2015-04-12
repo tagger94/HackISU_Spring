@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Simulates a deck of cards. Supports various function that a deck would allow
+ * Simulates a deck of cards. Supports various functions that a deck would allow
  * such as drawing, peeking and discarding. Can also function as a discard pile
- * by using the default constructor
+ * by using the default constructor.
  * 
  * @author Mike Onyszczak
  *
@@ -20,12 +20,10 @@ public class Deck<C extends Card> {
 	private int numCards;
 	private int numDraws;
 	private String name;
-
-	// By default deck refers to standard card deck
 	private ArrayList<C> deck;
 
 	/**
-	 * Create empty deck with default name "deck", Typically a discard deck
+	 * Create empty deck with default name "deck". Typically a discard deck.
 	 */
 	public Deck() {
 		numCards = 0;
@@ -36,7 +34,7 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Creates an empty deck, Typically a discard deck, with a user-defined name
+	 * Creates an empty deck with a user-defined name. Typically a discard deck.
 	 * 
 	 * @param name
 	 *            Name of the deck
@@ -50,7 +48,7 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Creates a fully stocked deck with default name "deck"
+	 * Creates a fully stocked deck with default name "deck".
 	 * 
 	 * @param deck
 	 *            Initial list of cards in the deck
@@ -65,7 +63,7 @@ public class Deck<C extends Card> {
 
 	/**
 	 * 
-	 * Creates a fully stocked deck with user-defined name
+	 * Creates a fully stocked deck with user-defined name.
 	 * 
 	 * @param deck
 	 *            Initial list of cards in the deck
@@ -81,7 +79,7 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Peek at the top card of the deck. Does not remove card
+	 * Peek at the top card of the deck. Does not remove the card.
 	 * 
 	 * @return Card that was at top of the deck
 	 */
@@ -92,18 +90,19 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Peek at the top card of the deck. Does not remove card. Generates report.
+	 * Peek at the top card of the deck. Does not the remove card. Generates
+	 * report.
 	 * 
 	 * @return Card that was at top of the deck
 	 */
-	public C peekTopReport() {
+	public C peekTop_Report() {
 		C result = peekTop();
 		Reporter.printReport("The top of" + name + " was looked at.\n" + result + " was on top.");
 		return result;
 	}
 
 	/**
-	 * Peek at the card at the bottom of the deck. Does not remove card
+	 * Peek at the card at the bottom of the deck. Does not remove the card.
 	 * 
 	 * @return Card that was at bottom of the deck
 	 */
@@ -114,19 +113,19 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Peek at the card at the bottom of the deck. Does not remove card
-	 * Generates report
+	 * Peek at the card at the bottom of the deck. Does not remove the card.
+	 * Generates report.
 	 * 
 	 * @return Card that was at bottom of the deck
 	 */
-	public C peekBottomReport() {
+	public C peekBottom_Report() {
 		C result = peekBottom();
 		Reporter.printReport("The bottom of" + name + " was looked at.\n" + result + " was on the bottom.");
 		return result;
 	}
 
 	/**
-	 * Draws the top card of the deck
+	 * Draws and removes the top card of the deck.
 	 * 
 	 * @return Card that was on top of the deck
 	 */
@@ -139,7 +138,7 @@ public class Deck<C extends Card> {
 
 	/**
 	 * 
-	 * Draws the top card of the deck. Generates report
+	 * Draws and removes the top card of the deck. Generates report.
 	 * 
 	 * @return Card that was on top of the deck
 	 */
@@ -150,14 +149,14 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Draws top number of cards from deck
+	 * Draws top number of cards from deck.
 	 * 
 	 * @param num
 	 *            Number of cards to be drawn
 	 * 
-	 * @return First number of cards on the deck
+	 * @return Lists cards drawn and removed from the deck
 	 */
-	public ArrayList<C> drawMulti(int num) {
+	public ArrayList<C> drawMultiple(int num) {
 		if (num > numCards)
 			throw new IllegalStateException("Not enough cards to draw from" + name + ".");
 		ArrayList<C> hold = new ArrayList<>();
@@ -168,47 +167,48 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Draws top number of cards from deck. Prints report
+	 * Draws top number of cards from deck. Generates report.
 	 * 
 	 * @param num
 	 *            Number of cards to draw
-	 * @return First number of cards from deck
+	 * @return Lists cards drawn and removed from the deck
 	 */
-	public ArrayList<C> drawMulti_Report(int num) {
-		ArrayList<C> temp = drawMulti(num);
+	public ArrayList<C> drawMultiple_Report(int num) {
+		ArrayList<C> temp = drawMultiple(num);
 		Reporter.printReport(num + " cards were drawn from" + name + ".\n");
 		return temp;
 	}
 
 	/**
-	 * Empties the deck.
+	 * Draws and removes all cards from the deck.
 	 * 
-	 * @return All cards that were previously in deck
+	 * @return List of all cards drawn from the deck
 	 */
 	public ArrayList<C> drawAll() {
-		ArrayList<C> temp = drawMulti(numCards);
+		ArrayList<C> temp = drawMultiple(numCards);
 		return temp;
 	}
 
 	/**
-	 * Empties the deck. Generates report
+	 * Draws and removes all cards from the deck. Generates report.
 	 * 
-	 * @return All cards that were previously in the deck
+	 * @return List of all cards drawn from the deck
 	 */
 	public ArrayList<C> drawAll_Report() {
-		ArrayList<C> temp = drawMulti_Report(numCards);
+		ArrayList<C> temp = drawMultiple_Report(numCards);
 		return temp;
 	}
 
 	/**
-	 * Gets a specific card from the deck if available
+	 * Retrieves and removes a specific card from the deck if the card is
+	 * available.
 	 * 
 	 * @param card
 	 *            Card requested from the deck.
 	 * 
 	 * @return The card requested or null if not found
 	 */
-	public C get(C card) {
+	public C retrieveCard(C card) {
 		if (numCards == 0)
 			return null;
 
@@ -226,36 +226,78 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Gets specified card from deck. Generates report
+	 * Retrieves and removes a specific card from the deck if the card is
+	 * available. Generates report.
 	 * 
 	 * @param card
 	 *            Card requested from the deck
 	 * 
 	 * @return The card requested or null if not found
 	 */
-	public C get_Report(C card) {
-		C result = get(card);
-		Reporter.printReport("Get Card was called. " + result + " was returned to the deck.");
+	public C retrieveCard_Report(C card) {
+		C result = retrieveCard(card);
+		Reporter.printReport(result + " was retrieved from the deck.\n");
 
 		return result;
 	}
 
 	/**
-	 * Gives the deck in its current state. Does not change the state of the
-	 * deck
+	 * Find the specified card in the deck. Does not remove the card.
 	 * 
-	 * @return Current deck
+	 * @param card
+	 *            Card requested from the deck
+	 * @return The card requested or null if not found
 	 */
-	public ArrayList<C> getContents() {
-		return deck;
+	public C findCard(C card) {
+		if (numCards == 0)
+			return null;
+
+		for(C current : deck){
+			if (current.equals(card)){
+				return current;
+			}
+		}
+
+		return null;
 	}
 
 	/**
-	 * Gives every card printed on its own line
+	 * Find the specified card in the deck. Does not remove the card. Generates
+	 * report.
+	 * 
+	 * @param card
+	 *            Card requested from the deck
+	 * @return The card requested or null if not found
+	 */
+	public C findCard_Report(C card) {
+		C result = findCard(card);
+		Reporter.printReport(result + " was found in the deck.\n");
+
+		return result;
+	}
+
+	/**
+	 * Generates list of all cards in the deck. Does not change the state of the
+	 * deck.
+	 * 
+	 * @return List of all Cards currently in the deck.
+	 */
+	public ArrayList<C> getContents() {
+		ArrayList<C> result = new ArrayList<C>();
+		for(C item : deck){
+			result.add(item);
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns every card printed on its own line.
 	 * 
 	 * @return Textual representation of deck
 	 */
-	public String printDeck() {
+	@Override
+	public String toString() {
 		String result = "";
 		for(C card : deck){
 			result += card.toString() + "\n";
@@ -264,9 +306,14 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Shuffle all the cards in the deck
+	 * Shuffle all the cards in the deck.
+	 * 
+	 * @return True if the deck was shuffled. False if the deck could not be
+	 *         shuffled.
 	 */
-	public void shuffle() {
+	public boolean shuffle() {
+		if (deck == null || numCards == 0)
+			return false;
 		Random random = new Random();
 		ArrayList<C> result = new ArrayList<C>();
 
@@ -278,53 +325,57 @@ public class Deck<C extends Card> {
 
 		deck = result;
 		timesShuffled++;
+		return true;
 	}
 
 	/**
-	 * Shuffles the deck and returns report that deck was shuffled along with
-	 * how many times the deck has been shuffled in total
+	 * Shuffles all the cards in the deck. Generates Report.
+	 * 
+	 * @return True if the deck was shuffled. False if the deck could not be
+	 *         shuffled.
 	 */
-	public void shuffle_Report() {
-		shuffle();
+	public boolean shuffle_Report() {
+		boolean result = shuffle();
 		Reporter.printReport("shuffled for the " + timesShuffled + " time\n");
+		return result;
 	}
 
 	/**
-	 * Adds a card to the deck
+	 * Adds a card to the top of the deck.
 	 * 
 	 * @param card
-	 *            Card to be added to deck
+	 *            Card to be added to the top of the deck
 	 * 
-	 * @return Confirmation of the card that was inserted
+	 * @return The card that was inserted
 	 */
-	public C giveTop(C card) {
+	public C giveToTop(C card) {
 		deck.add(0, card);
 		numCards++;
 		return card;
 	}
 
 	/**
-	 * Adds a card to the deck. Generates report
+	 * Adds a card to the top of the deck. Generates report.
 	 * 
 	 * @param card
-	 *            Card to be added to deck
+	 *            Card to be added to the top of the deck
 	 * 
-	 * @return Confirmation of the card that was inserted
+	 * @return The card that was inserted
 	 */
-	public C giveTop_Report(C card) {
-		giveTop(card);
+	public C giveToTop_Report(C card) {
+		giveToTop(card);
 		Reporter.printReport(card + " was added to the top of " + name + ".\n");
 		return card;
 	}
 
 	/**
-	 * Adds a card to the bottom of the deck
+	 * Adds a card to the bottom of the deck.
 	 * 
 	 * @param card
 	 *            Card to be added to the bottom of the deck
-	 * @return Confirmation of the card that was inserted
+	 * @return The card that was inserted
 	 */
-	public C giveBottom(C card) {
+	public C giveToBottom(C card) {
 		deck.add(card);
 		numCards++;
 		return card;
@@ -332,102 +383,100 @@ public class Deck<C extends Card> {
 	}
 
 	/**
-	 * Adds a card to the bottom of the deck. Generates report
+	 * Adds a card to the bottom of the deck. Generates report.
 	 * 
 	 * @param card
 	 *            Card to be added to the bottom of the deck
-	 * @return Confirmation of the card that was inserted
+	 * @return The card that was inserted
 	 */
-	public C giveBottom_Report(C card) {
-		giveBottom(card);
+	public C giveToBottom_Report(C card) {
+		giveToBottom(card);
 		Reporter.printReport(card + " was added to the bottom of " + name + ".\n");
 		return card;
 	}
 
 	/**
-	 * Adds several cards to the deck
+	 * Adds several cards to the deck.
 	 * 
 	 * @param cards
 	 *            Cards to add to the deck
 	 */
-	public void giveMulti(ArrayList<C> cards) {
+	public void giveMultiple(ArrayList<C> cards) {
 		for(C card : cards)
-			giveTop(card);
+			giveToTop(card);
 	}
 
 	/**
-	 * Adds several cards to the deck
+	 * Adds several cards to the deck. Generates report.
 	 * 
 	 * @param cards
 	 *            Cards to add to the deck
 	 */
-	public void give_Report(ArrayList<C> cards) {
+	public void giveMultiple_Report(ArrayList<C> cards) {
 		for(C card : cards)
-			giveTop_Report(card);
+			giveToTop_Report(card);
 	}
 
 	/**
-	 * Returns report of all action that has occurred in this deck
-	 * 
-	 * @return Actions occurred in this deck.
+	 * Generates report of all actions that have occurred in this deck.
 	 */
-	public String getReport() {
-		return "The deck was shuffled " + timesShuffled + ". There were " + numDraws + " draws.\n";
+	public void getFullReport() {
+		Reporter.printReport("The deck was shuffled " + timesShuffled + ". There were " + numDraws + " draws.\n");
 	}
 
 	/**
-	 * States how many cards have been drawn have occurred
+	 * Returns how many cards have been drawn.
 	 * 
 	 * @return Number of draws that have occurred
 	 */
-	public int get_NumDraws() {
+	public int getNumDraws() {
 		return numDraws;
 	}
 
 	/**
-	 * States how many shuffles have occurred
+	 * Returns how many shuffles have occurred.
 	 * 
 	 * @return Number of shuffles that have been performed on this deck
 	 */
-	public int get_TimesShuffled() {
+	public int getTimesShuffled() {
 		return timesShuffled;
 	}
 
 	/**
-	 * States how many cards have been drawn. Generates report
+	 * Returns how many cards have been drawn. Generates report.
 	 * 
 	 * @return Number of cards drawn from this deck
 	 */
-	public String numDraws_Report() {
+	public int getNumDraws_Report() {
 		Reporter.printReport("There were " + numDraws + " draws\n");
-		return "There were " + numDraws + " draws";
+		return numDraws;
 	}
 
 	/**
-	 * States how many shuffles have occurred. Generates report
+	 * Returns how many shuffles have occurred. Generates report.
 	 * 
 	 * @return Number of shuffles that have been performed on this deck
 	 */
-	public String timesShuffled_Report() {
+	public int timesShuffled_Report() {
 		Reporter.printReport("The deck was shuffled " + timesShuffled + " times\n");
-		return "The deck was shuffled " + timesShuffled + " times";
+		return timesShuffled;
 	}
 
 	/**
-	 * States how many cards are currently in the deck
+	 * Returns how many cards are currently in the deck.
 	 * 
-	 * @return number of cards in the deck
+	 * @return Number of cards in the deck
 	 */
-	public int get_NumCards() {
+	public int getNumCards() {
 		return numCards;
 	}
 
 	/**
-	 * States how many cards are currently in the deck. Generates report
+	 * States how many cards are currently in the deck. Generates report.
 	 * 
 	 * @return number of cards in the deck
 	 */
-	public int numCards_Report() {
+	public int getNumCards_Report() {
 		Reporter.printReport("There are " + numCards + " cards in the deck\n");
 		return numCards;
 	}
