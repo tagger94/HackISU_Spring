@@ -1,7 +1,8 @@
 package gstat.util;
 
 /**
- * Class designed to track an inventory
+ * A class to track an inventory of items in a game. Often used for money tokens
+ * or chits.
  * 
  * @author Brennyn Hawbaker
  *
@@ -18,7 +19,7 @@ public class Inventory {
 	private int numGiven;
 
 	/**
-	 * Default constructor
+	 * Creates an empty inventory.
 	 */
 	public Inventory() {
 		title = "Inventory";
@@ -30,10 +31,10 @@ public class Inventory {
 	}
 
 	/**
-	 * Constructor with set size, -1 for "infinite" size
+	 * Creates an inventory of user defined size. Use -1 for "infinite" size.
 	 * 
 	 * @param size
-	 *            -number of beginning tokens
+	 *            Number of beginning tokens
 	 */
 	public Inventory(int size) {
 		title = "Inventory";
@@ -50,12 +51,13 @@ public class Inventory {
 	}
 
 	/**
-	 * Constructor with set size and title, -1 for "infinite" size
+	 * Creates an inventory with user defined size and title. Use -1 for
+	 * "infinite" size.
 	 * 
 	 * @param title
-	 *            -Name of inventory
+	 *            Name of inventory
 	 * @param size
-	 *            -Number of beginning tokens
+	 *            Number of beginning tokens
 	 */
 	public Inventory(String title, int size) {
 		this.title = title;
@@ -69,12 +71,12 @@ public class Inventory {
 	}
 
 	/**
-	 * Subtract from the inventory
+	 * Removes specified number of items from the inventory.
 	 * 
 	 * @param num
 	 *            Number taken from inventory
 	 * 
-	 * @return number of pieces taken
+	 * @return Number of pieces taken
 	 */
 	public int take(int num) {
 		takeCalled++;
@@ -87,12 +89,12 @@ public class Inventory {
 	}
 
 	/**
-	 * Subtract from the inventory with printed report
+	 * Removes specified number of items from the inventory. Generates report.
 	 * 
 	 * @param num
 	 *            Number taken from inventory
 	 * 
-	 * @return number of pieces taken from inventory
+	 * @return Number of pieces taken
 	 */
 	public int take_Report(int num) {
 		this.take(num);
@@ -101,14 +103,14 @@ public class Inventory {
 	}
 
 	/**
-	 * Add to inventory
+	 * Adds the specified number of items into the inventory.
 	 * 
 	 * @param num
 	 *            Number given to inventory
 	 * 
-	 * @return number of tokens given
+	 * @return Number of tokens given
 	 */
-	public int give(int num) {
+	public int giveTo(int num) {
 		giveCalled++;
 		if (size != -1)
 			size += num;
@@ -117,73 +119,71 @@ public class Inventory {
 	}
 
 	/**
-	 * Add to inventory with printed report
+	 * Adds the specified number of items into the inventory. Generates report.
 	 * 
 	 * @param num
 	 *            Number given to inventory
 	 * 
-	 * @return number of tokens given
+	 * @return Number of tokens given
 	 */
-	public int give_Report(int num) {
-		this.give(num);
+	public int giveTo_Report(int num) {
+		this.giveTo(num);
 		Reporter.printReport(title + " amount changed: +" + num);
 		return num;
 	}
 
 	/**
-	 * Return takeCalled
+	 * Returns how many times the take method was called.
 	 * 
-	 * @return -Number of times take method was called
+	 * @return Number of times take method was called
 	 */
 	public int get_takeCalled() {
 		return takeCalled;
 	}
 
 	/**
-	 * Return numTaken
+	 * Returns the total number of items taken from this inventory.
 	 * 
-	 * @return -Total number taken from inventory
+	 * @return Total number taken from inventory
 	 */
 	public int get_numTaken() {
 		return numTaken;
 	}
 
 	/**
-	 * Return giveCalled
+	 * Returns how many times the giveTo method was called.
 	 * 
-	 * @return -Number of times give was called
+	 * @return Number of times giveTo was called
 	 */
 	public int get_giveCalled() {
 		return giveCalled;
 	}
 
 	/**
-	 * Return numGiven
+	 * Return Returns the total number of items given to this inventory.
 	 * 
-	 * @return -Total number given to the inventory
+	 * @return Total number given to the inventory
 	 */
 	public int get_numGiven() {
 		return numGiven;
 	}
 
 	/**
-	 * Return all stats
-	 * 
-	 * @return -String containing all stat variables
+	 * Generates report of lifetime statistics of this inventory.
 	 */
-	public String getReport() {
+	public void getFullReport() {
 		String report = "";
 		report += "Take called: " + takeCalled + "\n";
 		report += "Number taken: " + numTaken + "\n";
 		report += "Give called: " + giveCalled + "\n";
 		report += "Number given: " + numGiven + "\n";
-		return report;
+		Reporter.printReport(report);
 	}
 
 	/**
-	 * Returns name of inventory
+	 * Returns title of the inventory
 	 * 
-	 * @return -Title
+	 * @return Title
 	 */
 	@Override
 	public String toString() {

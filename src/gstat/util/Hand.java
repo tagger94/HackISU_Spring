@@ -20,7 +20,7 @@ public class Hand<C extends Card> {
 	private int minHandSize;
 
 	/**
-	 * Sets counters for reporting statistics to zero.
+	 * Creates an empty hand with no maximum or minimum size limits.
 	 */
 	public Hand() {
 		cardsDrawn = 0;
@@ -31,10 +31,12 @@ public class Hand<C extends Card> {
 	}
 
 	/**
+	 * Creates an empty hand with specified size limits.
+	 * 
 	 * @param max
-	 *            - Max number of cards in a hand at one time
+	 *            Max number of cards in a hand at one time
 	 * @param min
-	 *            - Min number of cards in a hand at one time
+	 *            Min number of cards in a hand at one time
 	 */
 	public Hand(int max, int min) {
 		cardsDrawn = 0;
@@ -48,12 +50,12 @@ public class Hand<C extends Card> {
 	 * Adds the given card to the hand.
 	 * 
 	 * @param c
-	 *            card to be add to hand
+	 *            Card to be add to hand
 	 * 
-	 * @return card that was just added to hand
+	 * @return Card that was added to hand
 	 */
 	public C drawCard(C c) {
-		if (hand.size() < maxHandSize){
+		if (hand.size() < maxHandSize) {
 			hand.add(c);
 			cardsDrawn++;
 			return c;
@@ -62,16 +64,15 @@ public class Hand<C extends Card> {
 	}
 
 	/**
-	 * Adds the given card to the hand and gives a string representation of the
-	 * card that was added. Generates report
+	 * Adds the given card to the hand. Generates report.
 	 * 
 	 * @param c
-	 *            card to add to hand
+	 *            Card to be add to hand
 	 * 
-	 * @return card that was just added to hand
+	 * @return Card that was added to hand
 	 */
 	public C drawCard_Report(C c) {
-		if (hand.size() < maxHandSize){
+		if (hand.size() < maxHandSize) {
 			drawCard(c);
 			System.out.println(c.toString() + " was added to the hand.\n");
 			return c;
@@ -83,14 +84,14 @@ public class Hand<C extends Card> {
 	 * Finds the given card and removes it from the hand.
 	 * 
 	 * @param c
-	 *            card to remove from hand
+	 *            Card to remove from hand
 	 * 
-	 * @return card that was just discarded
+	 * @return Card that was discarded
 	 */
 	public C discardCard(C c) {
-		if (hand.size() > minHandSize){
-			for(int i = 0; i < hand.size(); i++){
-				if (hand.get(i).equals(c)){
+		if (hand.size() > minHandSize) {
+			for (int i = 0; i < hand.size(); i++) {
+				if (hand.get(i).equals(c)) {
 					C temp = hand.get(i);
 					hand.remove(i);
 					cardsDiscarded++;
@@ -102,15 +103,15 @@ public class Hand<C extends Card> {
 	}
 
 	/**
-	 * Finds given card and removes it from the hand and gives a string
-	 * representation of the card that was removed.
+	 * Finds the given card and removes it from the hand. Generates report.
 	 * 
 	 * @param c
-	 *            card to remove from hand
-	 * @return card that was just discarded
+	 *            Card to remove from hand
+	 * 
+	 * @return Card that was discarded
 	 */
 	public C discardCard_Report(C c) {
-		if (hand.size() > minHandSize){
+		if (hand.size() > minHandSize) {
 			System.out.println(c.toString() + " was removed from the hand.\n");
 			discardCard(c);
 			return c;
@@ -118,28 +119,39 @@ public class Hand<C extends Card> {
 		return null;
 	}
 
+	/**
+	 * Removes all cards from hand.
+	 * 
+	 * @return List of cards removed from hand.
+	 */
 	public ArrayList<C> discardHand() {
 		ArrayList<C> tempList = new ArrayList<C>();
-		for(int i = 0; i < hand.size(); i++){
+		for (int i = 0; i < hand.size(); i++) {
 			tempList.add(hand.get(i));
 			hand.remove(i);
 		}
 		return tempList;
 	}
 
+	public ArrayList<C> discardHand_Report() {
+		ArrayList<C> tempList = discardHand();
+		Reporter.printReport("Hand was discarded\n");
+		return tempList;
+	}
+
 	/**
 	 * Returns raw value of the number of cards drawn.
 	 * 
-	 * @return cards that were just drawn
+	 * @return Number of cards drawn
 	 */
 	public int getCardsDrawn() {
 		return cardsDrawn;
 	}
 
 	/**
-	 * Returns a string representation of the amount of cards drawn.
+	 * Returns raw value of the number of cards drawn. Generates report.
 	 * 
-	 * @return Cards that were just drawn
+	 * @return Number of cards drawn
 	 */
 	public String getCardsDrawn_Report() {
 		Reporter.printReport(cardsDrawn + " have been drawn.\n");
@@ -147,43 +159,46 @@ public class Hand<C extends Card> {
 	}
 
 	/**
-	 * Returns raw value of the number of cards discarded.
+	 * Returns the number of cards discarded.
 	 * 
-	 * @return card that was just discarded
+	 * @return Number of cards discarded
 	 */
-	public int getCardsDiscarded() {
+	public int getNumCardsDiscarded() {
 		return cardsDiscarded;
 	}
 
 	/**
-	 * Returns string representation of the amount of cards discarded. Generates
-	 * report
+	 * Returns the number of cards discarded. Generates report.
 	 * 
-	 * @return card that was just discarded
+	 * @return Number of cards discarded
 	 */
-	public String getCardsDiscarded_Report() {
+	public String getNumCardsDiscarded_Report() {
 		Reporter.printReport(cardsDiscarded + " have been discarded\n");
 		return cardsDiscarded + " have been discarded\n";
 	}
 
 	/**
-	 * Returns a string representation of the amount of cards drawn and
-	 * discarded.
+	 * Generates report of number of cards drawn and discarded.
 	 * 
-	 * @return report of all actions taken by this hand
+	 * @return Report of all actions taken by this hand
 	 */
-	public String getReport() {
-		String report = cardsDrawn + "were given to the hand and " + cardsDiscarded + "were taken from the hand.\n";
-		report += "The minimum hand size was " + minHandSize + " and the maximum hand size was " + maxHandSize + ".\n";
-		return report;
+	public void getFullReport() {
+		String report = cardsDrawn + "were given to the hand and "
+				+ cardsDiscarded + "were taken from the hand.\n";
+		report += "The minimum hand size was " + minHandSize
+				+ " and the maximum hand size was " + maxHandSize + ".\n";
+
+		Reporter.printReport(report);
 	}
 
 	/**
-	 * Returns a String representation of the contents of hand
+	 * Returns a String representation of the contents of hand.
+	 * 
+	 * @return String String representation of this hand
 	 */
 	public String toString() {
 		String report = "";
-		for(int i = 0; i < hand.size(); i++){
+		for (int i = 0; i < hand.size(); i++) {
 			report += hand.get(i).toString() + ", ";
 		}
 		return report;
