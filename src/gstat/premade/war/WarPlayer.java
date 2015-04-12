@@ -13,34 +13,34 @@ import gstat.util.Deck;
  */
 public class WarPlayer {
 
-	private String title;
+	private String name;
 	private Deck<StandardPlayingCard> hand;
 	private Deck<StandardPlayingCard> discard;
 
 	/**
-	 * Default constructor
+	 * Constructs a war player with default name "Player" and empty decks.
 	 */
 	public WarPlayer() {
-		title = "Player";
+		name = "Player";
 		hand = new Deck<StandardPlayingCard>("hand");
 		discard = new Deck<StandardPlayingCard>("discard");
 	}
 
 	/**
-	 * Constructor with name
+	 * Constructs a war player with given name and empty decks.
 	 * 
-	 * @param title
+	 * @param name
 	 *            Name of player
 	 */
-	public WarPlayer(String title) {
-		this.title = title;
+	public WarPlayer(String name) {
+		this.name = name;
 		hand = new Deck<StandardPlayingCard>("hand");
 		discard = new Deck<StandardPlayingCard>("discard");
 	}
 
 	/**
 	 * Plays first card from player's hand, if empty, attempts to take discard
-	 * pile
+	 * pile.
 	 * 
 	 * @return Card to be played, null if no card to play
 	 */
@@ -60,45 +60,51 @@ public class WarPlayer {
 	}
 
 	/**
-	 * Adds card to player's hand
+	 * Adds card to player's hand.
 	 * 
 	 * @param card
 	 *            card to be added
+	 *            
+	 * @return added card
 	 */
-	public void takeCard(StandardPlayingCard card) {
-		hand.giveBottom(card);
+	public StandardPlayingCard takeCard(StandardPlayingCard card) {
+		hand.giveToBottom(card);
+		return card; 
 	}
 
 	/**
-	 * Adds multiple cards to player's hand
+	 * Adds multiple cards to player's hand.
 	 * 
 	 * @param card
-	 *            card to add to hand
+	 *    		card to add to hand
+	 *            
+	 * @return list of added cards
 	 */
-	public void takeMulti(ArrayList<StandardPlayingCard> card) {
-		hand.giveMulti(card);
+	public ArrayList<StandardPlayingCard> takeMultiple(ArrayList<StandardPlayingCard> card) {
+		hand.giveMultiple(card);
+		return card; 
 	}
 
 	/**
-	 * Move all cards from discard to hand
+	 * Move all cards from discard to hand.
 	 */
 	public void takeDiscard() {
 		discard.shuffle();
-		hand.giveMulti(discard.drawAll());
+		hand.giveMultiple(discard.drawAll());
 	}
 
 	/**
-	 * Put cards in play into discard pile
+	 * Move cards from play into discard pile.
 	 * 
 	 * @param winnings
 	 *            cards from last round of play
 	 */
 	public void winRound(ArrayList<StandardPlayingCard> winnings) {
-		discard.giveMulti(winnings);
+		discard.giveMultiple(winnings);
 	}
 
 	/**
-	 * Checks if there is a winner (other player has no cards)
+	 * Checks if there is a winner (other player has no cards).
 	 * 
 	 * @param p1
 	 *            player 1
@@ -115,28 +121,27 @@ public class WarPlayer {
 	}
 
 	private boolean noCards() {
-		if (hand.get_NumCards() == 0 && discard.get_NumCards() == 0)
+		if (hand.getNumCards() == 0 && discard.getNumCards() == 0)
 			return true;
 		return false;
 	}
 
 	/**
-	 * Returns title of player
+	 * Returns name of player.
 	 * 
-	 * @return Title of player
+	 * @return name of player
 	 */
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * Set title of player
+	 * Set name of player
 	 * 
-	 * @param title
-	 *            of player
+	 * @param name of player
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
