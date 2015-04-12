@@ -71,7 +71,7 @@ public class BlackJack {
 
 		// Place Bets
 		for(BlackJackPlayerAI p : players){
-			p.subTokens_Report(chips, p.determineBet());
+			p.removeTokens_Report(chips, p.determineBet());
 		}
 
 		// Each player gets 2 cards
@@ -111,9 +111,9 @@ public class BlackJack {
 	private static void endRound() {
 
 		for(BlackJackPlayer h : players){
-			deck.giveMulti(h.hand.discardHand());
+			deck.giveMultiple(h.hand.discardHand());
 		}
-		deck.giveMulti(dealer.hand.discardHand());
+		deck.giveMultiple(dealer.hand.discardHand());
 	}
 
 }
