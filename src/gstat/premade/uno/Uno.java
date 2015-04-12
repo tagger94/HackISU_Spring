@@ -80,8 +80,8 @@ public class Uno {
 	}
 
 	/**
-	 * This method will play one game of UNO and print a log of the actions taken
-	 *  to the console and a file called log.txt.
+	 * This method will play one game of UNO and print a log of the actions
+	 * taken to the console and a file called log.txt.
 	 */
 	public static void play() {
 		UnoPlayerAI Bob = new UnoPlayerAI("Bob");
@@ -154,8 +154,8 @@ public class Uno {
 	}
 
 	/**
-	  * This method will play one game of UNO and will not print a log of the actions taken
-	 *  to the console and a file called log.txt.
+	 * This method will play one game of UNO and will not print a log of the
+	 * actions taken to the console and a file called log.txt.
 	 */
 	public static void playSilent() {
 		SilentUnoPlayerAI Bob = new SilentUnoPlayerAI("Bob");
@@ -221,7 +221,8 @@ public class Uno {
 	}
 
 	/**
-	 * Repopulates and reshuffles the play deck using the contents of the discard deck.
+	 * Repopulates and reshuffles the play deck using the contents of the
+	 * discard deck.
 	 * 
 	 * @param playDeck
 	 *            Empty deck of cards to be drawn

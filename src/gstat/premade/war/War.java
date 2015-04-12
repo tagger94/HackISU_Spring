@@ -6,7 +6,10 @@ import gstat.premade.playingcard.StandardPlayingCard;
 import gstat.util.Deck;
 
 /**
- * Example War simulation setup
+ * The game of war simulation setup. War is a game in which both players are
+ * randomly given half a deck of standard playing cards. They each
+ * simultaneously flip their cards and compare to see if they can take the other
+ * players cards. First to gain all the cards wins.
  * 
  * @author Brennyn Hawbaker
  *
@@ -27,7 +30,7 @@ public class War {
 	static int games;
 
 	/**
-	 * Default new game constructor
+	 * Constructs a new game with two players.
 	 */
 	public War() {
 		player_1 = new WarPlayer("Player_1");
@@ -43,7 +46,7 @@ public class War {
 	}
 
 	/**
-	 * Runs one turn of the game
+	 * Runs one turn of the game.
 	 */
 	public void playTurn() {
 		down = new ArrayList<>();
@@ -64,7 +67,7 @@ public class War {
 	}
 
 	/**
-	 * Runs one full game of War
+	 * Runs one full game of War. Tracks statistics.
 	 */
 	public void playGame() {
 		rounds = 0;
@@ -79,7 +82,7 @@ public class War {
 	}
 
 	/**
-	 * Applies War rules to determine the "winner" of the two cards
+	 * Compares two cards using war rules to determine a "winner".
 	 * 
 	 * @param c1
 	 *            player 1's card
@@ -101,7 +104,7 @@ public class War {
 	}
 
 	/**
-	 * Splits ties during rounds
+	 * Does the extra tie actions in war.
 	 * 
 	 * @param c1
 	 *            player 1's card
@@ -124,7 +127,7 @@ public class War {
 	}
 
 	/**
-	 * Ends game and declares a winner
+	 * Checks if either player has won.
 	 */
 	public void checkEndGame() {
 		if (WarPlayer.haveWinner(player_1, player_2) == -1){
@@ -138,7 +141,7 @@ public class War {
 	}
 
 	/**
-	 * Returns number of games player 1 won
+	 * Returns number of games player 1 has won.
 	 * 
 	 * @return number of games won
 	 */
@@ -147,7 +150,7 @@ public class War {
 	}
 
 	/**
-	 * Returns number of games player 2 won
+	 * Returns number of games player 2 has won.
 	 * 
 	 * @return number of games won
 	 */
