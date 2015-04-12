@@ -137,7 +137,7 @@ public class Deck<C extends Card> {
 	 */
 	public C draw_Report() {
 		C result = draw();
-		Reporter.printReport("A card was drawn from" + name + ".\n" + result + " was drawn");
+		Reporter.printReport("A card was drawn from " + name + ".\n" + result + " was drawn");
 		return result;
 	}
 	
@@ -274,9 +274,10 @@ public class Deck<C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void giveTop(C card) {
-		deck.add(card);
+	public C giveTop(C card) {
+		deck.add(0, card);
 		numCards++;
+		return card; 
 	}
 	
 	/**
@@ -285,18 +286,21 @@ public class Deck<C extends Card> {
 	 * @param card
 	 *            Card to be added to deck.
 	 */
-	public void giveTop_Report(C card) {
+	public C giveTop_Report(C card) {
 		giveTop(card); 
 		Reporter.printReport(card + " was added to the top of " + name + ".\n");
+		return card; 
 	}
 	
-	public void giveBottom(C card){
-		giveBottom(card);
+	public C giveBottom(C card){
+		deck.add(card);
+		return card; 
 	}
 	
-	public void giveBottom_Report(C card){
+	public C giveBottom_Report(C card){
 		giveBottom(card);
 		Reporter.printReport(card + " was added to the bottom of " + name + ".\n");
+		return card;
 	}
 
 	/**
