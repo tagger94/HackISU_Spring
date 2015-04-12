@@ -27,14 +27,16 @@ public class Uno {
 		System.out.println("\n\nThe game begins\n\n"); 
 		boolean flag = false;
 		int turnsTaken = 0;
-		int tempSize = 0; 
+		int tempSize = 0;
+		UnoCard temp = new UnoCard(); 
 		while(!flag){
 			turnsTaken++; 
 			System.out.println("Its turn " + turnsTaken);
 			System.out.println("Its Bob's Turn");
 			tempSize = Bob.playerHand.hand.size();
-			discardDeck.giveTop_Report(Bob.playCard(currentTop, playDeck));
+			temp = Bob.playCard(currentTop, playDeck);
 			if(Bob.playerHand.hand.size() < tempSize){
+				discardDeck.giveTop_Report(temp);
 				currentTop = discardDeck.peekTop(); 
 			}
 			if(Bob.playerHand.hand.size() == 0){
@@ -45,8 +47,9 @@ public class Uno {
 			
 			System.out.println("It's Alice's Turn");
 			tempSize = Alice.playerHand.hand.size();
-			discardDeck.giveTop_Report(Alice.playCard(currentTop, playDeck));
+			temp = Alice.playCard(currentTop, playDeck); 
 			if(Alice.playerHand.hand.size() < tempSize){
+				discardDeck.giveTop_Report(temp);
 				currentTop = discardDeck.peekTop(); 
 			}
 			if(Alice.playerHand.hand.size() == 0){
