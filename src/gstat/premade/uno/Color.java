@@ -1,7 +1,7 @@
 package gstat.premade.uno;
 
 /**
- * This is an enumerated type to help tell what color cards are
+ * This is an enumerated type to help identify card colors
  * 
  * @author Camden Voigt
  *

@@ -55,7 +55,7 @@ public class Hand<C extends Card> {
 	 * @return Card that was added to hand
 	 */
 	public C drawCard(C c) {
-		if (hand.size() < maxHandSize) {
+		if (hand.size() < maxHandSize){
 			hand.add(c);
 			cardsDrawn++;
 			return c;
@@ -72,7 +72,7 @@ public class Hand<C extends Card> {
 	 * @return Card that was added to hand
 	 */
 	public C drawCard_Report(C c) {
-		if (hand.size() < maxHandSize) {
+		if (hand.size() < maxHandSize){
 			drawCard(c);
 			System.out.println(c.toString() + " was added to the hand.\n");
 			return c;
@@ -89,9 +89,9 @@ public class Hand<C extends Card> {
 	 * @return Card that was discarded
 	 */
 	public C discardCard(C c) {
-		if (hand.size() > minHandSize) {
-			for (int i = 0; i < hand.size(); i++) {
-				if (hand.get(i).equals(c)) {
+		if (hand.size() > minHandSize){
+			for(int i = 0; i < hand.size(); i++){
+				if (hand.get(i).equals(c)){
 					C temp = hand.get(i);
 					hand.remove(i);
 					cardsDiscarded++;
@@ -111,7 +111,7 @@ public class Hand<C extends Card> {
 	 * @return Card that was discarded
 	 */
 	public C discardCard_Report(C c) {
-		if (hand.size() > minHandSize) {
+		if (hand.size() > minHandSize){
 			System.out.println(c.toString() + " was removed from the hand.\n");
 			discardCard(c);
 			return c;
@@ -126,7 +126,7 @@ public class Hand<C extends Card> {
 	 */
 	public ArrayList<C> discardHand() {
 		ArrayList<C> tempList = new ArrayList<C>();
-		for (int i = 0; i < hand.size(); i++) {
+		for(int i = 0; i < hand.size(); i++){
 			tempList.add(hand.get(i));
 			hand.remove(i);
 		}
@@ -183,10 +183,8 @@ public class Hand<C extends Card> {
 	 * @return Report of all actions taken by this hand
 	 */
 	public void getFullReport() {
-		String report = cardsDrawn + "were given to the hand and "
-				+ cardsDiscarded + "were taken from the hand.\n";
-		report += "The minimum hand size was " + minHandSize
-				+ " and the maximum hand size was " + maxHandSize + ".\n";
+		String report = cardsDrawn + "were given to the hand and " + cardsDiscarded + "were taken from the hand.\n";
+		report += "The minimum hand size was " + minHandSize + " and the maximum hand size was " + maxHandSize + ".\n";
 
 		Reporter.printReport(report);
 	}
@@ -198,7 +196,7 @@ public class Hand<C extends Card> {
 	 */
 	public String toString() {
 		String report = "";
-		for (int i = 0; i < hand.size(); i++) {
+		for(int i = 0; i < hand.size(); i++){
 			report += hand.get(i).toString() + ", ";
 		}
 		return report;

@@ -4,12 +4,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Convient method to print to log file
+ * @author Alex Berns
+ *
+ */
 public class Reporter {
 
 	private static File f = new File("log.txt");
 
 	private static FileWriter w;
 
+	/**
+	 * Writes to log.txt and prints to console
+	 * @param s
+	 */
 	public static void printReport(String s) {
 		if (!f.exists()){
 			try{
