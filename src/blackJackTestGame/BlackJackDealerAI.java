@@ -1,15 +1,21 @@
 package blackJackTestGame;
 
 import exampleClasses.StandardPlayingCard;
+import gameSim.Hand;
 
-public class BlackJackDealerAI extends BlackJackPlayer implements BlackJackAI{
+public class BlackJackDealerAI extends BlackJackPlayer {
 	
 	
 
 	public BlackJackDealerAI(String name) {
-		super(name);
+		super(name, 0);
 	}
 	
+	@Override
+	public void setDealerTopCard(StandardPlayingCard c) {
+		//Empty
+	}
+
 	@Override
 	public Boolean doHit() {
 		
@@ -22,11 +28,6 @@ public class BlackJackDealerAI extends BlackJackPlayer implements BlackJackAI{
 	@Override
 	public Boolean doSplit() {
 		return false;
-	}
-
-	@Override
-	public void setDealerTopCard(StandardPlayingCard c) {
-		//Empty
 	}
 
 	@Override

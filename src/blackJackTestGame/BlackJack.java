@@ -2,17 +2,12 @@ package blackJackTestGame;
 
 import java.util.ArrayList;
 
-import exampleClasses.ExamplePlayer;
 import exampleClasses.StandardPlayingCard;
-import exampleClasses.Suit;
 import gameSim.*;
 
 public class BlackJack {
-	private static Suit suit;
-
-	private static StandardPlayingCard deckMaker = new StandardPlayingCard(1,
-			suit.SPADES);
-	private static Deck deck = new Deck(deckMaker.makeDeck());
+	private static Deck<StandardPlayingCard> deck = new Deck<StandardPlayingCard>(
+			StandardPlayingCard.makeDeck());
 
 	private static BlackJackDealerAI dealer = new BlackJackDealerAI("Dealer");
 
@@ -22,30 +17,25 @@ public class BlackJack {
 
 	private static final int START_CHIP = 50;
 
-	// TODO: Bank
+	private static Inventory chips = new Inventory("Chips", -1);
 
-	public static void main() {
-		Inventory chips = new Inventory("Chips", -1);
+	public static void main(String[] args) {
 
-		players.add(new BlackJackPlayerAI("Bob", chips.take(START_CHIP), 90));
-		players.add(new BlackJackPlayerAI("Alice", chips.take(START_CHIP), 50));
-		players.add(new BlackJackPlayerAI("Eve", chips.take(START_CHIP), 20));
+		players.add(new BlackJackPlayerAI("Bob", START_CHIP, 90));
+		players.add(new BlackJackPlayerAI("Alice", START_CHIP, 50));
+		players.add(new BlackJackPlayerAI("Eve", START_CHIP, 20));
 
-		while (round < 100) {
+		while (round < 1) {
+			Reporter.printReport("-----------------------------------------");
 			// Set up deck
 			startRound();
 
 			// Increment Counter
 			round++;
 
-			// Place Bets
-			for (BlackJackPlayerAI p : players) {
-				p.determineBet();
-			}
-
 			// Take Player Turns
 			for (BlackJackPlayer p : players) {
-				takeTurn((BlackJackAI) p);
+				takeTurn(p);
 			}
 
 			// Take Dealer Turn
@@ -54,14 +44,17 @@ public class BlackJack {
 			// Reclaim Bet
 			for (BlackJackPlayerAI p : players) {
 				int temp = p.doWin(dealer.hand.findHandValue());
-				if(temp < 1)
-					chips.give(temp * -1);
-				else
-					chips.take(temp);
+				// Loss return 0, Win return (bet * 2)
+				// Win
+				Reporter.printReport("*****************************************");
+				Reporter.printReport(p.toString() + "'s returns");
+				p.addTokens_Report(chips, temp);
 			}
 
 			// Reset Deck
 			endRound();
+			
+			Reporter.printReport("-----------------------------------------");
 		}
 	}
 
@@ -69,35 +62,50 @@ public class BlackJack {
 
 		// Shuffle
 		deck.shuffle_Report();
-		System.out.println("Shuffled Deck");
+
+		// Place Bets
+		for (BlackJackPlayerAI p : players) {
+			p.subTokens_Report(chips, p.determineBet());
+		}
 
 		// Each player gets 2 cards
-		for (BlackJackPlayer h : players) {
-			h.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
-			h.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
-			System.out.println(h.toString() + ": drew " + h.hand);
+		for (BlackJackPlayer p : players) {
+			startDraw(p);
 		}
 
 		// Dealer gets 2 cards
-		dealer.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
-		dealer.hand.drawCard_Report((StandardPlayingCard) deck.draw_Report());
-
+		startDraw(dealer);
+		
+		//Players See Dealers Face-Up Card
+		for (BlackJackPlayer p : players) {
+			p.setDealerTopCard(dealer.hand.hand.get(0));
+		}
+	}
+	
+	private static void startDraw(BlackJackPlayer p) {
+		Reporter.printReport("*****************************************");
+		Reporter.printReport(p.toString() + "'s Draw");
+		p.hand.drawCard_Report(deck.draw());
+		p.hand.drawCard_Report(deck.draw());
 	}
 
-	private static void takeTurn(BlackJackAI p) {
+	private static void takeTurn(BlackJackPlayer p) {
 
-		// Determine Bet
-		p.determineBet();
+		Reporter.printReport("*****************************************");
+		Reporter.printReport(p.toString() + "'s Turn[" + round + "]");
 		// Hit until Stop
 		while (p.doHit()) {
+			Reporter.printReport(p.toString() + " Hits");
+			p.getHand().drawCard_Report(deck.draw());
 		}
+		Reporter.printReport(p.toString() + " Stays");
 
 	}
 
 	private static void endRound() {
 
 		for (BlackJackPlayer h : players) {
-			deck.giveMulti( h.hand.discardHand());
+			deck.giveMulti(h.hand.discardHand());
 		}
 		deck.giveMulti(dealer.hand.discardHand());
 	}

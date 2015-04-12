@@ -1,8 +1,9 @@
 package blackJackTestGame;
 
 import exampleClasses.StandardPlayingCard;
+import gameSim.Reporter;
 
-public class BlackJackPlayerAI extends BlackJackPlayer implements BlackJackAI {
+public class BlackJackPlayerAI extends BlackJackPlayer {
 
 	/*
 	 * Possible Actions
@@ -10,43 +11,19 @@ public class BlackJackPlayerAI extends BlackJackPlayer implements BlackJackAI {
 	 * Hit Stand Split***Double***Surrender
 	 */
 
-	private StandardPlayingCard dealerCard;
 	private int riskLevel;
-
+	private StandardPlayingCard dealerCard;
 	private int bet;
-	
-	private int chips;
 
 	public BlackJackPlayerAI(String name, int chips, int riskLevel) {
-		super(name);
+		super(name, chips);
 		this.riskLevel = riskLevel;
-		this.chips = chips;
 		bet = 0;
 	}
-
+	
 	@Override
-	public int determineBet() {
-		bet = chips * riskLevel / 100;
-		chips -= bet;
-
-		return bet;
-	}
-
-	public int doWin(int dealerVal) {
-		int val = hand.findHandValue();
-		int temp = bet;
-
-		// Win
-		if (dealerVal > 21 || (val <= 21 && val > dealerVal)) {
-			chips += bet * 2;
-			bet = 0;
-			return temp;
-		}
-
-		// Lost
-		bet = 0;
-		return temp * -1;
-
+	public void setDealerTopCard(StandardPlayingCard c) {
+		dealerCard = c;
 	}
 
 	@Override
@@ -75,7 +52,7 @@ public class BlackJackPlayerAI extends BlackJackPlayer implements BlackJackAI {
 
 		return true;
 	}
-
+	
 	@Override
 	public Boolean doSplit() {
 		if (!hand.canSplit())
@@ -89,9 +66,27 @@ public class BlackJackPlayerAI extends BlackJackPlayer implements BlackJackAI {
 		return true;
 	}
 
-	@Override
-	public void setDealerTopCard(StandardPlayingCard c) {
-		dealerCard = c;
+	public int determineBet() {
+		bet = getNumTokens() * riskLevel / 100;
+
+		Reporter.printReport(this.toString() + " places a bet of " + bet);
+
+		return bet;
+	}
+
+	public int doWin(int dealerVal) {
+		int val = hand.findHandValue();
+		int temp = bet;
+		bet = 0;
+
+		// Win
+		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))) {
+			return temp * 2;
+		} else {
+			// Lost
+			return 0;
+		}
+
 	}
 
 }
