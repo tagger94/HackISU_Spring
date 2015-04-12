@@ -5,7 +5,7 @@ import gameSim.Hand;
 
 public class BlackJackDealerAI extends BlackJackPlayer {
 	
-	
+	private int numOfBlackJack = 0;
 
 	public BlackJackDealerAI(String name) {
 		super(name, 0);
@@ -18,6 +18,10 @@ public class BlackJackDealerAI extends BlackJackPlayer {
 
 	@Override
 	public Boolean doHit() {
+		
+		if(hand.findHandValue() == 21 && hand.hand.size() == 2) {
+			numOfBlackJack++;
+		}
 		
 		if(hand.findHandValue() < 17)
 			return true;
