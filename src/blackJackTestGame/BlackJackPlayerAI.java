@@ -15,12 +15,33 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	private StandardPlayingCard dealerCard;
 	private int bet;
 
+	private int hotStreak;
+	private int reqLenOfHotStreak;
+
+	// Trackers
+	// Turns
+	private int numOfWins = 0;
+	private int numOfLoses = 0;
+	private int numOfRounds = 0;
+
+	private int longestHotStreak = 0;
+	private int numOfStreaksLongerThanThree = 0;
+
+	private int numOfHits = 0;
+	private int numOfBlackJack = 0;
+
+	private int totNumOfCards = 0;
+
+	private int totMoneyProfit = 0;
+	private int totMoneyLost = 0;
+	private int totMoneyWon = 0;
+
 	public BlackJackPlayerAI(String name, int chips, int riskLevel) {
 		super(name, chips);
 		this.riskLevel = riskLevel;
 		bet = 0;
 	}
-	
+
 	@Override
 	public void setDealerTopCard(StandardPlayingCard c) {
 		dealerCard = c;
@@ -31,6 +52,10 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 
 		int val = hand.findHandValue();
 		int dRank = Math.max(dealerCard.getRank(), 10);
+
+		if (hand.findHandValue() == 21 && hand.hand.size() == 2) {
+			numOfBlackJack++;
+		}
 
 		// Deals with greater than you 17
 		if (val >= 17) {
@@ -50,9 +75,10 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 			return false;
 		}
 
+		numOfHits++;
 		return true;
 	}
-	
+
 	@Override
 	public Boolean doSplit() {
 		if (!hand.canSplit())
@@ -71,6 +97,10 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 
 		Reporter.printReport(this.toString() + " places a bet of " + bet);
 
+		// Track Stats
+		numOfRounds++;
+		totNumOfCards += 2;
+
 		return bet;
 	}
 
@@ -81,12 +111,92 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 
 		// Win
 		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))) {
+			numOfWins++;
+			totMoneyWon = temp;
 			return temp * 2;
 		} else {
 			// Lost
+			numOfLoses++;
+			totMoneyLost += temp;
 			return 0;
 		}
 
 	}
 
+	public int getNumOfWins() {
+		return numOfWins;
+	}
+
+	public int getNumOfLoses() {
+		return numOfLoses;
+	}
+
+	public int getNumOfRounds() {
+		return numOfRounds;
+	}
+
+	public int getLongestHotStreak() {
+		return longestHotStreak;
+	}
+
+	public int getNumOfStreaksLongerThanThree() {
+		return numOfStreaksLongerThanThree;
+	}
+
+	public int getNumOfHits() {
+		return numOfHits;
+	}
+
+	public int getNumOfBlackJacks() {
+		return numOfBlackJack;
+	}
+
+	public int getTotNumOfCards() {
+		return totNumOfCards;
+	}
+
+	public int getTotMoneyLost() {
+		return totMoneyLost;
+	}
+
+	public int getTotMoneyWon() {
+		return totMoneyWon;
+	}
+
+	public int getTotProfit() {
+		return totMoneyWon - totMoneyLost;
+	}
+
+	public Double getAvgMoneyLost() {
+		return 1.0 * totMoneyLost / numOfRounds;
+	}
+
+	public Double getAvgMoneyWon() {
+		return 1.0 * totMoneyLost / numOfRounds;
+	}
+
+	public Double getWinRatio() {
+		return 1.0 * numOfWins / numOfLoses;
+	}
+
+	public Double getHitPerLoss() {
+		return 1.0 * numOfHits / numOfLoses;
+	}
+
+	public Double getHitPerWin() {
+		return 1.0 * numOfHits / numOfWins;
+	}
+
+	public Double getAvgCardPerRound() {
+		return 1.0 * totNumOfCards / numOfRounds;
+	}
+	
+	public void generateReport() {
+		String s = "";
+		s += "=========================\n";
+		s += "Player Name: " + this.toString() + "\n";
+		s += "Final Money: " + this.getNumTokens() + "\n";
+		
+		Reporter.printReport(s);
+	}
 }
