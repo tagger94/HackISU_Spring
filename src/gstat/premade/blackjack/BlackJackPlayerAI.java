@@ -4,7 +4,7 @@ import gstat.premade.playingcard.StandardPlayingCard;
 import gstat.util.Reporter;
 
 /**
- * Extends the Blackjack Player class. Addes AI to choice of player
+ * Decision Maker for the Blackjack Player.
  * 
  * @author Alex Berns
  * 
@@ -54,7 +54,7 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	}
 
 	/**
-	 * Sets the dealers face up card. Used in determining optimal AI
+	 * Sets what dealer card is face-up. Used in desicions for hitting.
 	 */
 	@Override
 	public void setDealerTopCard(StandardPlayingCard c) {
@@ -62,7 +62,10 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	}
 
 	/**
-	 * Decides whether to hit or not based on dealer card and your cards
+	 * Returns if the player should hit. Determined by dealer's face-up card and
+	 * player's own hand
+	 * 
+	 * @return If player should hit
 	 */
 	@Override
 	public Boolean doHit() {
@@ -70,25 +73,25 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 		int val = hand.findHandValue();
 		int dRank = Math.max(dealerCard.getRank(), 10);
 
-		if (hand.findHandValue() == 21 && hand.hand.size() == 2){
+		if (hand.findHandValue() == 21 && hand.hand.size() == 2) {
 			numOfBlackJack++;
 		}
 
 		// Deals with greater than you 17
-		if (val >= 17){
+		if (val >= 17) {
 			return false;
 		}
 
 		// Deals with Dealer Ace
-		if (dRank == 1){
+		if (dRank == 1) {
 			return true;
 		}
 
-		if (val >= 13 && dRank <= 6){
+		if (val >= 13 && dRank <= 6) {
 			return false;
 		}
 
-		if (val == 12 && dRank >= 4 && dRank <= 6){
+		if (val == 12 && dRank >= 4 && dRank <= 6) {
 			return false;
 		}
 
@@ -97,7 +100,9 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	}
 
 	/**
-	 * NOT USED: Descieds to split or not based on dealers cards and yours
+	 * Returns if player should split hand. Determined by dealer's face-p card and own hand.
+	 * 
+	 * @return If player should split hand
 	 */
 	@Override
 	public Boolean doSplit() {
@@ -113,7 +118,9 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	}
 
 	/**
-	 * Determins the bet based on AI risk level
+	 * Returns the amount the bet the player will bet based on risk level.
+	 * 
+	 * @return value of bet
 	 */
 	public int determineBet() {
 		bet = getNumTokens() * riskLevel / 100;
@@ -128,7 +135,7 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 	}
 
 	/**
-	 * Handels winning and money returns
+	 * Checks if player beats dealer or not. Returns chips to add to player.
 	 * 
 	 * @param dealerVal
 	 *            the final value of dealer
@@ -140,24 +147,22 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 		bet = 0;
 
 		// Win
-		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))){
+		if ((val <= 21 && (dealerVal > 21 || val > dealerVal))) {
 			numOfWins++;
 			totMoneyWon = temp;
 			return temp * 2;
-		}
-		else{
+		} else {
 			// Lost
 			numOfLoses++;
 			totMoneyLost += temp;
 			return 0;
 		}
-
 	}
 
 	/*
 	 * Stats
 	 */
-	
+
 	public int getNumOfWins() {
 		return numOfWins;
 	}
@@ -226,7 +231,7 @@ public class BlackJackPlayerAI extends BlackJackPlayer {
 		return 1.0 * totNumOfCards / numOfRounds;
 	}
 
-	public void generateReport() {
+	public void getFullReport() {
 		String s = "";
 		s += "=========================\n";
 		s += "Player Name: " + this.toString() + "\n";
