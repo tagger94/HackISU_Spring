@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Reporter {
 	
-	private static File f = new File("log.txt.");
+	private static File f = new File("log.txt");
 	
 	private static FileWriter w;
 

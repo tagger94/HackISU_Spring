@@ -57,7 +57,7 @@ public class WarPlayer {
 	 * @param Card to be added
 	 */
 	public void takeCard(StandardPlayingCard card){
-		hand.give(card);
+		hand.giveTop(card);
 		hand.shuffle();
 	}
 	
