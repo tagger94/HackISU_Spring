@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import gameSim.Dice;
 
-public class ShutTheBox {
+public class shutTheBox {
 	private static Dice die1 = new Dice(6);
 	private static Dice die2 = new Dice(6);
 	private static int winState = 0;
