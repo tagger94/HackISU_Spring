@@ -35,7 +35,7 @@ public class ExamplePlayer implements Player {
 	 * Default constructor that gets just the name of the player
 	 * 
 	 * @param name
-	 *            -Name of the player
+	 *            Name of the player
 	 */
 	public ExamplePlayer(String name) {
 		this.name = name;
@@ -49,9 +49,9 @@ public class ExamplePlayer implements Player {
 	 * Constructor used to give the player a name and starting amount of tokens
 	 * 
 	 * @param name
-	 *            -Name of the player
+	 *            Name of the player
 	 * @param numTokens
-	 *            -Starting number of tokens
+	 *            Starting number of tokens
 	 */
 	public ExamplePlayer(String name, int numTokens) {
 		this.name = name;
@@ -66,9 +66,9 @@ public class ExamplePlayer implements Player {
 	 * amount from the inventory from which they are taken.
 	 * 
 	 * @param i
-	 *            - inventory to be taken from
+	 *            inventory to be taken from
 	 * @param num
-	 *            - number of tokens to be added to player total
+	 *            number of tokens to be added to player total
 	 */
 
 	@Override
@@ -102,16 +102,16 @@ public class ExamplePlayer implements Player {
 	 * amount form the inventory from which they from.
 	 * 
 	 * @param i
-	 *            - inventory to be added to
+	 *            inventory to be added to
 	 * @param num
-	 *            - number of tokens to be taken from the player total
+	 *            number of tokens to be taken from the player total
 	 */
 
 	@Override
-	public int subTokens(Inventory i, int num) {
+	public int removeTokens(Inventory i, int num) {
 		numTokens -= num;
 		totalLostTokens += num;
-		return i.give(num);
+		return i.giveTo(num);
 	}
 
 	/**
@@ -120,14 +120,14 @@ public class ExamplePlayer implements Player {
 	 * representation to the console.
 	 * 
 	 * @param i
-	 *            - inventory to be added to
+	 *            inventory to be added to
 	 * @param num
-	 *            - number of tokens to be taken from the player total
+	 *            number of tokens to be taken from the player total
 	 */
 
 	@Override
-	public int subTokens_Report(Inventory i, int num) {
-		int temp = subTokens(i, num);
+	public int removeTokens_Report(Inventory i, int num) {
+		int temp = removeTokens(i, num);
 		System.out.println(temp + " tokens were taken from " + name + ".\n");
 		System.out.println(temp + " tokens were given to inventory " + i + ".\n");
 		return temp;

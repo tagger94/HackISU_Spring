@@ -7,9 +7,9 @@ import gstat.util.Deck;
 
 /**
  * The game of war simulation setup. War is a game in which both players are
- * randomly given half a deck of standard playing cards. They each simultaneously
- * flip their cards and compare to see if they can take the other players cards. 
- * First to gain all the cards wins. 
+ * randomly given half a deck of standard playing cards. They each
+ * simultaneously flip their cards and compare to see if they can take the other
+ * players cards. First to gain all the cards wins.
  * 
  * @author Brennyn Hawbaker
  *
@@ -67,7 +67,7 @@ public class War {
 	}
 
 	/**
-	 * Runs one full game of War. Tracks statistics. 
+	 * Runs one full game of War. Tracks statistics.
 	 */
 	public void playGame() {
 		rounds = 0;
@@ -104,7 +104,7 @@ public class War {
 	}
 
 	/**
-	 * Does the extra tie actions in war. 
+	 * Does the extra tie actions in war.
 	 * 
 	 * @param c1
 	 *            player 1's card

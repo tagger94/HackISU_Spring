@@ -101,7 +101,7 @@ public class UnoCard implements Card {
 	}
 
 	/**
-	 * This method compares the number of this card and the specified card. 
+	 * This method compares the number of this card and the specified card.
 	 * 
 	 * @param c
 	 *            Card to be compared to

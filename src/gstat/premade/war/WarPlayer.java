@@ -64,25 +64,25 @@ public class WarPlayer {
 	 * 
 	 * @param card
 	 *            card to be added
-	 *            
+	 * 
 	 * @return added card
 	 */
 	public StandardPlayingCard takeCard(StandardPlayingCard card) {
 		hand.giveToBottom(card);
-		return card; 
+		return card;
 	}
 
 	/**
 	 * Adds multiple cards to player's hand.
 	 * 
 	 * @param card
-	 *    		card to add to hand
-	 *            
+	 *            card to add to hand
+	 * 
 	 * @return list of added cards
 	 */
 	public ArrayList<StandardPlayingCard> takeMultiple(ArrayList<StandardPlayingCard> card) {
 		hand.giveMultiple(card);
-		return card; 
+		return card;
 	}
 
 	/**
@@ -138,7 +138,8 @@ public class WarPlayer {
 	/**
 	 * Set name of player
 	 * 
-	 * @param name of player
+	 * @param name
+	 *            of player
 	 */
 	public void setName(String name) {
 		this.name = name;

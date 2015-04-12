@@ -21,7 +21,8 @@ public class Dice {
 	/**
 	 * Constructs a die with specific number of sides.
 	 * 
-	 * @param sides Number of sides on die
+	 * @param sides
+	 *            Number of sides on die
 	 */
 	public Dice(int sides) {
 		DIE_SIZE = sides;
@@ -62,7 +63,7 @@ public class Dice {
 		report_LastRoll++;
 		return last_Roll;
 	}
-	
+
 	/**
 	 * Returns previous die value rolled. Generates report.
 	 * 

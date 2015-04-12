@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import gstat.util.Deck;
 
 /**
- * This class is a subclass of UnoPlayer and is an automatic UNO
- * player for use in simulations.
+ * This class is a subclass of UnoPlayer and is an automatic UNO player for use
+ * in simulations.
  * 
  * @author Camden Voigt
  *
@@ -23,7 +23,8 @@ public class UnoPlayerAI extends UnoPlayer {
 	}
 
 	/**
-	 * Creates a UnoPlayerAI using super class UnoPlayer with a user specified name.
+	 * Creates a UnoPlayerAI using super class UnoPlayer with a user specified
+	 * name.
 	 * 
 	 * @param name
 	 *            The name for the UnoPlayerAI
@@ -34,13 +35,13 @@ public class UnoPlayerAI extends UnoPlayer {
 
 	/**
 	 * Chooses and plays a card from the hand based on the card in play.
-	 * Generates reports. 
+	 * Generates reports.
 	 * 
 	 * @param c
 	 *            UnoCard to be played on
 	 * @param d
 	 *            Deck to be drawn from
-	 *            
+	 * 
 	 * @return the UnoCard that is played or drawn
 	 */
 	public UnoCard playCard(UnoCard c, Deck<UnoCard> d) {
