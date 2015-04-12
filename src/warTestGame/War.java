@@ -5,12 +5,22 @@ import java.util.ArrayList;
 import exampleClasses.StandardPlayingCard;
 import gameSim.Deck;
 
+/**
+ * Example War simulation setup
+ * 
+ * @author Brennyn Hawbaker
+ *
+ */
 public class War {
 
 
 	private ArrayList<StandardPlayingCard> down;
 	WarPlayer player_1;
 	WarPlayer player_2;
+	
+	/**
+	 * Statistic variables
+	 */
 	static int p1_wins;
 	static int p2_wins;
 	static int rounds;
@@ -67,7 +77,12 @@ public class War {
 		games++;
 	}
 	
-	
+	/**
+	 * Applies War rules to determine the "winner" of the two cards
+	 * @param Player 1's card
+	 * @param Player 2's card
+	 * @return Integer representing winner
+	 */
 	public int makeAction(StandardPlayingCard c1, StandardPlayingCard c2){
 		if(c1 == null)
 			return 1;
@@ -81,6 +96,12 @@ public class War {
 		return splitTie(c1, c2);
 	}
 	
+	/**
+	 * Splits ties during rounds
+	 * @param Player 1's card
+	 * @param Player s'2 card
+	 * @return Integer representing winner
+	 */
 	public int splitTie(StandardPlayingCard c1, StandardPlayingCard c2){
 		for(int a = 0; a < 3; a++){
 			try{
@@ -107,10 +128,18 @@ public class War {
 		}
 	}
 	
+	/**
+	 * Returns number of games player 1 won
+	 * @return number of games won
+	 */
 	public static int get_p1W(){
 		return p1_wins;
 	}
 	
+	/**
+	 * Returns number of games player 2 won
+	 * @return number of games won
+	 */
 	public static int get_p2W(){
 		return p2_wins;
 	}
