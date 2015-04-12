@@ -249,12 +249,12 @@ public class Deck<C extends Card> {
 		Random random = new Random();
 		ArrayList<C> result = new ArrayList<C>();
 
-		while (numCards != 0) {
-			result.add(deck.remove(random.nextInt(numCards)));
-			numCards--; 
+		int count = numCards;
+		while (count != 0) {
+			result.add(deck.remove(random.nextInt(count)));
+			count--; 
 		}
 
-		numCards = result.size();
 		deck = result;
 		timesShuffled++;
 	}

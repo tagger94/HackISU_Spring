@@ -8,10 +8,11 @@ import gameSim.Deck;
 public class War {
 
 
-	private Deck<StandardPlayingCard> deck;
 	private ArrayList<StandardPlayingCard> down;
 	WarPlayer player_1;
 	WarPlayer player_2;
+	static int p1_wins;
+	static int p2_wins;
 
 	/**
 	 * Default new game constructor
@@ -26,6 +27,7 @@ public class War {
 			player_1.takeCard(deck.draw());
 			player_2.takeCard(deck.draw());
 		}
+		down = new ArrayList<>();
 	}
 	
 	/**
@@ -37,28 +39,29 @@ public class War {
 		down.add(player_2.playCard());
 		if(down.get(0).equals(null) || down.get(1).equals(null))
 			return;
-		if(makeAction(down.get(0), down.get(1)) == -1){
+		int win = makeAction(down.get(0), down.get(1));
+		if(win == -1){
 			player_1.winRound(down);
-		} else {
+		} else if(win == -2){
+			player_1.winRound(down);
+		} else
 			player_2.winRound(down);
-		}
 	}
 	
 	/**
 	 * Runs one full game of War
 	 */
 	public void playGame(){
-		while(player_1.hasWon() == false && player_2.hasWon() == false){
+		while(WarPlayer.haveWinner(player_1, player_2, down) == 0){
 			playTurn();
 			checkEndGame();
 		}
-		System.out.println("Game over.");
+		//System.out.println("Game over.");
 	}
 	
 	
 	public int makeAction(StandardPlayingCard c1, StandardPlayingCard c2){
-		if(c1.equals(null) || c2.equals(null))
-			return -2;
+
 		int comp = c1.compareToIgnoreSuit(c2);
 		if(comp < 0) //c1 bigger
 			return -1;
@@ -68,7 +71,7 @@ public class War {
 	}
 	
 	public int splitTie(StandardPlayingCard c1, StandardPlayingCard c2){
-		for(int a = 0; a < 4; a++){
+		for(int a = 0; a < 3; a++){
 			try{
 				down.add(player_1.playCard());
 				down.add(player_2.playCard());
@@ -76,17 +79,29 @@ public class War {
 				return -2;
 			}
 		}
-		return makeAction(down.get(6), down.get(7));
+		return makeAction(player_1.playCard(), player_2.playCard());
 	}
 	
 	/**
 	 * Ends game and declares a winner
 	 */
 	public void checkEndGame(){
-		if(player_1.hasWon() == true)
-			System.out.println("Player one wins!");
-		if(player_2.hasWon() == true)
-			System.out.println("Player two wins!");
+		if(WarPlayer.haveWinner(player_1, player_2, down) == -1){
+			//System.out.print("Player one wins! ");
+			p1_wins++;
+		}
+		if(WarPlayer.haveWinner(player_1, player_2, down) == 1){
+			//System.out.print("Player two wins! ");
+			p2_wins++;
+		}
+	}
+	
+	public static int get_p1W(){
+		return p1_wins;
+	}
+	
+	public static int get_p2W(){
+		return p2_wins;
 	}
 
 
