@@ -47,7 +47,11 @@ public class WarPlayer {
 			return hand.draw();
 		} catch(IllegalStateException b){
 			takeDiscard();
-			return hand.draw();
+			try{
+				return hand.draw();
+			} catch(IllegalStateException c){
+				return null;
+			}
 		}
 	}
 	
@@ -57,18 +61,16 @@ public class WarPlayer {
 	 * @param Card to be added
 	 */
 	public void takeCard(StandardPlayingCard card){
-		hand.give(card);
-		hand.shuffle();
+		hand.giveBottom(card);
 	}
 	
 	/**
-	 * Adds multiple cards of player's hand
+	 * Adds multiple cards to player's hand
 	 * 
 	 * @param Cards to add to hand
 	 */
 	public void takeMulti(ArrayList<StandardPlayingCard> card){
 		hand.giveMulti(card);
-		hand.shuffle();
 	}
 	
 	/**
@@ -88,7 +90,7 @@ public class WarPlayer {
 		discard.giveMulti(winnings);
 	}
 	
-	public static int haveWinner(WarPlayer p1, WarPlayer p2, ArrayList<StandardPlayingCard> board){
+	public static int haveWinner(WarPlayer p1, WarPlayer p2){
 		if(p2.noCards())
 			return -1;
 		if(p1.noCards())
@@ -97,7 +99,7 @@ public class WarPlayer {
 	}
 	
 	private boolean noCards(){
-		if(hand.equals(null) && discard.equals(null))
+		if(hand.get_NumCards() ==0 && discard.get_NumCards() ==0)
 			return true;
 		return false;
 	}
