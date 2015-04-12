@@ -1,16 +1,29 @@
 package blackJackTestGame;
 
 import exampleClasses.ExamplePlayer;
+import exampleClasses.StandardPlayingCard;
 import gameSim.*;
 
-public class BlackJackPlayer extends ExamplePlayer{
-	
+public abstract class BlackJackPlayer extends ExamplePlayer {
+
 	public BlackJackHand hand;
 
-	public BlackJackPlayer(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	
+	public BlackJackPlayer(String name, int chips) {
+		super(name, chips);
+		hand = new BlackJackHand();
+
+	}
+
+	public abstract void setDealerTopCard(StandardPlayingCard c);
+
+	public abstract Boolean doSplit();
+
+	public abstract Boolean doHit();
+
+	public abstract int determineBet();
+
+	public Hand<StandardPlayingCard> getHand() {
+		return hand;
 	}
 
 }

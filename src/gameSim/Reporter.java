@@ -29,7 +29,7 @@ public class Reporter {
 		}
 		
 		try {
-			w.write(s);
+			w.write(s + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

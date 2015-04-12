@@ -291,7 +291,7 @@ public class Deck<C extends Card> {
 	 */
 	public void shuffle_Report() {
 		shuffle();
-		Reporter.printReport("shuffled for the " + timesShuffled + " time");
+		Reporter.printReport("shuffled for the " + timesShuffled + " time\n");
 	}
 
 	/**
@@ -331,7 +331,9 @@ public class Deck<C extends Card> {
 	 */
 	public C giveBottom(C card) {
 		deck.add(card);
-		return card;
+		numCards++;
+		return card; 
+
 	}
 
 	/**

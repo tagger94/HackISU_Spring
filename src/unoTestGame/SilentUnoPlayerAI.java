@@ -3,15 +3,15 @@ package unoTestGame;
 import java.util.ArrayList;
 import gameSim.*; 
 
-public class UnoPlayerAI extends UnoPlayer {
+public class SilentUnoPlayerAI extends UnoPlayer {
 
 	private int numUno = 0; 
 	
-	public UnoPlayerAI(){
+	public SilentUnoPlayerAI(){
 		super(); 
 	}
 	
-	public UnoPlayerAI(String name){
+	public SilentUnoPlayerAI(String name){
 		super(name);
 	}
 	
@@ -31,14 +31,13 @@ public class UnoPlayerAI extends UnoPlayer {
 		
 		if(colorList.size() == 0 && numberList.size() == 0){
 			UnoCard temp = d.draw(); 
-			playerHand.drawCard_Report(temp);
+			playerHand.drawCard(temp);
 			return temp; 
 		}
 		
 		if(colorList.size() != 0){
-			playerHand.discardCard_Report(colorList.get(0));
+			playerHand.discardCard(colorList.get(0));
 			if(playerHand.hand.size() == 1){
-				System.out.println("UNO!\n");
 				numUno++;
 			}
 			return colorList.get(0);
@@ -74,17 +73,15 @@ public class UnoPlayerAI extends UnoPlayer {
 			UnoCard temp = new UnoCard(maxColor, c.getNumber());
 			for(int j = 0; j < numberList.size(); j++){
 				if(numberList.get(j).equalColor(temp)){
-					playerHand.discardCard_Report(numberList.get(j));
+					playerHand.discardCard(numberList.get(j));
 					if(playerHand.hand.size() == 1){
-						System.out.println("UNO!\n");
 						numUno++; 
 					}
 					return numberList.get(j); 
 				}
 			}
-			playerHand.discardCard_Report(numberList.get(0));
+			playerHand.discardCard(numberList.get(0));
 			if(playerHand.hand.size() == 1){
-				System.out.println("UNO!\n");
 				numUno++; 
 			}
 			return numberList.get(0);

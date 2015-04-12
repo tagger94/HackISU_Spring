@@ -73,7 +73,7 @@ public class Inventory {
 	 */
 	public int take(int num) {
 		takeCalled++;
-		if (num > size || num < -1)
+		if ((num > size && size > 0) || num < -1)
 			throw new IllegalStateException();
 		if (size != -1)
 			size -= num;
